@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".Pantallas.LoginActivity">
+
+        <TextView
+            android:id="@+id/textViewWelcome"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Bienvenido a ComandaXpress"
+            android:textSize="24sp"
+            android:textColor="#000000"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp" />
+
+        <TextView
+            android:id="@+id/textViewLogin"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Login"
+            android:textSize="20sp"
+            android:textColor="#000000"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/textViewWelcome"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="32dp"/>
+
+        <EditText
+            android:id="@+id/editTextUsername"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Usuario"
+            android:inputType="text"
+            android:background="@drawable/edit_text_background"
+            android:padding="12dp"
+            app:layout_constraintTop_toBottomOf="@id/textViewLogin"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintWidth_percent="0.8"
+            android:layout_marginTop="16dp"/>
+
+        <EditText
+            android:id="@+id/editTextPassword"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Contraseña"
+            android:inputType="textPassword"
+            android:background="@drawable/edit_text_background"
+            android:padding="12dp"
+            app:layout_constraintTop_toBottomOf="@id/editTextUsername"
+            app:layout_constraintStart_toStartOf="@id/editTextUsername"
+            app:layout_constraintEnd_toEndOf="@id/editTextUsername"
+            android:layout_marginTop="16dp"/>
+
+        <Button
+            android:id="@+id/buttonLogin"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Login"
+            android:textColor="#FFFFFF"
+            android:background="#6200EE"
+            app:layout_constraintTop_toBottomOf="@id/editTextPassword"
+            app:layout_constraintStart_toStartOf="@id/editTextPassword"
+            app:layout_constraintEnd_toEndOf="@id/editTextPassword"
+            app:layout_constraintWidth_percent="0.8"
+            android:layout_marginTop="24dp"/>
+
+        <Button
+            android:id="@+id/buttonRegister"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Registrarse"
+            android:textColor="#FFFFFF"
+            android:background="#6200EE"
+            app:layout_constraintTop_toBottomOf="@id/buttonLogin"
+            app:layout_constraintStart_toStartOf="@id/buttonLogin"
+            app:layout_constraintEnd_toEndOf="@id/buttonLogin"
+            app:layout_constraintWidth_percent="0.8"
+            android:layout_marginTop="16dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

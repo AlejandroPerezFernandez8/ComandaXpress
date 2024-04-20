@@ -55,8 +55,8 @@ public class ProductoController {
         producto.setDescripcion(detallesProducto.getDescripcion());
         producto.setCategoria(detallesProducto.getCategoria());
         producto.setImagenUrl(detallesProducto.getImagenUrl());
+        producto.setActivo(detallesProducto.isActivo());
         final Producto productoActualizado = productoRepository.save(producto);
-
 
         return ResponseEntity.ok(productoActualizado);
     }

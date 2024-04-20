@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
 
 import java.math.BigDecimal;
 
@@ -33,9 +34,12 @@ public class Producto {
     @Column(name = "imagen_url")
     private String imagenUrl;
 
+    @Column (name = "activo")
+    private boolean activo;
+
     // Este método proporciona el ID de la categoría para la serialización JSON
     @JsonProperty("categoriaId")
-    @JsonInclude(JsonInclude.Include.NON_NULL) // Incluye el ID de la categoría solo si no es null
+    @JsonInclude
     public Long getCategoriaId() {
         return categoria != null ? categoria.getCategoriaId() : null;
     }

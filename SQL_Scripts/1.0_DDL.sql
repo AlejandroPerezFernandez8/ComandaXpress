@@ -1,6 +1,6 @@
-drop database if exists comandaxpress;
-create database comandaxpress;
-use comandaxpress;
+DROP DATABASE IF EXISTS comandaxpress;
+CREATE DATABASE comandaxpress;
+USE comandaxpress;
 
 -- Creación de la tabla Usuarios
 CREATE TABLE Usuarios (
@@ -14,7 +14,7 @@ CREATE TABLE Usuarios (
 );
 
 -- Creación de la tabla Categorías de Productos
-CREATE TABLE Categorias(
+CREATE TABLE Categorias (
     categoria_id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(255) NOT NULL,
     descripcion TEXT
@@ -28,27 +28,32 @@ CREATE TABLE Productos (
     precio DECIMAL(10, 2) NOT NULL,
     descripcion TEXT,
     imagen_url VARCHAR(255),
-    FOREIGN KEY (categoria_id) REFERENCES Categorias(categoria_id)
+    activo BOOLEAN,
+    FOREIGN KEY (categoria_id) REFERENCES Categorias(categoria_id) ON DELETE SET NULL
 );
 
--- Creación de la tabla Pedidos
-CREATE TABLE Pedidos (
-    pedido_id INT AUTO_INCREMENT PRIMARY KEY,
-    usuario_id INT,
-    fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    estado ENUM('pendiente', 'completado', 'cancelado') NOT NULL,
-    total DECIMAL(10, 2) NOT NULL,
-    FOREIGN KEY (usuario_id) REFERENCES Usuarios(usuario_id)
+-- Creación de la tabla Mesas
+CREATE TABLE Mesa(
+    mesa_id INT AUTO_INCREMENT PRIMARY KEY,
+    numero INT NOT NULL UNIQUE,
+    capacidad INT NOT NULL,
+    activa BOOLEAN NOT NULL DEFAULT TRUE
 );
 
--- Creación de la tabla Pedido_Producto para asociar pedidos con productos (muchos a muchos)
-CREATE TABLE Pedido_Producto (
-    pedido_id INT,
+-- Creación de la tabla Tickets
+CREATE TABLE Tickets (
+    ticket_id INT AUTO_INCREMENT PRIMARY KEY,
+    mesa_id INT,
+    fecha_hora DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (mesa_id) REFERENCES Mesas(mesa_id)
+);
+
+-- Creación de la tabla Detalle de Tickets
+CREATE TABLE TicketDetalle (
+    ticket_id INT,
     producto_id INT,
     cantidad INT NOT NULL,
-    FOREIGN KEY (pedido_id) REFERENCES Pedidos(pedido_id),
+    FOREIGN KEY (ticket_id) REFERENCES Tickets(ticket_id),
     FOREIGN KEY (producto_id) REFERENCES Productos(producto_id),
-    PRIMARY KEY (pedido_id, producto_id)
+    PRIMARY KEY (ticket_id, producto_id)
 );
-
-
