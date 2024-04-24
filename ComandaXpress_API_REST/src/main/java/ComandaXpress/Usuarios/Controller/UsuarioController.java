@@ -1,11 +1,16 @@
 package ComandaXpress.Usuarios.Controller;
 
+import ComandaXpress.DTO.UsuarioDTO;
 import ComandaXpress.Usuarios.Model.Usuario;
 import ComandaXpress.Usuarios.Repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
 public class UsuarioController {
@@ -13,8 +18,18 @@ public class UsuarioController {
     private UsuarioRepository usuarioRepository;
 
     @GetMapping(value = "/usuarios")
-    public List<Usuario> getUsuarios(){
-        return usuarioRepository.findAll();
+    public List<UsuarioDTO> getUsuarios(){
+        return usuarioRepository.findAll().stream().map(UsuarioDTO::converter).collect(Collectors.toList());
+    }
+
+    @GetMapping(value = "/usuarios/login")
+    public ResponseEntity<Usuario> loginUsuario(@RequestBody Map<String, String> loginDetails) {
+        Usuario usuario = usuarioRepository.findByUsuarioAndContraseña(loginDetails.get("usuario"), loginDetails.get("contraseña"));
+        if(usuario != null) {
+            return new ResponseEntity<>(usuario, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
     }
 
     @PostMapping(value = "/saveUsuario")
@@ -33,7 +48,6 @@ public class UsuarioController {
         usuarioModificado.setContraseña(usuario.getContraseña());
         usuarioModificado.setEmail(usuario.getEmail());
         usuarioModificado.setRol(usuario.getRol());
-
         usuarioRepository.save(usuarioModificado);
         return "Usuario Modificado!!!";
     }

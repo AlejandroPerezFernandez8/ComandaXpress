@@ -27,6 +27,7 @@ public class LoginActivity extends AppCompatActivity {
         btnRegistro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent intentRegistro = new Intent(getApplicationContext(),RegistroActivity.class);
                 someActivityResultLauncher.launch(intentRegistro);
             }
@@ -41,7 +42,6 @@ public class LoginActivity extends AppCompatActivity {
             new ActivityResultCallback<ActivityResult>() {
                 @Override
                 public void onActivityResult(ActivityResult result) {
-
                 }
             }
     );

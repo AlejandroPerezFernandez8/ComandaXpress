@@ -36,11 +36,4 @@ public class Producto {
 
     @Column (name = "activo")
     private boolean activo;
-
-    // Este método proporciona el ID de la categoría para la serialización JSON
-    @JsonProperty("categoriaId")
-    @JsonInclude
-    public Long getCategoriaId() {
-        return categoria != null ? categoria.getCategoriaId() : null;
-    }
 }

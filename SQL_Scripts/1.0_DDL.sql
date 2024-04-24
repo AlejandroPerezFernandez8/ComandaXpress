@@ -9,8 +9,8 @@ CREATE TABLE Usuarios (
     apellido VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL UNIQUE,
     usuario VARCHAR(255) NOT NULL UNIQUE,
-    contraseña VARCHAR(255) NOT NULL, -- Se recomienda guardar un hash de la contraseña
-    rol ENUM('cliente', 'admin') NOT NULL -- O los roles que requieras
+    contraseña VARCHAR(255) NOT NULL,
+    rol ENUM('cliente', 'admin') NOT NULL
 );
 
 -- Creación de la tabla Categorías de Productos
@@ -33,7 +33,7 @@ CREATE TABLE Productos (
 );
 
 -- Creación de la tabla Mesas
-CREATE TABLE Mesa(
+CREATE TABLE mesa(
     mesa_id INT AUTO_INCREMENT PRIMARY KEY,
     numero INT NOT NULL UNIQUE,
     capacidad INT NOT NULL,
@@ -45,11 +45,11 @@ CREATE TABLE Tickets (
     ticket_id INT AUTO_INCREMENT PRIMARY KEY,
     mesa_id INT,
     fecha_hora DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (mesa_id) REFERENCES Mesas(mesa_id)
+    FOREIGN KEY (mesa_id) REFERENCES Mesa(mesa_id)
 );
 
 -- Creación de la tabla Detalle de Tickets
-CREATE TABLE TicketDetalle (
+CREATE TABLE Ticket_Detalle (
     ticket_id INT,
     producto_id INT,
     cantidad INT NOT NULL,

@@ -2,6 +2,9 @@ package ComandaXpress.Ticket.Model;
 
 import ComandaXpress.Mesa.Model.Mesa;
 import ComandaXpress.TicketDetalle.Model.TicketDetalle;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.util.Date;
@@ -17,6 +20,8 @@ public class Ticket {
 
         @ManyToOne(fetch = FetchType.LAZY)
         @JoinColumn(name = "mesa_id", nullable = false)
+        @JsonManagedReference
+        @JsonIgnore
         private Mesa mesa;
 
         @Column(nullable = false)
@@ -24,5 +29,7 @@ public class Ticket {
         private Date fechaHora = new Date();
 
         @OneToMany(mappedBy = "ticket", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+        @JsonManagedReference
+        @JsonIgnore
         private List<TicketDetalle> ticketDetalles;
 }

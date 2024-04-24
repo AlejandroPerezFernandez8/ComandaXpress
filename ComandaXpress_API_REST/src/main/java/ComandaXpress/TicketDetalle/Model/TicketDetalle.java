@@ -5,9 +5,12 @@ import ComandaXpress.Ticket.Model.Ticket;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
 @Entity
 @Table(name = "TicketDetalle")
+@IdClass(TicketDetalleID.class)
 public class TicketDetalle {
         @Id
         @ManyToOne(fetch = FetchType.LAZY)
