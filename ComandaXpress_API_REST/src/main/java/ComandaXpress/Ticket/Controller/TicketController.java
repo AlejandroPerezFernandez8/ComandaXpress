@@ -1,5 +1,6 @@
 package ComandaXpress.Ticket.Controller;
 
+import ComandaXpress.Api_Map;
 import ComandaXpress.DTO.TicketDTO;
 import ComandaXpress.Ticket.Model.Ticket;
 import ComandaXpress.Ticket.Repository.TicketRepository;
@@ -10,12 +11,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/ticket")
+@RequestMapping(Api_Map.TICKET_BASE_URL)
 public class TicketController {
-
     @Autowired
     private TicketRepository ticketRepository;
-
     @GetMapping
     public List<TicketDTO> getAllTickets() {
         return ticketRepository.findAll().stream().map(TicketDTO::converter).collect(Collectors.toList());
@@ -25,8 +24,7 @@ public class TicketController {
         ticketRepository.save(ticket);
         return "Ticket guardado con éxito!";
     }
-
-    @PutMapping("/{ticketId}")
+    @PutMapping(Api_Map.TICKET_ID_URL)
     public String actualizarTicket(@PathVariable Long ticketId, @RequestBody Ticket ticket) {
         Ticket ticketExistente = ticketRepository.findById(ticketId)
                 .orElseThrow(() -> new RuntimeException("Ticket no encontrado")); // Excepción
@@ -37,8 +35,7 @@ public class TicketController {
         ticketRepository.save(ticketExistente);
         return "Ticket actualizado con éxito!";
     }
-
-    @DeleteMapping("/{ticketId}")
+    @DeleteMapping(Api_Map.TICKET_ID_URL)
     public String eliminarTicket(@PathVariable Long ticketId) {
         Ticket ticket = ticketRepository.findById(ticketId)
                 .orElseThrow(() -> new RuntimeException("Ticket no encontrado")); // Excepción

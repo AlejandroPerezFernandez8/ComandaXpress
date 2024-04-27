@@ -22,7 +22,8 @@ public class TicketDTO {
         target.setMesaId(source.getMesa().getMesaId());
         target.setFechaHora(source.getFechaHora());
         target.setTicketDetallesID(source.getTicketDetalles().stream().map(
-                TicketDetalle::getTicket).collect(Collectors.toList()).stream().map(Ticket::getTicketId).collect(Collectors.toList())
+                TicketDetalle::getTicket).collect(Collectors.toList())
+                .stream().map(ticket -> ticket.getTicketId()).collect(Collectors.toList())
         );
         return target;
     }

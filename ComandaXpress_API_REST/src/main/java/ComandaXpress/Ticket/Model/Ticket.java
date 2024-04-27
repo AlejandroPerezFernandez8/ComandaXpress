@@ -3,7 +3,6 @@ package ComandaXpress.Ticket.Model;
 import ComandaXpress.Mesa.Model.Mesa;
 import ComandaXpress.TicketDetalle.Model.TicketDetalle;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;

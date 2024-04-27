@@ -1,5 +1,6 @@
 package ComandaXpress.Usuarios.Controller;
 
+import ComandaXpress.Api_Map;
 import ComandaXpress.DTO.UsuarioDTO;
 import ComandaXpress.Usuarios.Model.Usuario;
 import ComandaXpress.Usuarios.Repository.UsuarioRepository;
@@ -13,16 +14,15 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
+@RequestMapping(Api_Map.USUARIO_BASE_URL)
 public class UsuarioController {
     @Autowired
     private UsuarioRepository usuarioRepository;
-
-    @GetMapping(value = "/usuarios")
+    @GetMapping
     public List<UsuarioDTO> getUsuarios(){
         return usuarioRepository.findAll().stream().map(UsuarioDTO::converter).collect(Collectors.toList());
     }
-
-    @GetMapping(value = "/usuarios/login")
+    @GetMapping(Api_Map.USUARIO_LOGIN_URL)
     public ResponseEntity<Usuario> loginUsuario(@RequestBody Map<String, String> loginDetails) {
         Usuario usuario = usuarioRepository.findByUsuarioAndContraseña(loginDetails.get("usuario"), loginDetails.get("contraseña"));
         if(usuario != null) {
@@ -31,14 +31,12 @@ public class UsuarioController {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
     }
-
-    @PostMapping(value = "/saveUsuario")
+    @PostMapping(Api_Map.USUARIO_GUARDAR_URL)
     public String saveusuario(@RequestBody Usuario usuario){
         usuarioRepository.save(usuario);
         return "Usuario Registrado!!!";
     }
-
-    @PutMapping(value = "/modificarUsuario/{usuario_id}")
+    @PutMapping(Api_Map.USUARIO_MODIFICAR_URL)
     public String modificarUsuario(@PathVariable long usuario_id ,@RequestBody Usuario usuario){
         Usuario usuarioModificado = usuarioRepository.findById(usuario_id).get();
         //Modificamos los varoles del usuario
@@ -51,13 +49,10 @@ public class UsuarioController {
         usuarioRepository.save(usuarioModificado);
         return "Usuario Modificado!!!";
     }
-
-
-    @DeleteMapping(value = "/borrarUsuario/{usuario_id}")
+    @DeleteMapping(Api_Map.USUARIO_ELIMINAR_URL)
     public String borrarUsuario(@PathVariable long usuario_id){
         String nombre = usuarioRepository.findById(usuario_id).get().getNombre();
         usuarioRepository.delete(usuarioRepository.findById(usuario_id).get());
         return "Usuario " + nombre + " Eliminado!!";
     }
-
 }

@@ -1,5 +1,6 @@
 package ComandaXpress.Producto.Controller;
 
+import ComandaXpress.Api_Map;
 import ComandaXpress.Categoria.Model.Categoria;
 import ComandaXpress.Categoria.Repository.CategoriaRepository;
 import ComandaXpress.DTO.MesaDTO;
@@ -18,19 +19,17 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/productos") // Ruta base para los productos
+@RequestMapping(Api_Map.PRODUCTO_BASE_URL) // Ruta base para los productos
 public class ProductoController {
     @Autowired
     private CategoriaRepository categoriaRepository;
     @Autowired
     private ProductoRepository productoRepository;
-
     // Obtener todos los productos
     @GetMapping
     public List<ProductoDTO> listarProductos() {
         return productoRepository.findAll().stream().map(ProductoDTO::converter).collect(Collectors.toList());
     }
-
     @PostMapping
     public ResponseEntity<Producto> guardarProducto(@RequestBody ProductoDTO productoDTO) {
         Producto producto = new Producto();
@@ -42,19 +41,15 @@ public class ProductoController {
         producto.setImagenUrl(productoDTO.getImagenUrl());
         producto.setCategoria(categoriaRepository.findById(productoDTO.categoriaId).
                 orElseThrow(() ->  new ResponseStatusException(HttpStatus.NOT_FOUND, "Categoría no encontrada con ID: " + productoDTO.getCategoriaId())));
-
-
         return ResponseEntity.ok(productoRepository.save(producto));
     }
-
-    @GetMapping("/{productoId}")
+    @GetMapping(Api_Map.PRODUCTO_ID_URL)
     public ResponseEntity<ProductoDTO> obtenerProductoPorId(@PathVariable Long productoId) {
         Optional<Producto> producto = productoRepository.findById(productoId);
         return producto.map(c -> ResponseEntity.ok(ProductoDTO.converter(c)))
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
-
-    @PutMapping("/{productoId}")
+    @PutMapping(Api_Map.PRODUCTO_ID_URL)
     public ResponseEntity<Producto> actualizarProducto(@PathVariable Long productoId, @RequestBody ProductoDTO detallesProducto) {
         Producto producto = productoRepository.findById(productoId)
                 .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
@@ -65,12 +60,10 @@ public class ProductoController {
         producto.setActivo(detallesProducto.isActivo());
         Categoria categoria = categoriaRepository.findById(detallesProducto.getCategoriaId())
                 .orElseThrow(() ->new ResponseStatusException(HttpStatus.NOT_FOUND, "Categoría no encontrada con ID: " + detallesProducto.getCategoriaId()));
-
         final Producto productoActualizado = productoRepository.save(producto);
         return ResponseEntity.ok().build();
     }
-
-    @DeleteMapping("/{productoId}")
+    @DeleteMapping(Api_Map.PRODUCTO_ID_URL)
     public ResponseEntity<Void> borrarProducto(@PathVariable Long productoId) {
         Producto producto = productoRepository.findById(productoId)
                 .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
