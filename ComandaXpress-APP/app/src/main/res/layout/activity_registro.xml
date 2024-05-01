@@ -1,93 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true">
+    android:background="@drawable/fondo"
+    tools:context=".Pantallas.RegistroActivity">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="24dp"
-        android:paddingBottom="80dp"
-        android:background="@color/white"
-        android:elevation="4dp">
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp">
 
+        <!-- Título -->
         <TextView
-            android:layout_width="match_parent"
+            android:id="@+id/Titulo"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Bienvenido a ComandaXpress"
-            android:textSize="24sp"
-            android:textColor="#000000"
-            android:gravity="center"
-            android:layout_marginTop="32dp"
-            android:layout_marginBottom="32dp"
-            android:fontFamily="sans-serif-medium" />
-
-        <!-- Nombre -->
-        <EditText
-            android:id="@+id/editTextName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Nombre"
-            android:inputType="textPersonName"
-            android:background="@drawable/edit_text_background"
-            android:padding="12dp"
-            android:layout_marginTop="16dp" />
-
-        <!-- Apellido -->
-        <EditText
-            android:id="@+id/editTextSurname"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Apellido"
-            android:inputType="textPersonName"
-            android:background="@drawable/edit_text_background"
-            android:padding="12dp"
-            android:layout_marginTop="8dp" />
-
-        <!-- Email -->
-        <EditText
-            android:id="@+id/editTextEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Email"
-            android:inputType="textEmailAddress"
-            android:background="@drawable/edit_text_background"
-            android:padding="12dp"
-            android:layout_marginTop="8dp" />
-
-        <!-- Usuario -->
-        <EditText
-            android:id="@+id/editTextUsername"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Usuario"
-            android:inputType="text"
-            android:background="@drawable/edit_text_background"
-            android:padding="12dp"
-            android:layout_marginTop="8dp" />
-
-        <!-- Contraseña -->
-        <EditText
-            android:id="@+id/editTextPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Contraseña"
-            android:inputType="textPassword"
-            android:background="@drawable/edit_text_background"
-            android:padding="12dp"
-            android:layout_marginTop="8dp" />
-
-        <!-- Botón de registro -->
-        <Button
-            android:id="@+id/buttonRegister"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:fontFamily="monospace"
             android:text="Registrarse"
-            android:textColor="#FFFFFF"
-            android:background="#6200EE"
-            android:layout_marginTop="32dp"
-            android:elevation="2dp" />
-    </LinearLayout>
+            android:textAlignment="center"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textColor="@color/colorLightBlue" />
+
+        <!-- Panel de Formulario -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/panel"
+            android:layout_width="374dp"
+            android:layout_height="482dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/panel_fondo_transparente_redondeado"
+            android:padding="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/Titulo">
+
+            <!-- Campos -->
+            <EditText
+                android:id="@+id/Nombre"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="Nombre"
+                android:textColorHint="@color/colorLightBlue"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:textColor="@color/colorLightBlue"
+                />
+
+            <EditText
+                android:id="@+id/Apellidos"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="Apellidos"
+                android:textColorHint="@color/colorLightBlue"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/Nombre"
+                android:textColor="@color/colorLightBlue"
+                />
+
+            <EditText
+                android:id="@+id/Email"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="Email"
+                android:textColorHint="@color/colorLightBlue"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/Apellidos"
+                android:textColor="@color/colorLightBlue"
+                android:inputType="textEmailAddress"
+                />
+
+            <EditText
+                android:id="@+id/NombreUsuario"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:hint="Nombre de usuario"
+                android:textColorHint="@color/colorLightBlue"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/Email"
+                android:textColor="@color/colorLightBlue"
+                />
+
+            <EditText
+                android:id="@+id/Contraseña"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="Contraseña"
+                android:textColorHint="@color/colorLightBlue"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/NombreUsuario"
+                android:textColor="@color/colorLightBlue"
+                android:inputType="textPassword"
+                />
+
+            <Button
+                android:id="@+id/btnRegistrarse"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorLightBlue"
+                android:text="Registrarse"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/Contraseña"
+                android:layout_marginTop="25dp"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

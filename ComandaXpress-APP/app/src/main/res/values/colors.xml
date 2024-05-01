@@ -5,4 +5,8 @@
     <color name="background_color">#FFFFFF</color>
     <color name="primary_text">#212121</color>
     <color name="button_text">#FFFFFF</color>
+    <color name="colorDarkBlue">#222831</color>  <!-- Muy oscuro -->
+    <color name="colorMediumBlue">#31363F</color> <!-- Oscuro -->
+    <color name="colorLightBlue">#76ABA7</color>  <!-- Azul claro -->
+    <color name="colorOffWhite">#EEEEEE</color>   <!-- Casi blanco -->
 </resources>

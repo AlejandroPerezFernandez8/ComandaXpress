@@ -20,23 +20,18 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         //Referencias a variables de actividad
-        EditText nombreUsuario = findViewById(R.id.editTextUsername);
-        Button btnRegistro = findViewById(R.id.buttonRegister);
-
-
+        EditText nombreUsuario = findViewById(R.id.NombreUsuario);
+        EditText contraseña = findViewById(R.id.Contraseña);
+        Button btnRegistro = findViewById(R.id.btnRegistrarse);
+        Button btnLogin = findViewById(R.id.btnLogin);
         btnRegistro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent intentRegistro = new Intent(getApplicationContext(),RegistroActivity.class);
                 someActivityResultLauncher.launch(intentRegistro);
-            }
-        });
-
-
+            }}
+        );
     }
-
-
     ActivityResultLauncher someActivityResultLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
