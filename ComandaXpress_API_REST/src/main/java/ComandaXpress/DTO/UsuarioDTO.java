@@ -29,4 +29,15 @@ public class UsuarioDTO {
         target.setRol(source.getRol());
         return target;
     }
+    public static Usuario fromEntity(UsuarioDTO source){
+        Usuario target = new Usuario();
+        target.setNombre(source.getNombre());
+        target.setApellido(source.getApellido());
+        target.setEmail(source.getEmail());
+        target.setUsuario(source.getUsuario());
+        target.setContraseña(source.getContraseña());
+        target.setRol(source.getRol());
+        return target;
+    }
+
 }

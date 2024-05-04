@@ -1,36 +1,47 @@
 package ComandaXpress.DTO;
 
+import ComandaXpress.Producto.Model.Producto;
+import ComandaXpress.Ticket.Model.Ticket;
 import ComandaXpress.TicketDetalle.Model.TicketDetalle;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 @Data
 public class TicketDetalleDTO {
-    public TicketDetalleDTO(){}
+    public TicketDetalleDTO() {}
     private long idTicket;
     private List<ProductoCantidad> productos;
+
     @Data
+    @NoArgsConstructor
     public static class ProductoCantidad {
         private long idProducto;
-        private List<Integer> cantidades;
+        private int cantidad; // Ahora es un entero, no una lista
+
         public ProductoCantidad(long idProducto) {
             this.idProducto = idProducto;
-            this.cantidades = new ArrayList<>();
+            this.cantidad = 0; // Inicializamos la cantidad
         }
+
         public void addCantidad(int cantidad) {
-            this.cantidades.add(cantidad);
+            this.cantidad += cantidad; // Sumamos la cantidad
         }
     }
+
     public TicketDetalleDTO(long idTicket) {
         this.idTicket = idTicket;
         this.productos = new ArrayList<>();
     }
+
     public void addProducto(ProductoCantidad producto) {
         this.productos.add(producto);
     }
+
     public static List<TicketDetalleDTO> agruparDetallesLista(List<TicketDetalle> detalles) {
         Map<Long, Map<Long, ProductoCantidad>> resultado = new HashMap<>();
 
@@ -45,6 +56,7 @@ public class TicketDetalleDTO {
         }
         return convertirListaAModeloDTO(resultado);
     }
+
     public static TicketDetalleDTO agruparDetalles(TicketDetalle detalle) {
         Map<Long, Map<Long, ProductoCantidad>> resultado = new HashMap<>();
         long ticketId = detalle.getTicket().getTicketId();
@@ -68,6 +80,7 @@ public class TicketDetalleDTO {
         }
         return listaDTOs;
     }
+
     private static TicketDetalleDTO convertirAModeloDTO(Map<Long, Map<Long, ProductoCantidad>> resultado) {
         TicketDetalleDTO ticketDetalleDTO = new TicketDetalleDTO();
         for (Map.Entry<Long, Map<Long, ProductoCantidad>> ticketEntry : resultado.entrySet()) {
@@ -79,6 +92,21 @@ public class TicketDetalleDTO {
         return ticketDetalleDTO;
     }
 
+    public static List<TicketDetalle> convertDTOToTicketDetalles(TicketDetalleDTO ticketDetalleDTO) {
+        List<TicketDetalle> detalles = new ArrayList<>();
+        Ticket ticket = new Ticket();
+        ticket.setTicketId(ticketDetalleDTO.getIdTicket());
 
+        for (ProductoCantidad productoCantidad : ticketDetalleDTO.getProductos()) {
+            Producto producto = new Producto();
+            producto.setProductoId(productoCantidad.getIdProducto());
 
+            TicketDetalle detalle = new TicketDetalle();
+            detalle.setTicket(ticket);
+            detalle.setProducto(producto);
+            detalle.setCantidad(productoCantidad.getCantidad());
+            detalles.add(detalle);
+        }
+        return detalles;
+    }
 }

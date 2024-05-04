@@ -11,13 +11,19 @@ import lombok.Data;
 @IdClass(TicketDetalleID.class)
 public class TicketDetalle {
         @Id
-        @ManyToOne(fetch = FetchType.LAZY)
-        @JoinColumn(name = "ticket_id")
-        private Ticket ticket;
+        @Column(name = "ticketId")
+        private Long ticketId;
 
         @Id
+        @Column(name = "productoId")
+        private Long productoId;
+
         @ManyToOne(fetch = FetchType.LAZY)
-        @JoinColumn(name = "producto_id")
+        @JoinColumn(name = "ticketId")
+        private Ticket ticket;
+
+        @ManyToOne(fetch = FetchType.LAZY)
+        @JoinColumn(name = "productoId")
         private Producto producto;
 
         @Column(nullable = false)

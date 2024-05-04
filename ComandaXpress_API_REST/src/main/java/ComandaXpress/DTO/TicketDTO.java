@@ -5,8 +5,10 @@ import ComandaXpress.TicketDetalle.Model.TicketDetalle;
 import lombok.Data;
 
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Data
@@ -21,10 +23,16 @@ public class TicketDTO {
         target.setTicketId(source.getTicketId());
         target.setMesaId(source.getMesa().getMesaId());
         target.setFechaHora(source.getFechaHora());
-        target.setTicketDetallesID(source.getTicketDetalles().stream().map(
-                TicketDetalle::getTicket).collect(Collectors.toList())
-                .stream().map(ticket -> ticket.getTicketId()).collect(Collectors.toList())
-        );
+
+        // Usar un Set para evitar duplicados
+        Set<Long> uniqueTicketDetalleIds = source.getTicketDetalles().stream()
+                .map(TicketDetalle::getTicket)
+                .map(Ticket::getTicketId)
+                .collect(Collectors.toSet());
+
+        // Convertir el Set a List antes de asignarlo
+        target.setTicketDetallesID(new ArrayList<>(uniqueTicketDetalleIds));
+
         return target;
     }
 }

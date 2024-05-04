@@ -2,6 +2,7 @@ package ComandaXpress.Ticket.Controller;
 
 import ComandaXpress.Api_Map;
 import ComandaXpress.DTO.TicketDTO;
+import ComandaXpress.Mesa.Repository.MesaRepository;
 import ComandaXpress.Ticket.Model.Ticket;
 import ComandaXpress.Ticket.Repository.TicketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,12 +16,19 @@ import java.util.stream.Collectors;
 public class TicketController {
     @Autowired
     private TicketRepository ticketRepository;
+    @Autowired
+    private MesaRepository mesaRepository;
     @GetMapping
     public List<TicketDTO> getAllTickets() {
         return ticketRepository.findAll().stream().map(TicketDTO::converter).collect(Collectors.toList());
     }
     @PostMapping
-    public String guardarTicket(@RequestBody Ticket ticket) {
+    public String guardarTicket(@RequestBody TicketDTO ticketDTO) {
+        Ticket ticket = new Ticket();
+        ticket.setTicketId(ticketDTO.getTicketId());
+        ticket.setMesa(mesaRepository.findById(ticketDTO.getMesaId())
+                .orElseThrow(()-> new RuntimeException("Mesa no existe!!")));
+
         ticketRepository.save(ticket);
         return "Ticket guardado con éxito!";
     }

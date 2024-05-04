@@ -5,6 +5,7 @@ import ComandaXpress.DTO.UsuarioDTO;
 import ComandaXpress.Usuarios.Model.Usuario;
 import ComandaXpress.Usuarios.Repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +23,7 @@ public class UsuarioController {
     public List<UsuarioDTO> getUsuarios(){
         return usuarioRepository.findAll().stream().map(UsuarioDTO::converter).collect(Collectors.toList());
     }
-    @GetMapping(Api_Map.USUARIO_LOGIN_URL)
+    @PostMapping(Api_Map.USUARIO_LOGIN_URL)
     public ResponseEntity<Usuario> loginUsuario(@RequestBody Map<String, String> loginDetails) {
         Usuario usuario = usuarioRepository.findByUsuarioAndContraseña(loginDetails.get("usuario"), loginDetails.get("contraseña"));
         if(usuario != null) {
@@ -32,9 +33,17 @@ public class UsuarioController {
         }
     }
     @PostMapping(Api_Map.USUARIO_GUARDAR_URL)
-    public String saveusuario(@RequestBody Usuario usuario){
-        usuarioRepository.save(usuario);
-        return "Usuario Registrado!!!";
+    public ResponseEntity saveusuario(@RequestBody UsuarioDTO usuarioDTO){
+        try {
+            usuarioRepository.save(UsuarioDTO.fromEntity(usuarioDTO));
+            return new ResponseEntity<>("Usuario Registrado", HttpStatus.OK);
+        }
+        catch (DataIntegrityViolationException e) {
+            return new ResponseEntity<>("Error: El usuario ya existe.", HttpStatus.CONFLICT); // HTTP 409 Conflict
+        } catch (Exception e) {
+            return new ResponseEntity<>("Error al registrar usuario.", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
     }
     @PutMapping(Api_Map.USUARIO_MODIFICAR_URL)
     public String modificarUsuario(@PathVariable long usuario_id ,@RequestBody Usuario usuario){

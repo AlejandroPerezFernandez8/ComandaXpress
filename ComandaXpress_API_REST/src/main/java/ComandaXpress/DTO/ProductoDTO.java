@@ -11,7 +11,7 @@ import lombok.Data;
 import java.math.BigDecimal;
 @Data
 public class ProductoDTO {
-    private Long productoId;
+    private Long producto_id;
     private String nombre;
     private BigDecimal precio;
     private String descripcion;
@@ -21,7 +21,7 @@ public class ProductoDTO {
 
     public static ProductoDTO converter(Producto source){
         ProductoDTO target = new ProductoDTO();
-        target.setProductoId(source.getProductoId());
+        target.setProducto_id(source.getProductoId());
         target.setNombre(source.getNombre());
         target.setPrecio(source.getPrecio());
         target.setDescripcion(source.getDescripcion());

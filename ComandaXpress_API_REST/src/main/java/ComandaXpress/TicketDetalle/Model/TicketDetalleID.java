@@ -7,6 +7,6 @@ import java.io.Serializable;
 
 @Data
 public class TicketDetalleID implements Serializable {
-    private Long ticket;
-    private Long producto;
+    private Long ticketId;
+    private Long productoId;
 }
