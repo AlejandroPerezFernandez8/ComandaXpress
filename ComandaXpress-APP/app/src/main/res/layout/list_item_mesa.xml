@@ -1,6 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp"
+    android:background="@color/colorMediumBlue">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <ImageView
+        android:id="@+id/mesaIcon"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/mesa_ico"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="16dp"
+        />
+
+    <TextView
+        android:id="@+id/mesaText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/mesaIcon"
+        android:text="Mesa nº1"
+        android:textSize="28sp"
+        android:textColor="@color/colorOffWhite"
+        android:textAlignment="center"
+        />
+</RelativeLayout>

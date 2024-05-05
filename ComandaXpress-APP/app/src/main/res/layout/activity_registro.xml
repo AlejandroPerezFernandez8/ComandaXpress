@@ -33,8 +33,8 @@
         <!-- Panel de Formulario -->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/panel"
-            android:layout_width="374dp"
-            android:layout_height="482dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
             android:background="@drawable/panel_fondo_transparente_redondeado"
@@ -112,6 +112,37 @@
                 android:inputType="textPassword"
                 />
 
+            <LinearLayout
+                android:id="@+id/layoutFoto"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/Contraseña"
+                android:layout_marginTop="16dp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/fotoPerfil"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:src="@drawable/fotoperfil"
+                    android:scaleType="centerCrop"
+
+                    />
+
+                <Button
+                    android:id="@+id/btnSacarFoto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sacar Foto"
+                    android:backgroundTint="@color/colorLightBlue"
+                    android:layout_marginStart="16dp"
+                    android:layout_weight="1"/>
+
+            </LinearLayout>
+
             <Button
                 android:id="@+id/btnRegistrarse"
                 android:layout_width="0dp"
@@ -120,7 +151,7 @@
                 android:text="Registrarse"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/Contraseña"
+                app:layout_constraintTop_toBottomOf="@+id/layoutFoto"
                 android:layout_marginTop="25dp"
                 />
 
