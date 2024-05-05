@@ -10,7 +10,7 @@ CREATE TABLE Usuarios (
     email VARCHAR(255) NOT NULL,
     usuario VARCHAR(255) NOT NULL UNIQUE,
     contraseña VARCHAR(255) NOT NULL,
-    rol ENUM('cliente', 'admin') NOT NULL
+    foto blob
 );
 
 -- Creación de la tabla Categorías de Productos

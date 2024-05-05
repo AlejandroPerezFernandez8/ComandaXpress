@@ -1,7 +1,7 @@
 -- Inserts para Usuarios
-INSERT INTO Usuarios (nombre, apellido, email, usuario, contraseña, rol) VALUES 
-('Juan', 'Pérez', 'juan.perez@example.com', 'juanp', 'hashed_password', 'cliente'),
-('Maria', 'Gomez', 'maria.gomez@example.com', 'mariag', 'hashed_password', 'admin');
+INSERT INTO Usuarios (nombre, apellido, email, usuario, contraseña, foto) VALUES 
+('Juan', 'Pérez', 'juan.perez@example.com', 'juanp', 'hashed_password', 'sdjfnlsjdnfkjsdnflknw9uehlijsndfkbsduf'),
+('Maria', 'Gomez', 'maria.gomez@example.com', 'mariag', 'hashed_password', 'asjdasjkndasndjasndknaksdnkasndkjas');
 
 -- Inserts para Categorías de Productos
 INSERT INTO Categorias (nombre, descripcion) VALUES 
