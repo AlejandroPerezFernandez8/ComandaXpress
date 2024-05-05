@@ -90,11 +90,11 @@ public class RegistroActivity extends AppCompatActivity implements RegistroCallb
                 editTexts.add(contraseña);
                 if(!comprobarVacio(editTexts)){return;}
                 Usuario usuario = new Usuario(
-                    nombre.getText().toString(),
-                    apellidos.getText().toString(),
-                    email.getText().toString(),
-                    nombreUsuario.getText().toString(),
-                    contraseña.getText().toString(),
+                    nombre.getText().toString().trim(),
+                    apellidos.getText().toString().trim(),
+                    email.getText().toString().trim(),
+                    nombreUsuario.getText().toString().trim(),
+                    contraseña.getText().toString().trim(),
                     ImageUtils.encodeImageViewToBase64(fotoPerfil)
                 );
                 UsuarioService.registrarUsuario(getApplicationContext(),usuario,RegistroActivity.this);

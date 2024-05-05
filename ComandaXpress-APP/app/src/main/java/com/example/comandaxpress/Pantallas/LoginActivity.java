@@ -36,9 +36,9 @@ public class LoginActivity extends AppCompatActivity implements LoginCallBack {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("Usuario",nombreUsuario.getText().toString());
-                Log.d("contraseña",contraseña.getText().toString());
-               UsuarioService.loginUsuario(getApplicationContext(),nombreUsuario.getText().toString(),contraseña.getText().toString(),LoginActivity.this);
+                Log.d("Usuario",nombreUsuario.getText().toString().trim());
+                Log.d("contraseña",contraseña.getText().toString().trim());
+               UsuarioService.loginUsuario(getApplicationContext(),nombreUsuario.getText().toString().trim(),contraseña.getText().toString().trim(),LoginActivity.this);
             }
         });
         btnRegistro.setOnClickListener(new View.OnClickListener() {
