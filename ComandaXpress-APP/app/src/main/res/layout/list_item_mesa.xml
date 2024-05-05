@@ -24,4 +24,14 @@
         android:textColor="@color/colorOffWhite"
         android:textAlignment="center"
         />
+    <View
+        android:id="@+id/statusIndicator"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="16dp"
+        android:background="#CCCCCC"
+        android:layout_alignRight="@+id/mesaText"
+        />
+
 </RelativeLayout>

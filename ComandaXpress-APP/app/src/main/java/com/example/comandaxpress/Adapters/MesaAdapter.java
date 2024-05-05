@@ -1,6 +1,8 @@
 package com.example.comandaxpress.Adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +21,8 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.util.Log;
 
+import androidx.core.content.ContextCompat;
+
 import java.util.List;
 
 public class MesaAdapter extends ArrayAdapter<Mesa> {
@@ -28,7 +32,6 @@ public class MesaAdapter extends ArrayAdapter<Mesa> {
         super(context, R.layout.list_item_mesa, mesas);
         this.mesas = mesas;
     }
-
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         Log.d("MesaAdapter", "Getting view for position: " + position);
@@ -36,8 +39,14 @@ public class MesaAdapter extends ArrayAdapter<Mesa> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_item_mesa, parent, false);
         }
         TextView mesaText = convertView.findViewById(R.id.mesaText);
-        Mesa mesa = getItem(position);  // Ahora esto funcionará correctamente
+        View statusIndicator = convertView.findViewById(R.id.statusIndicator);
+        Mesa mesa = getItem(position);
         mesaText.setText("Mesa " + mesa.getNumero());
+        if (mesa.getActiva()) {
+            statusIndicator.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorGreen)); // Verde
+        } else {
+            statusIndicator.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorRed)); // Rojo
+        }
         return convertView;
     }
 }

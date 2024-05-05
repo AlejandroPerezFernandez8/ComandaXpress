@@ -9,4 +9,6 @@
     <color name="colorMediumBlue">#31363F</color> <!-- Oscuro -->
     <color name="colorLightBlue">#76ABA7</color>  <!-- Azul claro -->
     <color name="colorOffWhite">#EEEEEE</color>   <!-- Casi blanco -->
+    <color name="colorRed">#FF0000</color>
+    <color name="colorGreen">#00FF00</color>
 </resources>
