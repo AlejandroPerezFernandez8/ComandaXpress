@@ -16,7 +16,7 @@ public class UsuarioDTO {
 
     private String contraseña;
 
-    private String rol;
+    private String foto;
 
     public static UsuarioDTO converter(Usuario source){
         UsuarioDTO target = new UsuarioDTO();
@@ -26,7 +26,7 @@ public class UsuarioDTO {
         target.setEmail(source.getEmail());
         target.setUsuario(source.getUsuario());
         target.setContraseña(source.getContraseña());
-        target.setRol(source.getRol());
+        target.setFoto(source.getFoto());
         return target;
     }
     public static Usuario fromEntity(UsuarioDTO source){
@@ -36,7 +36,7 @@ public class UsuarioDTO {
         target.setEmail(source.getEmail());
         target.setUsuario(source.getUsuario());
         target.setContraseña(source.getContraseña());
-        target.setRol(source.getRol());
+        target.setFoto(source.getFoto());
         return target;
     }
 

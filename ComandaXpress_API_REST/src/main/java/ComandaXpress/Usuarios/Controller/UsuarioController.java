@@ -54,7 +54,7 @@ public class UsuarioController {
         usuarioModificado.setUsuario(usuario.getUsuario());
         usuarioModificado.setContraseña(usuario.getContraseña());
         usuarioModificado.setEmail(usuario.getEmail());
-        usuarioModificado.setRol(usuario.getRol());
+        usuarioModificado.setFoto(usuario.getFoto());
         usuarioRepository.save(usuarioModificado);
         return "Usuario Modificado!!!";
     }

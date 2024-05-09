@@ -22,5 +22,5 @@ public class Usuario {
     @Column
     private String contraseña;
     @Column
-    private String rol;
+    private String foto;
 }
