@@ -32,7 +32,7 @@
         <!-- Panel de Formulario -->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/panel"
-            android:layout_width="360dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@drawable/panel_fondo_transparente_redondeado"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -41,6 +41,8 @@
             app:layout_constraintTop_toBottomOf="@+id/Titulo"
             android:padding="20dp"
             android:layout_marginTop="100dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp"
             >
 
             <!-- Campos de Usuario y Contraseña -->

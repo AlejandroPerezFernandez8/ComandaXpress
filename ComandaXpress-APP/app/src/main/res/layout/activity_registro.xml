@@ -129,7 +129,6 @@
                     android:layout_height="70dp"
                     android:src="@drawable/fotoperfil"
                     android:scaleType="centerCrop"
-
                     />
 
                 <Button

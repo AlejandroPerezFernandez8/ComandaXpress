@@ -19,6 +19,7 @@ import com.example.comandaxpress.API.Clases.Usuario;
 import com.example.comandaxpress.API.Interfaces.LoginCallBack;
 import com.example.comandaxpress.API.UsuarioService;
 import com.example.comandaxpress.R;
+import com.example.comandaxpress.Util.CryptoUtils;
 
 public class LoginActivity extends AppCompatActivity implements LoginCallBack {
     SharedPreferences sharedPreferences;
@@ -26,7 +27,13 @@ public class LoginActivity extends AppCompatActivity implements LoginCallBack {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        sharedPreferences= getSharedPreferences("preferencias", MODE_PRIVATE);
+        sharedPreferences= getApplicationContext().getSharedPreferences("preferencias", MODE_PRIVATE);
+        if("noExiste" != sharedPreferences.getString("Usuario","noExiste")){
+            //SE PASA A LA PANTALLA DE MESAS
+            Intent intentMesas = new Intent(getApplicationContext(),MesasActivity.class);
+            someActivityResultLauncher.launch(intentMesas);
+            finish();
+        }
         //Referencias a variables de actividad
         EditText nombreUsuario = findViewById(R.id.NombreUsuario);
         EditText contraseña = findViewById(R.id.Contraseña);
@@ -36,8 +43,6 @@ public class LoginActivity extends AppCompatActivity implements LoginCallBack {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("Usuario",nombreUsuario.getText().toString().trim());
-                Log.d("contraseña",contraseña.getText().toString().trim());
                UsuarioService.loginUsuario(getApplicationContext(),nombreUsuario.getText().toString().trim(),contraseña.getText().toString().trim(),LoginActivity.this);
             }
         });
@@ -59,10 +64,16 @@ public class LoginActivity extends AppCompatActivity implements LoginCallBack {
 
     @Override
     public void onSuccess(Usuario usuario) {
-        //SE GUARDA EL ESTADO DE LOGIN EN LAS PREFERENCIAS
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putBoolean("Logeado",true);
-        editor.apply();
+        try {
+            //SE GUARDA EL USUARIO EN LAS SHARED PREFERENCES
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            String usuarioEncriptado = CryptoUtils.encriptar(CryptoUtils.transformarUsuarioToJson(usuario),"abc123.");
+            editor.putString("Usuario",usuarioEncriptado);
+            editor.apply();
+        }catch (Exception ex){
+            Log.d("ERROR",ex.getMessage());
+        }
+
         //SE NOTIFICA AL USUARIO DE LA BIENVENIDA
         Toast.makeText(this,"Bienvenido " + usuario.getUsuario()+" !!",Toast.LENGTH_LONG).show();
         //SE PASA A LA PANTALLA DE MESAS

@@ -22,7 +22,7 @@ import java.util.Map;
 public class UsuarioService {
 
     public static void loginUsuario(Context context, String nombreUsuario, String contraseña, LoginCallBack callBack) {
-        String url = "http://192.168.1.131:8080/usuarios/login";  // Asegúrate de que esta URL es correcta
+        String url = "http://192.168.1.131:8080/usuarios/login";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override

@@ -7,23 +7,39 @@
     android:background="@drawable/fondo"
     tools:context=".Pantallas.MesasActivity">
 
-    <!-- Título -->
-    <TextView
-        android:id="@+id/titulo"
+    <LinearLayout
+        android:id="@+id/linearLayoutTituloImagen"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
         android:background="@color/colorLightBlue"
-        android:paddingStart="16dp"
-        android:paddingTop="8dp"
-        android:paddingEnd="16dp"
-        android:paddingBottom="8dp"
-        android:text="Gestión de Mesas"
-        android:textColor="@color/colorOffWhite"
-        android:textSize="24sp"
-        android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp">
+
+        <!-- Título -->
+        <TextView
+            android:id="@+id/titulo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Gestión de Mesas"
+            android:textColor="@color/colorOffWhite"
+            android:textSize="34sp"
+            android:textStyle="bold"/>
+
+        <!-- Imagen circular al lado del título -->
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/fotoPerfilMesas"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/fotoperfil"
+            android:layout_marginStart="16dp" />
+
+    </LinearLayout>
 
     <!-- ListView para mesas -->
     <ListView
@@ -32,7 +48,7 @@
         android:layout_height="0dp"
         android:divider="@android:color/transparent"
         android:dividerHeight="10dp"
-        app:layout_constraintTop_toBottomOf="@id/titulo"
+        app:layout_constraintTop_toBottomOf="@id/linearLayoutTituloImagen"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">

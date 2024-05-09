@@ -162,7 +162,6 @@ public class RegistroActivity extends AppCompatActivity implements RegistroCallb
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == MY_CAMERA_PERMISSION_CODE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(this, "Aceptado", Toast.LENGTH_LONG).show();
                 // Iniciar la cámara después de que el permiso ha sido concedido
                 openCamera();
             } else {
