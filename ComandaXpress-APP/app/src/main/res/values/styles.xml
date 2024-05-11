@@ -5,4 +5,7 @@
         <item name="android:textSize">18sp</item>
         <item name="android:background">@color/colorMediumBlue</item>
     </style>
+    <style name="CustomSpinnerDropdown" parent="Widget.AppCompat.Spinner.DropDown.ActionBar">
+        <item name="android:popupBackground">@drawable/spinner_item_background</item> <!-- Fondo personalizado -->
+    </style>
 </resources>

@@ -92,7 +92,6 @@
                 android:backgroundTint="@color/colorLightBlue"
                 />
 
-            <!-- Texto de Transición y Botón de Registrarse -->
             <TextView
                 android:id="@+id/textViewRegisterPrompt"
                 android:layout_width="0dp"
@@ -114,6 +113,28 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewRegisterPrompt"
+                android:backgroundTint="@color/colorLightBlue"
+                />
+            <TextView
+                android:id="@+id/textIp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="¿Tienes porblemas de conexión?"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btnRegistrarse"
+                android:textColor="@color/colorLightBlue"
+                />
+            <Button
+                android:id="@+id/btnCambiarIPLogin"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Cambiar direccion ip"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textIp"
                 android:backgroundTint="@color/colorLightBlue"
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>

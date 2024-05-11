@@ -22,8 +22,7 @@ import java.util.Map;
 public class UsuarioService {
 
     public static void loginUsuario(Context context, String nombreUsuario, String contraseña, LoginCallBack callBack) {
-        String url = "http://192.168.1.131:8080/usuarios/login";
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, ApiMapSingleton.getInstance().getUrlUsuarioLogin(),
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -60,12 +59,10 @@ public class UsuarioService {
 
 
     public static void registrarUsuario(Context context, Usuario usuario, RegistroCallback callback) {
-        String url = "http://192.168.1.131:8080/usuarios/saveUsuarios";
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, ApiMapSingleton.getInstance().getUrlUsuarioRegistro(),
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        // Notifica al callback que el registro fue exitoso
                         callback.onRegistroSuccess(response);
                     }
                 },

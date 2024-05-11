@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">ComandaXpress</string>
+    <string name="idiomas">Seleccionar Idioma</string>
+    <string-array name="languages_array">
+        <item>Castellano</item>
+        <item>Gallego</item>
+    </string-array>
 </resources>

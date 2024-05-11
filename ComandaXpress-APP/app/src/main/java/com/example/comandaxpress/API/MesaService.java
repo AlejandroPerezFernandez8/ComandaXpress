@@ -21,9 +21,7 @@ import java.util.List;
 
 public class MesaService {
     public static void getAllMesas(Context context, GetAllMesasCallback callback) {
-        String url = "http://192.168.1.131:8080/mesa";  // Asegúrate de que esta URL es correcta
-
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null,
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, ApiMapSingleton.getInstance().getUrlMesa(), null,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {

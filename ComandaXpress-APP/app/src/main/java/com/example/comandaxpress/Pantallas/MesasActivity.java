@@ -1,10 +1,12 @@
 package com.example.comandaxpress.Pantallas;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Base64;
+import android.view.View;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -23,6 +25,7 @@ import com.example.comandaxpress.API.MesaService;
 import com.example.comandaxpress.Adapters.MesaAdapter;
 import com.example.comandaxpress.R;
 import com.example.comandaxpress.Util.CryptoUtils;
+import com.example.comandaxpress.Util.SQLiteUtils;
 
 import java.util.List;
 
@@ -41,11 +44,18 @@ public class MesasActivity extends AppCompatActivity implements GetAllMesasCallb
             String encriptedUser = sharedPreferences.getString("Usuario","");
             String jsonUsuario = CryptoUtils.desencriptar(encriptedUser,"abc123.");
             usuario = CryptoUtils.transformarJsonToUsuaro(jsonUsuario);
-
             if(!usuario.getFoto().isEmpty() || usuario.getFoto() == null){
                 fotoPerfil.setImageBitmap(CryptoUtils.decodeBase64ToBitmap(usuario.getFoto()));
             }
         }catch (Exception ex){}
+        fotoPerfil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentAjustes = new Intent(getApplicationContext(),AjustesActivity.class);
+                startActivity(intentAjustes);
+            }
+        });
+
     }
 
     @Override
@@ -70,4 +80,6 @@ public class MesasActivity extends AppCompatActivity implements GetAllMesasCallb
     public void onError(String error) {
         Toast.makeText(this, "Error cargando Mesas", Toast.LENGTH_LONG).show();
     }
+
+
 }
