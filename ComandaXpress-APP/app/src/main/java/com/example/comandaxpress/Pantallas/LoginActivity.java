@@ -39,8 +39,9 @@ public class LoginActivity extends AppCompatActivity implements LoginCallBack {
 
         if (SQLiteUtils.getIP(this) == null) {
             solicitarIP();
+        }else {
+            ApiMapSingleton.getInstance().setIP(SQLiteUtils.getIP(this));
         }
-
         if("noExiste" != sharedPreferences.getString("Usuario","noExiste")){
             //SE PASA A LA PANTALLA DE MESAS
             Intent intentMesas = new Intent(getApplicationContext(),MesasActivity.class);

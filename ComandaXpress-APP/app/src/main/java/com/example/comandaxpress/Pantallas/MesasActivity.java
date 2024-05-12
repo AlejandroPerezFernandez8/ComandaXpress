@@ -13,11 +13,16 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.comandaxpress.API.ApiMapSingleton;
 import com.example.comandaxpress.API.Clases.Mesa;
 import com.example.comandaxpress.API.Clases.Usuario;
 import com.example.comandaxpress.API.Interfaces.GetAllMesasCallback;
@@ -52,7 +57,7 @@ public class MesasActivity extends AppCompatActivity implements GetAllMesasCallb
             @Override
             public void onClick(View v) {
                 Intent intentAjustes = new Intent(getApplicationContext(),AjustesActivity.class);
-                startActivity(intentAjustes);
+                someActivityResultLauncher.launch(intentAjustes);
             }
         });
 
@@ -75,11 +80,20 @@ public class MesasActivity extends AppCompatActivity implements GetAllMesasCallb
             }
         });
     }
-
     @Override
     public void onError(String error) {
         Toast.makeText(this, "Error cargando Mesas", Toast.LENGTH_LONG).show();
     }
 
+
+    ActivityResultLauncher someActivityResultLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    Toast.makeText(MesasActivity.this, ApiMapSingleton.getInstance().getIP(), Toast.LENGTH_SHORT).show();
+                    recreate();
+                }
+            });
 
 }
