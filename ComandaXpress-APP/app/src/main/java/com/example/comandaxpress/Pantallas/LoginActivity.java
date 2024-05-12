@@ -77,7 +77,6 @@ public class LoginActivity extends AppCompatActivity implements LoginCallBack {
             public void onClick(View v) {
                 Intent intentRegistro = new Intent(getApplicationContext(),RegistroActivity.class);
                 someActivityResultLauncher.launch(intentRegistro);
-                finish();
             }});
     }
 

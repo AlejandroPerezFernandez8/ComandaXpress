@@ -1,8 +1,11 @@
 package com.example.comandaxpress.Pantallas;
 
+import android.app.AlertDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -13,6 +16,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -34,6 +41,7 @@ public class AjustesActivity extends AppCompatActivity {
         TextView nombreUsuario = findViewById(R.id.nombreUsuarioAjustes);
         EditText etCambiarIP = findViewById(R.id.etCambioIP);
         Button btnCambiarIP = findViewById(R.id.btnCambiarIP);
+        ImageView logout = findViewById(R.id.imagen_logout);
         Spinner languageSpinner = findViewById(R.id.languageSpinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.languages_array, R.layout.spinner_item);
         adapter.setDropDownViewResource(R.layout.spinner_item);
@@ -70,7 +78,47 @@ public class AjustesActivity extends AppCompatActivity {
             }
         });
 
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(AjustesActivity.this);
+                LayoutInflater inflater = AjustesActivity.this.getLayoutInflater();
+                View dialogView = inflater.inflate(R.layout.logout, null);
+                builder.setView(dialogView);
+
+                AlertDialog dialog = builder.create();
+
+                Button btnConfirm = dialogView.findViewById(R.id.btnConfirm);
+                Button btnCancel = dialogView.findViewById(R.id.btnCancel);
+
+                btnConfirm.setOnClickListener(b -> {
+                    //ELIMINAR EL USER DE LAS SHARED PREFERENCES;
+                    sharedPreferences= getApplicationContext().getSharedPreferences("preferencias", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.clear();
+                    editor.apply();
+                    //LANZAR LA ACTIVIDAD DE LOGIN
+                    Intent intentLogin = new Intent(AjustesActivity.this,LoginActivity.class);
+                    intentLogin.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    someActivityResultLauncher.launch(intentLogin);
+                    dialog.dismiss();
+                });
+                btnCancel.setOnClickListener(b -> {dialog.dismiss();});
+                dialog.show();
+            }
+        });
 
 
     }
+
+
+
+
+    ActivityResultLauncher someActivityResultLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                }
+            });
 }

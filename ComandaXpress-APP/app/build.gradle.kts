@@ -37,6 +37,7 @@ dependencies {
     implementation ("com.google.code.gson:gson:2.8.8")
     implementation ("com.android.volley:volley:1.2.1")
     implementation ("de.hdodenhof:circleimageview:3.1.0")
+    implementation ("com.caverock:androidsvg:1.4")
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)

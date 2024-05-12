@@ -5,7 +5,9 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Picture;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -32,6 +34,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.caverock.androidsvg.SVG;
 import com.example.comandaxpress.API.Clases.Usuario;
 import com.example.comandaxpress.API.Interfaces.RegistroCallback;
 import com.example.comandaxpress.API.UsuarioService;
@@ -62,8 +65,6 @@ public class RegistroActivity extends AppCompatActivity implements RegistroCallb
         Button btnFoto = findViewById(R.id.btnSacarFoto);
         Button btnRegistro = findViewById(R.id.btnRegistrarse);
         List<EditText> editTexts = new ArrayList<>();
-
-
 
         btnFoto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,13 +114,13 @@ public class RegistroActivity extends AppCompatActivity implements RegistroCallb
             }
         });
     }
-
     @Override
     public void onRegistroSuccess(String response) {
         Toast.makeText(this,response,Toast.LENGTH_LONG).show();
         //Se pasa a la pantalla de login
-        Intent intentLogin = new Intent(getApplicationContext(),LoginActivity.class);
+        Intent intentLogin = new Intent(RegistroActivity.this,LoginActivity.class);
         someActivityResultLauncher.launch(intentLogin);
+        finish();
     }
     @Override
     public void onRegistroFailed(String error) {
@@ -128,7 +129,6 @@ public class RegistroActivity extends AppCompatActivity implements RegistroCallb
             nombreUsuario.setTextColor(Color.RED);
         }
     }
-
     public boolean comprobarVacio(List<EditText> editTexts){
         for (EditText editText: editTexts) {
             if(editText.getText().toString().isEmpty()){
@@ -139,7 +139,6 @@ public class RegistroActivity extends AppCompatActivity implements RegistroCallb
         }
         return true;
     }
-
     ActivityResultLauncher someActivityResultLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
@@ -156,7 +155,6 @@ public class RegistroActivity extends AppCompatActivity implements RegistroCallb
                     }
                 }
             });
-
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -169,8 +167,6 @@ public class RegistroActivity extends AppCompatActivity implements RegistroCallb
             }
         }
     }
-
-
     private void openCamera() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         someActivityResultLauncher.launch(intent);
