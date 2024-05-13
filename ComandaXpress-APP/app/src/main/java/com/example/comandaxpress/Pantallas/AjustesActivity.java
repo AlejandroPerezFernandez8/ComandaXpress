@@ -192,6 +192,14 @@ public class AjustesActivity extends AppCompatActivity implements ModificacionCa
             new ActivityResultCallback<ActivityResult>() {
                 @Override
                 public void onActivityResult(ActivityResult result) {
+                }
+            });
+
+    ActivityResultLauncher<Intent> cameraLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
                     if (result.getResultCode() == RESULT_OK && result.getData() != null) {
                         // Obtener la miniatura
                         Bundle extras = result.getData().getExtras();
@@ -202,6 +210,7 @@ public class AjustesActivity extends AppCompatActivity implements ModificacionCa
                     }
                 }
             });
+
 
     public boolean comprobarVacio(List<EditText> editTexts){
         for (EditText editText: editTexts) {
@@ -218,7 +227,7 @@ public class AjustesActivity extends AppCompatActivity implements ModificacionCa
     public void onRegistroSuccess(String response) {
         try {
             //GUARDAR EL USUARIO ENCRIPTADO EN LAS PREFERENCIAS
-            sharedPreferences.edit().putString("Usuario", CryptoUtils.encriptar(new Gson().toJson(usuario), "abc123."));
+            sharedPreferences.edit().putString("Usuario", CryptoUtils.encriptar(new Gson().toJson(usuario), "abc123.")).apply();
             Toast.makeText(this, "Usuario Modificado", Toast.LENGTH_SHORT).show();
             //VOLVER AL LOGIN
             Intent intentLogin = new Intent(AjustesActivity.this,LoginActivity.class);
@@ -232,13 +241,17 @@ public class AjustesActivity extends AppCompatActivity implements ModificacionCa
 
     @Override
     public void onRegistroFailed(String error) {
-        Toast.makeText(this, "Error al modificar usuario", Toast.LENGTH_SHORT).show();
-        Log.d("Modificacion Error",error);
+        if(error.contains("Usuario duplicado")){
+            Toast.makeText(this, "Error: Usuario Duplicado", Toast.LENGTH_SHORT).show();
+        }else {
+            Toast.makeText(this, "Error al modificar usuario", Toast.LENGTH_SHORT).show();
+            Log.d("Modificacion Error", error);
+        }
     }
 
     private void openCamera() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        someActivityResultLauncher.launch(intent);
+        cameraLauncher.launch(intent);
     }
 
 }
