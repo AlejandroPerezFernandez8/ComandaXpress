@@ -36,7 +36,11 @@ public class UsuarioDTO {
         target.setEmail(source.getEmail());
         target.setUsuario(source.getUsuario());
         target.setContraseña(source.getContraseña());
-        target.setFoto(source.getFoto());
+        if(source.foto != null){
+            target.setFoto(source.getFoto());
+        }else{
+            target.setFoto("");
+        }
         return target;
     }
 

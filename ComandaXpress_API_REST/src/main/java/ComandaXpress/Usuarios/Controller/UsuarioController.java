@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 
 @RestController
@@ -39,24 +40,30 @@ public class UsuarioController {
             return new ResponseEntity<>("Usuario Registrado", HttpStatus.OK);
         }
         catch (DataIntegrityViolationException e) {
-            return new ResponseEntity<>("Error: El usuario ya existe.", HttpStatus.CONFLICT); // HTTP 409 Conflict
+            System.out.println(e.getMostSpecificCause().getMessage());
+            return new ResponseEntity<>("Error: El usuario ya existe.", HttpStatus.CONFLICT);
         } catch (Exception e) {
             return new ResponseEntity<>("Error al registrar usuario.", HttpStatus.INTERNAL_SERVER_ERROR);
         }
-
     }
     @PutMapping(Api_Map.USUARIO_MODIFICAR_URL)
     public String modificarUsuario(@PathVariable long usuario_id ,@RequestBody Usuario usuario){
-        Usuario usuarioModificado = usuarioRepository.findById(usuario_id).get();
-        //Modificamos los varoles del usuario
-        usuarioModificado.setNombre(usuario.getNombre());
-        usuarioModificado.setApellido(usuario.getApellido());
-        usuarioModificado.setUsuario(usuario.getUsuario());
-        usuarioModificado.setContraseña(usuario.getContraseña());
-        usuarioModificado.setEmail(usuario.getEmail());
-        usuarioModificado.setFoto(usuario.getFoto());
-        usuarioRepository.save(usuarioModificado);
-        return "Usuario Modificado!!!";
+        try {
+            Usuario usuarioModificado = usuarioRepository.findById(usuario_id).get();
+            //Modificamos los varoles del usuario
+            usuarioModificado.setNombre(usuario.getNombre());
+            usuarioModificado.setApellido(usuario.getApellido());
+            usuarioModificado.setUsuario(usuario.getUsuario());
+            usuarioModificado.setContraseña(usuario.getContraseña());
+            usuarioModificado.setEmail(usuario.getEmail());
+            usuarioModificado.setFoto(usuario.getFoto());
+            usuarioRepository.save(usuarioModificado);
+            return "Usuario Modificado!!!";
+        }catch (Exception ex){
+            if(ex.getMessage().contains("duplicate")){
+                return "Usuario duplicado";
+            }else {return "Ha ocurrido un error";}
+        }
     }
     @DeleteMapping(Api_Map.USUARIO_ELIMINAR_URL)
     public String borrarUsuario(@PathVariable long usuario_id){
