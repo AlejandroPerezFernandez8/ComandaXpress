@@ -85,84 +85,124 @@
             />
 
         <!-- Panel de ajustes para modificar información del usuario -->
+
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/panelAjustes"
+            android:id="@+id/panel"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
+            android:layout_height="match_parent"
+            android:layout_margin="16dp"
             android:background="@drawable/panel_fondo_transparente_redondeado"
             android:padding="20dp"
-            app:layout_constraintTop_toBottomOf="@+id/nombreUsuarioAjustes"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            >
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nombreUsuarioAjustes"
+            app:layout_constraintVertical_bias="0.06">
 
+            <!-- Campos -->
             <EditText
-                android:id="@+id/editNombreUsuarioAjustes"
+                android:id="@+id/NombreModificar"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:hint="Nombre de usuario"
-                android:textColorHint="@color/colorLightBlue"
+                android:hint="Nombre"
                 android:textColor="@color/colorLightBlue"
+                android:textColorHint="@color/colorLightBlue"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
-                android:id="@+id/editEmailAjustes"
+                android:id="@+id/ApellidosModificar"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:hint="Correo electrónico"
-                android:textColorHint="@color/colorLightBlue"
+                android:hint="Apellidos"
                 android:textColor="@color/colorLightBlue"
+                android:textColorHint="@color/colorLightBlue"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/NombreModificar" />
+
+            <EditText
+                android:id="@+id/EmailModificar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="Email"
                 android:inputType="textEmailAddress"
+                android:textColor="@color/colorLightBlue"
+                android:textColorHint="@color/colorLightBlue"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editNombreUsuarioAjustes" />
-
+                app:layout_constraintTop_toBottomOf="@+id/ApellidosModificar" />
 
             <EditText
-                android:id="@+id/editUsuarioAjustes"
+                android:id="@+id/NombreUsuarioModificar"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:hint="Usuario"
-                android:textColorHint="@color/colorLightBlue"
+                android:layout_marginTop="30dp"
+                android:hint="Nombre de usuario"
                 android:textColor="@color/colorLightBlue"
-                android:inputType="text"
+                android:textColorHint="@color/colorLightBlue"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editEmailAjustes" />
+                app:layout_constraintTop_toBottomOf="@+id/EmailModificar" />
 
             <EditText
-                android:id="@+id/editContraseñaAjustes"
+                android:id="@+id/ContraseñaModificar"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:hint="Contraseña"
-                android:textColorHint="@color/colorLightBlue"
-                android:textColor="@color/colorLightBlue"
                 android:inputType="textPassword"
+                android:textColor="@color/colorLightBlue"
+                android:textColorHint="@color/colorLightBlue"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editUsuarioAjustes" />
+                app:layout_constraintTop_toBottomOf="@+id/NombreUsuarioModificar" />
 
-            <Button
-                android:id="@+id/btnModificarUsuario"
+            <LinearLayout
+                android:id="@+id/layoutFotoModificar"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ContraseñaModificar">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/fotoPerfilModificar"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/fotoperfil" />
+
+                <Button
+                    android:id="@+id/btnSacarFotoModificar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/colorLightBlue"
+                    android:textColor="@color/colorOffWhite"
+                    android:text="Sacar Foto" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnRegistrarse"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:backgroundTint="@color/colorLightBlue"
                 android:text="Modificar Usuario"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editContraseñaAjustes"
-                android:backgroundTint="@color/colorLightBlue"
+                app:layout_constraintTop_toBottomOf="@+id/layoutFotoModificar"
+                android:textColor="@color/colorOffWhite"
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -173,7 +213,7 @@
             android:layout_marginTop="10dp"
             android:background="@drawable/panel_fondo_transparente_redondeado"
             android:padding="20dp"
-            app:layout_constraintTop_toBottomOf="@+id/panelAjustes"
+            app:layout_constraintTop_toBottomOf="@+id/panel"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginLeft="15dp"

@@ -12,6 +12,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.comandaxpress.API.Clases.Usuario;
 import com.example.comandaxpress.API.Interfaces.LoginCallBack;
+import com.example.comandaxpress.API.Interfaces.ModificacionCallback;
 import com.example.comandaxpress.API.Interfaces.RegistroCallback;
 import com.google.gson.Gson;
 
@@ -29,6 +30,7 @@ public class UsuarioService {
                         Log.d("Login Response", response);
                         Gson gson = new Gson();
                         Usuario usuario = gson.fromJson(response, Usuario.class);
+                        Log.d("usuario",usuario.toString());
                         callBack.onSuccess(usuario);
                     }
                 }, new Response.ErrorListener() {
@@ -94,5 +96,43 @@ public class UsuarioService {
         RequestQueue queue = Volley.newRequestQueue(context);
         queue.add(stringRequest);
     }
+    public static void modificarUsuario(Context context, long usuarioId, Usuario usuario, ModificacionCallback callback) {
+        String url = ApiMapSingleton.getInstance().getUrlUsuarioModificar(usuarioId);
+        StringRequest stringRequest = new StringRequest(Request.Method.PUT, url, new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        callback.onRegistroSuccess(response);
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // Manejo del error
+                        String errorMessage = "Error desconocido";
+                        if (error.networkResponse != null && error.networkResponse.data != null) {
+                            errorMessage = new String(error.networkResponse.data, StandardCharsets.UTF_8);
+                        }
+                        callback.onRegistroFailed(errorMessage);
+                    }
+                }) {
+            @Override
+            public byte[] getBody() throws AuthFailureError {
+                Gson gson = new Gson();
+                String payload = gson.toJson(usuario);
+                return payload.getBytes(StandardCharsets.UTF_8);
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> headers = new HashMap<>();
+                headers.put("Content-Type", "application/json; charset=utf-8");
+                return headers;
+            }
+        };
+        RequestQueue queue = Volley.newRequestQueue(context);
+        queue.add(stringRequest);
+    }
+
+
+
 
 }
