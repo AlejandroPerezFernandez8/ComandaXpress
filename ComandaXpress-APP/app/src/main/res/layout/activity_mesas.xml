@@ -37,7 +37,10 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:src="@drawable/fotoperfil"
-            android:layout_marginStart="16dp" />
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            />
 
     </LinearLayout>
 

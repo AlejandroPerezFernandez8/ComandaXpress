@@ -60,7 +60,6 @@ public class LoginActivity extends AppCompatActivity implements LoginCallBack {
             public void onClick(View v) {
                 solicitarIP();
                 ApiMapSingleton.getInstance().setIP(SQLiteUtils.getIP(LoginActivity.this));
-                Toast.makeText(LoginActivity.this, "ip x " + ApiMapSingleton.getInstance().getIP(), Toast.LENGTH_SHORT).show();
             }
         });
         btnLogin.setOnClickListener(new View.OnClickListener() {

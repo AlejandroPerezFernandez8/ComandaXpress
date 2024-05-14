@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Base64;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -31,12 +32,14 @@ import com.example.comandaxpress.Adapters.MesaAdapter;
 import com.example.comandaxpress.R;
 import com.example.comandaxpress.Util.CryptoUtils;
 import com.example.comandaxpress.Util.SQLiteUtils;
+import com.google.gson.Gson;
 
 import java.util.List;
 
 public class MesasActivity extends AppCompatActivity implements GetAllMesasCallback {
     SharedPreferences sharedPreferences ;
     MesaAdapter adaptador;
+    ListView lista;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +47,7 @@ public class MesasActivity extends AppCompatActivity implements GetAllMesasCallb
         MesaService.getAllMesas(this,this);
         sharedPreferences= getApplicationContext().getSharedPreferences("preferencias", MODE_PRIVATE);
         ImageView fotoPerfil = findViewById(R.id.fotoPerfilMesas);
+        lista = findViewById(R.id.listaMesas);
         try {
             Usuario usuario;
             String encriptedUser = sharedPreferences.getString("Usuario","");
@@ -61,7 +65,19 @@ public class MesasActivity extends AppCompatActivity implements GetAllMesasCallb
             }
         });
 
+        lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intentTicket = new Intent(MesasActivity.this,Mesa_ticket_Activity.class);
+                intentTicket.putExtra("Mesa",new Gson().toJson(adaptador.getItem(position)));
+                someActivityResultLauncher.launch(intentTicket);
+            }
+        });
+
     }
+
+
+
 
     @Override
     public void onSuccess(List<Mesa> mesas) {
@@ -70,7 +86,6 @@ public class MesasActivity extends AppCompatActivity implements GetAllMesasCallb
             public void run() {
                 if (adaptador == null) {
                     adaptador = new MesaAdapter(MesasActivity.this, mesas);
-                    ListView lista = findViewById(R.id.listaMesas);
                     lista.setAdapter(adaptador);
                 } else {
                     adaptador.clear();
@@ -91,7 +106,6 @@ public class MesasActivity extends AppCompatActivity implements GetAllMesasCallb
             new ActivityResultCallback<ActivityResult>() {
                 @Override
                 public void onActivityResult(ActivityResult result) {
-                    Toast.makeText(MesasActivity.this, ApiMapSingleton.getInstance().getIP(), Toast.LENGTH_SHORT).show();
                     recreate();
                 }
             });
