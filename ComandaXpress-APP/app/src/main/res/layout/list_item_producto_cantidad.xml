@@ -1,0 +1,40 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="6dp"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:layout_margin="10dp"
+    android:paddingEnd="20dp">
+
+    <TextView
+        android:id="@+id/textNombre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:textColor="@color/colorOffWhite"
+        android:gravity="start"
+        android:text="Nombre"/>
+
+    <TextView
+        android:id="@+id/textPuntos"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="..........................................................................."
+        android:textSize="10sp"
+        android:textColor="@color/colorOffWhite"
+        android:gravity="center"
+        android:singleLine="true"
+        android:ellipsize="end"
+        android:paddingHorizontal="8dp"/>
+
+    <TextView
+        android:id="@+id/textCantidad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:textColor="@color/colorOffWhite"
+        android:gravity="end"
+        android:text="Cantidad"/>
+</LinearLayout>
