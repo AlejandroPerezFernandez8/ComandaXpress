@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.activity.result.ActivityResult;
@@ -21,17 +22,23 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.comandaxpress.API.CategoriaService;
+import com.example.comandaxpress.API.Clases.Categoria;
 import com.example.comandaxpress.API.Clases.Mesa;
 import com.example.comandaxpress.API.Clases.Usuario;
+import com.example.comandaxpress.API.Interfaces.GetAllCategoriasCallback;
 import com.example.comandaxpress.Adapters.TicketProductoAdapter;
 import com.example.comandaxpress.ClasesHelper.ProductoCantidad;
+import com.example.comandaxpress.Pantallas.Fragment.DialogoCategoriasFragment;
 import com.example.comandaxpress.R;
 import com.example.comandaxpress.Util.CryptoUtils;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
-public class Mesa_ticket_Activity extends AppCompatActivity {
+public class Mesa_ticket_Activity extends AppCompatActivity implements GetAllCategoriasCallback{
     SharedPreferences sharedPreferences;
     ArrayList<ProductoCantidad> pcList = new ArrayList<>();
     TicketProductoAdapter adapter;
@@ -57,7 +64,7 @@ public class Mesa_ticket_Activity extends AppCompatActivity {
         btnAñadirProducto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                CategoriaService.getAllCategorias(Mesa_ticket_Activity.this,Mesa_ticket_Activity.this);
             }
         });
 
@@ -93,4 +100,15 @@ public class Mesa_ticket_Activity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
     }
 
+    @Override
+    public void onSuccess(List<Categoria> categorias) {
+        DialogoCategoriasFragment dialogo = DialogoCategoriasFragment.newInstance(new ArrayList<>(categorias));
+        dialogo.show(getSupportFragmentManager(), "dialogo_categorias");
+    }
+
+    @Override
+    public void onError(String error) {
+        Log.d("Error carga categorias",error);
+        Toast.makeText(this, "Error al cargar categorias", Toast.LENGTH_SHORT).show();
+    }
 }
