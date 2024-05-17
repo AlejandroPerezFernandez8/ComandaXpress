@@ -30,15 +30,20 @@ public class ProductoController {
     public List<ProductoDTO> listarProductos() {
         return productoRepository.findAll().stream().map(ProductoDTO::converter).collect(Collectors.toList());
     }
+    @GetMapping(Api_Map.PRODUCTO_CATEGORIAID_URL)
+    public ResponseEntity<List<Producto>> getProductosPorCategoria(@PathVariable Long categoriaId) {
+        List<Producto> productos = productoRepository.findByCategoriaCategoriaId(categoriaId);
+        if (productos.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(productos, HttpStatus.OK);
+    }
     @PostMapping
     public ResponseEntity<Producto> guardarProducto(@RequestBody ProductoDTO productoDTO) {
         Producto producto = new Producto();
         producto.setProductoId(producto.getProductoId());
         producto.setNombre(productoDTO.getNombre());
-        producto.setDescripcion(productoDTO.getDescripcion());
-        producto.setActivo(productoDTO.isActivo());
         producto.setPrecio(productoDTO.getPrecio());
-        producto.setImagenUrl(productoDTO.getImagenUrl());
         producto.setCategoria(categoriaRepository.findById(productoDTO.categoriaId).
                 orElseThrow(() ->  new ResponseStatusException(HttpStatus.NOT_FOUND, "Categoría no encontrada con ID: " + productoDTO.getCategoriaId())));
         return ResponseEntity.ok(productoRepository.save(producto));
@@ -55,9 +60,6 @@ public class ProductoController {
                 .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
         producto.setNombre(detallesProducto.getNombre());
         producto.setPrecio(detallesProducto.getPrecio());
-        producto.setDescripcion(detallesProducto.getDescripcion());
-        producto.setImagenUrl(detallesProducto.getImagenUrl());
-        producto.setActivo(detallesProducto.isActivo());
         Categoria categoria = categoriaRepository.findById(detallesProducto.getCategoriaId())
                 .orElseThrow(() ->new ResponseStatusException(HttpStatus.NOT_FOUND, "Categoría no encontrada con ID: " + detallesProducto.getCategoriaId()));
         final Producto productoActualizado = productoRepository.save(producto);

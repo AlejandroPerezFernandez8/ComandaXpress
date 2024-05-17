@@ -11,6 +11,7 @@ public class Api_Map {
     /**-------------------------PRODUCTO--------------------------------*/
     public static final String PRODUCTO_BASE_URL = "/productos";
     public static final String PRODUCTO_ID_URL = "/{productoId}";
+    public static final String PRODUCTO_CATEGORIAID_URL = "/categoria/{categoriaId}";
     /**-------------------------TICKETS--------------------------------*/
     public static final String TICKET_BASE_URL = "/ticket";
     public static final String TICKET_ID_URL = "/{ticketId}";

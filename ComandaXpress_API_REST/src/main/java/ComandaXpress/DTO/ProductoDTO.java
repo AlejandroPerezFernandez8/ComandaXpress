@@ -14,9 +14,6 @@ public class ProductoDTO {
     private Long producto_id;
     private String nombre;
     private BigDecimal precio;
-    private String descripcion;
-    private String imagenUrl;
-    private boolean activo;
     public Long categoriaId;
 
     public static ProductoDTO converter(Producto source){
@@ -24,9 +21,6 @@ public class ProductoDTO {
         target.setProducto_id(source.getProductoId());
         target.setNombre(source.getNombre());
         target.setPrecio(source.getPrecio());
-        target.setDescripcion(source.getDescripcion());
-        target.setImagenUrl(source.getImagenUrl());
-        target.setActivo(source.isActivo());
         target.setCategoriaId(source.getCategoria().getCategoriaId());
         return target;
     }

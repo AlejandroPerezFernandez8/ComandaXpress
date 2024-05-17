@@ -27,13 +27,4 @@ public class Producto {
 
     @Column(nullable = false)
     private BigDecimal precio;
-
-    @Column
-    private String descripcion;
-
-    @Column(name = "imagen_url")
-    private String imagenUrl;
-
-    @Column (name = "activo")
-    private boolean activo;
 }
