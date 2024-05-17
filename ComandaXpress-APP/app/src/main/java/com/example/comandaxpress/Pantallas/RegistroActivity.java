@@ -56,6 +56,7 @@ public class RegistroActivity extends AppCompatActivity implements RegistroCallb
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro);
+        EdgeToEdge.enable(this);
         EditText nombre = findViewById(R.id.Nombre);
         EditText apellidos = findViewById(R.id.Apellidos);
         EditText email= findViewById(R.id.Email);

@@ -4,9 +4,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Base64;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.GridLayout;
 import android.widget.ImageView;
@@ -44,6 +47,7 @@ public class MesasActivity extends AppCompatActivity implements GetAllMesasCallb
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mesas);
+        EdgeToEdge.enable(this);
         MesaService.getAllMesas(this,this);
         sharedPreferences= getApplicationContext().getSharedPreferences("preferencias", MODE_PRIVATE);
         ImageView fotoPerfil = findViewById(R.id.fotoPerfilMesas);

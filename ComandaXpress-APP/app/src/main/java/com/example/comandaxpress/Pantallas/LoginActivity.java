@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.activity.EdgeToEdge;
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
@@ -35,6 +36,7 @@ public class LoginActivity extends AppCompatActivity implements LoginCallBack {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        EdgeToEdge.enable(this);
         sharedPreferences= getApplicationContext().getSharedPreferences("preferencias", MODE_PRIVATE);
 
         if (SQLiteUtils.getIP(this) == null) {

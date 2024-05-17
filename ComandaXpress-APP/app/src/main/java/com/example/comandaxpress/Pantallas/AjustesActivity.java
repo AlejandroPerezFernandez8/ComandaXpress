@@ -56,6 +56,7 @@ public class AjustesActivity extends AppCompatActivity implements ModificacionCa
     protected void onCreate(Bundle savedInstanceState)  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ajustes);
+        EdgeToEdge.enable(this);
         sharedPreferences= getApplicationContext().getSharedPreferences("preferencias", MODE_PRIVATE);
         ImageView fotoPerfil = findViewById(R.id.fotoPerfilAjustes);
         TextView nombreUsuario = findViewById(R.id.nombreUsuarioAjustes);

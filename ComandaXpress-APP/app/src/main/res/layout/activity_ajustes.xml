@@ -6,7 +6,9 @@
     android:layout_height="match_parent"
     android:fillViewport="true"
     android:background="@drawable/fondo"
-    tools:context=".Pantallas.AjustesActivity">
+    tools:context=".Pantallas.AjustesActivity"
+    android:fitsSystemWindows="true"
+    >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

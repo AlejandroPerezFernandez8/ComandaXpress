@@ -11,6 +11,7 @@ public class ApiMap {
     }
     public static String getUrlUsuarioRegistro() {return getBaseUrl() + "usuarios/saveUsuarios";}
     public static String getUrlUsuarioModificar(long idUsuario) {return getBaseUrl() + "usuarios/modificarUsuario/"+idUsuario;}
+    public static String getUrlProductosCategoria(long idCategoria) {return getBaseUrl() + "productos/categoria/"+idCategoria;}
     public static String getUrlMesa() {return getBaseUrl() + "mesa";}
     public static String getUrlCategoria() {return getBaseUrl() + "categoria";}
     public static void setIP(String ip) {

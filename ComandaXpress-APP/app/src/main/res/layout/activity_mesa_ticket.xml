@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/fondo"
-    tools:context=".Pantallas.Mesa_ticket_Activity">
+    tools:context=".Pantallas.Mesa_ticket_Activity"
+    android:fitsSystemWindows="true"
+    >
 
     <LinearLayout
         android:id="@+id/linearLayoutTituloImagen"
@@ -75,7 +77,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="10dp"
         android:layout_marginStart="40dp"
-        android:layout_marginEnd="40dp"/>
+        android:layout_marginEnd="40dp"
+        android:textColor="@color/colorOffWhite"
+        />
 
     <ListView
         android:id="@+id/listaProductosAgregados"
@@ -101,5 +105,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
-        android:layout_marginBottom="16dp"/>
+        android:layout_marginBottom="16dp"
+        android:textColor="@color/colorOffWhite"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>

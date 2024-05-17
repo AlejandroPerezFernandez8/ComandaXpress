@@ -7,27 +7,21 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import java.util.List;
-
 import com.example.comandaxpress.API.Clases.Categoria;
 import com.example.comandaxpress.R;
-
-import android.content.Context;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.TextView;
 
 import java.util.List;
 
 public class AdaptadorCategorias extends BaseAdapter {
-    private Context context;
+    private Context contexto;
     private List<Categoria> categorias;
+    private int alturaMaxima = 0;
+    private LayoutInflater inflater;
 
-    public AdaptadorCategorias(Context context, List<Categoria> categorias) {
-        this.context = context;
+    public AdaptadorCategorias(Context contexto, List<Categoria> categorias) {
+        this.contexto = contexto;
         this.categorias = categorias;
+        inflater = LayoutInflater.from(contexto);
     }
 
     @Override
@@ -36,25 +30,46 @@ public class AdaptadorCategorias extends BaseAdapter {
     }
 
     @Override
-    public Object getItem(int position) {
-        return categorias.get(position);
+    public Object getItem(int posicion) {
+        return categorias.get(posicion);
     }
 
     @Override
-    public long getItemId(int position) {
-        return position;
+    public long getItemId(int posicion) {
+        return posicion;
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int posicion, View convertView, ViewGroup parent) {
+        ViewHolder holder;
         if (convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(R.layout.item_categoria, parent, false);
+            convertView = inflater.inflate(R.layout.item_categoria, parent, false);
+            holder = new ViewHolder();
+            holder.nombre = convertView.findViewById(R.id.textoNombre);
+            convertView.setTag(holder);
+        } else {
+            holder = (ViewHolder) convertView.getTag();
         }
-        TextView nombre = convertView.findViewById(R.id.textoNombre);
-        TextView descripcion = convertView.findViewById(R.id.textoDescripcion);
-        Categoria categoria = categorias.get(position);
-        nombre.setText(categoria.getNombre());
-        descripcion.setText(categoria.getDescripcion());
+
+        Categoria categoria = categorias.get(posicion);
+        holder.nombre.setText(categoria.getNombre());
+        final View convert = convertView;
+
+        convertView.post(() -> {
+            if (convert.getHeight() > alturaMaxima) {
+                alturaMaxima = convert.getHeight();
+                notifyDataSetChanged();
+            }
+        });
+
+        if (alturaMaxima > 0) {
+            convertView.getLayoutParams().height = alturaMaxima;
+        }
+
         return convertView;
+    }
+
+    static class ViewHolder {
+        TextView nombre;
     }
 }

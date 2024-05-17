@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.Button;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -46,6 +47,7 @@ public class Mesa_ticket_Activity extends AppCompatActivity implements GetAllCat
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mesa_ticket);
+        EdgeToEdge.enable(this);
         sharedPreferences= getApplicationContext().getSharedPreferences("preferencias", MODE_PRIVATE);
         TextView numeroMesa = findViewById(R.id.tituloMesaTicket);
         TextView numeroComensales = findViewById(R.id.numComensales);
