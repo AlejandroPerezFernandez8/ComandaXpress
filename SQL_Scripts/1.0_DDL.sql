@@ -26,9 +26,6 @@ CREATE TABLE Productos (
     categoria_id INT,
     nombre VARCHAR(255) NOT NULL,
     precio DECIMAL(10, 2) NOT NULL,
-    descripcion TEXT,
-    imagen_url VARCHAR(255),
-    activo BOOLEAN,
     FOREIGN KEY (categoria_id) REFERENCES Categorias(categoria_id) ON DELETE SET NULL
 );
 
