@@ -1,5 +1,6 @@
 package com.example.comandaxpress.Pantallas;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -7,10 +8,13 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Base64;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -28,18 +32,26 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.comandaxpress.API.ApiMapSingleton;
 import com.example.comandaxpress.API.Clases.Mesa;
+import com.example.comandaxpress.API.Clases.Ticket;
 import com.example.comandaxpress.API.Clases.Usuario;
 import com.example.comandaxpress.API.Interfaces.GetAllMesasCallback;
+import com.example.comandaxpress.API.Interfaces.InsertTickectCallback;
+import com.example.comandaxpress.API.Interfaces.ModificacionMesaCallback;
 import com.example.comandaxpress.API.MesaService;
+import com.example.comandaxpress.API.TicketService;
 import com.example.comandaxpress.Adapters.MesaAdapter;
 import com.example.comandaxpress.R;
 import com.example.comandaxpress.Util.CryptoUtils;
 import com.example.comandaxpress.Util.SQLiteUtils;
 import com.google.gson.Gson;
 
+import java.text.SimpleDateFormat;
+import java.time.OffsetDateTime;
+import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
-public class MesasActivity extends AppCompatActivity implements GetAllMesasCallback {
+public class MesasActivity extends AppCompatActivity implements GetAllMesasCallback, ModificacionMesaCallback, InsertTickectCallback {
     SharedPreferences sharedPreferences ;
     MesaAdapter adaptador;
     ListView lista;
@@ -72,9 +84,35 @@ public class MesasActivity extends AppCompatActivity implements GetAllMesasCallb
         lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intentTicket = new Intent(MesasActivity.this,Mesa_ticket_Activity.class);
-                intentTicket.putExtra("Mesa",new Gson().toJson(adaptador.getItem(position)));
-                someActivityResultLauncher.launch(intentTicket);
+                Mesa mesa = adaptador.getItem(position);
+                if(!mesa.getActiva()){
+                        AlertDialog.Builder builder = new AlertDialog.Builder(MesasActivity.this);
+                        LayoutInflater inflater = MesasActivity.this.getLayoutInflater();
+                        View dialogView = inflater.inflate(R.layout.abrir_mesa, null);
+                        builder.setView(dialogView);
+
+                        AlertDialog dialog = builder.create();
+
+                        Button btnConfirm = dialogView.findViewById(R.id.btnConfirm);
+                        Button btnCancel = dialogView.findViewById(R.id.btnCancel);
+
+                        btnConfirm.setOnClickListener(b -> {
+                            mesa.setActiva(!mesa.getActiva());
+                            MesaService.updateMesa(MesasActivity.this,mesa,MesasActivity.this);
+                            Ticket ticket = new Ticket(mesa.getMesaId());
+                            TicketService.insertTicket(MesasActivity.this,ticket,MesasActivity.this);
+                            Intent intentTicket = new Intent(MesasActivity.this,Mesa_ticket_Activity.class);
+                            sharedPreferences.edit().putString("Mesa",new Gson().toJson(mesa)).apply();
+                            someActivityResultLauncher.launch(intentTicket);
+                            dialog.dismiss();
+                        });
+                        btnCancel.setOnClickListener(b -> {dialog.dismiss();});
+                        dialog.show();
+                }else{
+                    Intent intentTicket = new Intent(MesasActivity.this,Mesa_ticket_Activity.class);
+                    sharedPreferences.edit().putString("Mesa",new Gson().toJson(mesa)).apply();
+                    someActivityResultLauncher.launch(intentTicket);
+                }
             }
         });
 
@@ -114,4 +152,25 @@ public class MesasActivity extends AppCompatActivity implements GetAllMesasCallb
                 }
             });
 
+
+    @Override
+    public void onModificacionSuccess(String response) {
+
+    }
+
+    @Override
+    public void onModificacionFailed(String errorMessage) {
+        Toast.makeText(this, "Error al modificar estado de la mesa", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onInsertSuccess(String response) {
+
+    }
+
+    @Override
+    public void onInsertFailed(String errorMessage) {
+        Toast.makeText(this, "Error al generar un ticket nuevo", Toast.LENGTH_SHORT).show();
+        Log.d("TicketError",errorMessage);
+    }
 }

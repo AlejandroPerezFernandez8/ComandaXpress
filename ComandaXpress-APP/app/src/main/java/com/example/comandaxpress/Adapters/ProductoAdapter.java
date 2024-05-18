@@ -10,8 +10,10 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.comandaxpress.API.Clases.Producto;
+import com.example.comandaxpress.ClasesHelper.ProductoCantidad;
 import com.example.comandaxpress.R;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,14 +51,14 @@ public class ProductoAdapter extends ArrayAdapter<Producto> {
         final Producto producto = getItem(position);
         Log.d("Producto",producto.toString());
         holder.nombre.setText(producto.getNombre());
-        holder.precio.setText("Precio: " + producto.getPrecio().toString());
+        holder.precio.setText("Precio: " + producto.getPrecio().toString()+"€");
 
-        updateQuantityView(holder, producto.getProducto_id());
+        actualizarCantidad(holder, producto.getProducto_id());
 
         holder.btnMas.setOnClickListener(v -> {
             int count = cantidades.getOrDefault(producto.getProducto_id(), 0) + 1;
             cantidades.put(producto.getProducto_id(), count);
-            updateQuantityView(holder, producto.getProducto_id());
+            actualizarCantidad(holder, producto.getProducto_id());
             imprimirCantidades();
         });
 
@@ -65,7 +67,7 @@ public class ProductoAdapter extends ArrayAdapter<Producto> {
             if (count > 0) {
                 count--;
                 cantidades.put(producto.getProducto_id(), count);
-                updateQuantityView(holder, producto.getProducto_id());
+                actualizarCantidad(holder, producto.getProducto_id());
                 imprimirCantidades();
             }
         });
@@ -73,7 +75,7 @@ public class ProductoAdapter extends ArrayAdapter<Producto> {
         return convertView;
     }
 
-    private void updateQuantityView(ViewHolder holder, Long productId) {
+    private void actualizarCantidad(ViewHolder holder, Long productId) {
         int quantity = cantidades.getOrDefault(productId, 0);
         holder.cantidad.setText(String.valueOf(quantity));
     }
@@ -96,5 +98,15 @@ public class ProductoAdapter extends ArrayAdapter<Producto> {
         Log.d("ProductoCantidades", builder.toString());
     }
 
+    public List<ProductoCantidad> getProductosSeleccionados() {
+        List<ProductoCantidad> seleccionados = new ArrayList<>();
+        for (Producto producto : productos) {
+            int cantidad = cantidades.getOrDefault(producto.getProducto_id(), 0);
+            if (cantidad > 0) {
+                seleccionados.add(new ProductoCantidad(producto, cantidad));
+            }
+        }
+        return seleccionados;
+    }
 
 }

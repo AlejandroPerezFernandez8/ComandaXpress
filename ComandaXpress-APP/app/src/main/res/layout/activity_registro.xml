@@ -139,6 +139,7 @@
                     android:layout_height="wrap_content"
                     android:text="Sacar Foto"
                     android:backgroundTint="@color/colorLightBlue"
+                    android:textColor="@color/colorOffWhite"
                     android:layout_marginStart="16dp"
                     android:layout_weight="1"/>
 
@@ -154,6 +155,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/layoutFoto"
                 android:layout_marginTop="25dp"
+                android:textColor="@color/colorOffWhite"
                 />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

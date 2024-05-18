@@ -67,9 +67,6 @@ public class LoginActivity extends AppCompatActivity implements LoginCallBack {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("LoginActivity", "IP actual al intentar login: " + ApiMapSingleton.getInstance().getIP());
-                Log.d("LoginActivity", "get: " + ApiMapSingleton.getInstance().getIP());
-                Log.d("LoginActivity", "IP actual al intentar login: " + ApiMapSingleton.getInstance().getUrlUsuarioLogin());
                 UsuarioService.loginUsuario(getApplicationContext(),nombreUsuario.getText().toString().trim(),contraseña.getText().toString().trim(),LoginActivity.this);
             }
         });

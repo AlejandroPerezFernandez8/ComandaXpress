@@ -1,6 +1,5 @@
 package com.example.comandaxpress.Pantallas.Fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,15 +13,13 @@ import androidx.fragment.app.DialogFragment;
 
 import com.example.comandaxpress.API.Clases.Categoria;
 import com.example.comandaxpress.Adapters.AdaptadorCategorias;
-import com.example.comandaxpress.Pantallas.Mesa_ticket_Activity;
-import com.example.comandaxpress.Pantallas.ProductosActivity;
 import com.example.comandaxpress.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class DialogoCategoriasFragment extends DialogFragment {
     private static final String ARG_CATEGORIAS = "categorias";
+    private CategoriaSeleccionadaListener mListener;
 
     public static DialogoCategoriasFragment newInstance(ArrayList<Categoria> categorias) {
         DialogoCategoriasFragment fragment = new DialogoCategoriasFragment();
@@ -30,6 +27,14 @@ public class DialogoCategoriasFragment extends DialogFragment {
         args.putSerializable(ARG_CATEGORIAS, categorias);
         fragment.setArguments(args);
         return fragment;
+    }
+
+    public interface CategoriaSeleccionadaListener {
+        void onCategoriaSeleccionada(Categoria categoria);
+    }
+
+    public void setCategoriaSeleccionadaListener(CategoriaSeleccionadaListener listener) {
+        mListener = listener;
     }
 
     @Override
@@ -44,14 +49,12 @@ public class DialogoCategoriasFragment extends DialogFragment {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     Categoria categoriaSeleccionada = (Categoria) parent.getItemAtPosition(position);
-                    Intent intent = new Intent(getActivity(), ProductosActivity.class);
-                    intent.putExtra("categoriaId", Integer.parseInt(categoriaSeleccionada.getCategoriaId().toString()));
-                    startActivity(intent);
+                    if (mListener != null) {
+                        mListener.onCategoriaSeleccionada(categoriaSeleccionada); // Pasar la categoría seleccionada al listener
+                    }
                     dismiss();
                 }
             });
-
-
         }
         return view;
     }

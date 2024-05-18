@@ -6,14 +6,23 @@ public class ApiMap {
     public static String getBaseUrl() {
         return "http://" + getIP() + PORT;
     }
+
+    //---------------------------USUARIOS--------------------------------------------------------------
     public static String getUrlUsuarioLogin() {
         return getBaseUrl() + "usuarios/login";
     }
     public static String getUrlUsuarioRegistro() {return getBaseUrl() + "usuarios/saveUsuarios";}
     public static String getUrlUsuarioModificar(long idUsuario) {return getBaseUrl() + "usuarios/modificarUsuario/"+idUsuario;}
+    //---------------------------PRODUCTOS------------------------------------------------------------
     public static String getUrlProductosCategoria(long idCategoria) {return getBaseUrl() + "productos/categoria/"+idCategoria;}
+    //---------------------------MESAS--------------------------------------------------------------
     public static String getUrlMesa() {return getBaseUrl() + "mesa";}
+    public static String getUrlMesaModificar(Long idMesa) {return getBaseUrl() + "mesa/" + idMesa;}
+    //---------------------------CATEGORIAS--------------------------------------------------
     public static String getUrlCategoria() {return getBaseUrl() + "categoria";}
+    //---------------------------CATEGORIAS----------------------------------------------------------
+    public static String getUrlTicket() {return getBaseUrl() + "ticket";}
+    //---------------------------CONFIGURACION DE IP--------------------------------------------------
     public static void setIP(String ip) {
         IP = ip;
     }

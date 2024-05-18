@@ -1,14 +1,16 @@
 package com.example.comandaxpress.ClasesHelper;
 
+import com.example.comandaxpress.API.Clases.Producto;
+
 public class ProductoCantidad {
-    String Producto;
+    Producto Producto;
     int cantidad;
-    public ProductoCantidad(String producto, int cantidad) {
+    public ProductoCantidad(Producto producto, int cantidad) {
         Producto = producto;
         this.cantidad = cantidad;
     }
-    public String getProducto() {return Producto;}
-    public void setProducto(String producto) {Producto = producto;}
+    public Producto getProducto() {return Producto;}
+    public void setProducto(Producto producto) {Producto = producto;}
     public int getCantidad() {return cantidad;}
     public void setCantidad(int cantidad) {this.cantidad = cantidad;}
 }

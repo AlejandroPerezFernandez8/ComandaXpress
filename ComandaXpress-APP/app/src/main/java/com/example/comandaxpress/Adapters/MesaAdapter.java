@@ -42,7 +42,7 @@ public class MesaAdapter extends ArrayAdapter<Mesa> {
         View statusIndicator = convertView.findViewById(R.id.statusIndicator);
         Mesa mesa = getItem(position);
         mesaText.setText("Mesa " + mesa.getNumero());
-        if (mesa.getActiva()) {
+        if (!mesa.getActiva()) {
             statusIndicator.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorGreen)); // Verde
         } else {
             statusIndicator.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorRed)); // Rojo

@@ -34,7 +34,7 @@ public class TicketProductoAdapter extends ArrayAdapter<ProductoCantidad> {
         TextView cantidadProducto = convertView.findViewById(R.id.textCantidad);
         ProductoCantidad producto = getItem(position);
 
-        nombreProducto.setText(producto.getProducto());
+        nombreProducto.setText(producto.getProducto().getNombre());
         cantidadProducto.setText(String.valueOf(producto.getCantidad())+"x");
 
         return convertView;
