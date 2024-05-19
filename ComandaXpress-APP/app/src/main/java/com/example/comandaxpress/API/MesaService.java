@@ -1,6 +1,7 @@
 package com.example.comandaxpress.API;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -31,14 +32,17 @@ public class MesaService {
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
+                        Log.d("MesaService", "Respuesta de la API: " + response.toString());
                         Gson gson = new Gson();
                         Type listType = new TypeToken<ArrayList<Mesa>>(){}.getType();
                         List<Mesa> mesas = gson.fromJson(response.toString(), listType);
+                        Log.d("MesaService", "Mesas convertidas: " + mesas);
                         callback.onSuccess(mesas);
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                Log.e("MesaService", "Error al recuperar las mesas: " + error.toString());
                 callback.onError("Error al recuperar las mesas: " + error.toString());
             }
         });

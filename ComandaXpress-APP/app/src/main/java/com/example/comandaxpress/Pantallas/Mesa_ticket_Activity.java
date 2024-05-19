@@ -23,6 +23,8 @@ import com.example.comandaxpress.API.Clases.Categoria;
 import com.example.comandaxpress.API.Clases.Mesa;
 import com.example.comandaxpress.API.Clases.Usuario;
 import com.example.comandaxpress.API.Interfaces.GetAllCategoriasCallback;
+import com.example.comandaxpress.API.Interfaces.GetProductoCantidadCallback;
+import com.example.comandaxpress.API.TicketService;
 import com.example.comandaxpress.Adapters.TicketProductoAdapter;
 import com.example.comandaxpress.ClasesHelper.ProductoCantidad;
 import com.example.comandaxpress.Pantallas.Fragment.DialogoCategoriasFragment;
@@ -35,7 +37,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Mesa_ticket_Activity extends AppCompatActivity implements GetAllCategoriasCallback, DialogoCategoriasFragment.CategoriaSeleccionadaListener {
+public class Mesa_ticket_Activity extends AppCompatActivity implements GetAllCategoriasCallback, GetProductoCantidadCallback,DialogoCategoriasFragment.CategoriaSeleccionadaListener {
     SharedPreferences sharedPreferences;
     ArrayList<ProductoCantidad> pcList = new ArrayList<>();
     TicketProductoAdapter adapter;
@@ -60,7 +62,11 @@ public class Mesa_ticket_Activity extends AppCompatActivity implements GetAllCat
             Mesa mesa = new Gson().fromJson(sharedPreferences.getString("Mesa", ""), Mesa.class);
             numeroMesa.setText("Mesa Número " + mesa.getNumero());
             numeroComensales.setText("Comensales: " + mesa.getCapacidad());
+            if(!mesa.getTickets().isEmpty()){
+                TicketService.getDetallesDeTicket(Mesa_ticket_Activity.this,mesa.getTickets().get(mesa.getTickets().size()-1).longValue(),Mesa_ticket_Activity.this);
+            }
         } catch (Exception ex) {
+            Log.d("Mesa_Ticket_Error",ex.getMessage());
         }
 
         btnAñadirProducto.setOnClickListener(new View.OnClickListener() {
@@ -151,5 +157,21 @@ public class Mesa_ticket_Activity extends AppCompatActivity implements GetAllCat
         Intent intent = new Intent(Mesa_ticket_Activity.this, ProductosActivity.class);
         intent.putExtra("categoriaId", Integer.parseInt(categoria.getCategoriaId().toString()));
         someActivityResultLauncher.launch(intent);
+    }
+
+    @Override
+    public void onGetProductosSuccess(List<ProductoCantidad> productoCantidadList) {
+        try {
+            adapter.addAll(new ArrayList<>(productoCantidadList));
+            adapter.notifyDataSetChanged();
+        }catch (Exception ex){
+            Log.d("ErrorCARGA",ex.getMessage());
+        }
+    }
+
+    @Override
+    public void onGetProductosError(String error) {
+        Log.d("GetProductosError",error);
+        Toast.makeText(this, "Error al recuperar los detalles del ticket", Toast.LENGTH_SHORT).show();
     }
 }

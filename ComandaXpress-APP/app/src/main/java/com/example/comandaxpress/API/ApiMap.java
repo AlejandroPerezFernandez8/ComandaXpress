@@ -7,22 +7,25 @@ public class ApiMap {
         return "http://" + getIP() + PORT;
     }
 
-    //---------------------------USUARIOS--------------------------------------------------------------
+    //----------------------------------USUARIOS--------------------------------------------------------------
     public static String getUrlUsuarioLogin() {
         return getBaseUrl() + "usuarios/login";
     }
     public static String getUrlUsuarioRegistro() {return getBaseUrl() + "usuarios/saveUsuarios";}
     public static String getUrlUsuarioModificar(long idUsuario) {return getBaseUrl() + "usuarios/modificarUsuario/"+idUsuario;}
-    //---------------------------PRODUCTOS------------------------------------------------------------
+    //----------------------------------PRODUCTOS------------------------------------------------------------
     public static String getUrlProductosCategoria(long idCategoria) {return getBaseUrl() + "productos/categoria/"+idCategoria;}
-    //---------------------------MESAS--------------------------------------------------------------
+    //-----------------------------------MESAS--------------------------------------------------------------
     public static String getUrlMesa() {return getBaseUrl() + "mesa";}
     public static String getUrlMesaModificar(Long idMesa) {return getBaseUrl() + "mesa/" + idMesa;}
-    //---------------------------CATEGORIAS--------------------------------------------------
+    //----------------------------------CATEGORIAS--------------------------------------------------
     public static String getUrlCategoria() {return getBaseUrl() + "categoria";}
-    //---------------------------CATEGORIAS----------------------------------------------------------
+    //-----------------------------------TICKETS----------------------------------------------------------
     public static String getUrlTicket() {return getBaseUrl() + "ticket";}
-    //---------------------------CONFIGURACION DE IP--------------------------------------------------
+    //-----------------------------------DETALLES DE LOS TICKETS----------------------------------------------------------
+    public static String getUrlTicketDetalle(long idTicket) {return getBaseUrl() + "ticketDetalle/"+idTicket;}
+    public static String getUrlTicketDetalleGuardar() {return getBaseUrl() + "ticketDetalle/guardar";}
+    //--------------------------------CONFIGURACION DE IP--------------------------------------------------
     public static void setIP(String ip) {
         IP = ip;
     }

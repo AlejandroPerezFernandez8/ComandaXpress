@@ -8,9 +8,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import androidx.core.content.ContextCompat;
-
-import com.example.comandaxpress.API.Clases.Mesa;
 import com.example.comandaxpress.ClasesHelper.ProductoCantidad;
 import com.example.comandaxpress.R;
 
@@ -30,12 +27,22 @@ public class TicketProductoAdapter extends ArrayAdapter<ProductoCantidad> {
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_item_producto_cantidad, parent, false);
         }
+
         TextView nombreProducto = convertView.findViewById(R.id.textNombre);
         TextView cantidadProducto = convertView.findViewById(R.id.textCantidad);
-        ProductoCantidad producto = getItem(position);
+        ProductoCantidad productoCantidad = getItem(position);
 
-        nombreProducto.setText(producto.getProducto().getNombre());
-        cantidadProducto.setText(String.valueOf(producto.getCantidad())+"x");
+        if (productoCantidad != null) {
+            if (productoCantidad.getProducto() != null) {
+                nombreProducto.setText(productoCantidad.getProducto().getNombre());
+            } else {
+                Log.e("ProductoCantidad", "Producto is null at position: " + position);
+                nombreProducto.setText("Producto desconocido");
+            }
+            cantidadProducto.setText(String.valueOf(productoCantidad.getCantidad()) + "x");
+        } else {
+            Log.e("ProductoCantidad", "ProductoCantidad is null at position: " + position);
+        }
 
         return convertView;
     }

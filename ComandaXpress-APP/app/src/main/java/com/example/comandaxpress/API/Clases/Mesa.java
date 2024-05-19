@@ -7,7 +7,7 @@ public class Mesa {
     private Integer numero;
     private Integer capacidad;
     private Boolean activa;
-    private List<Long> Tickets;
+    private List<Long> tickets;
 
     public Long getMesaId() {return mesaId;}
     public void setMesaId(Long mesaId) {this.mesaId = mesaId;}
@@ -17,6 +17,17 @@ public class Mesa {
     public void setCapacidad(Integer capacidad) {this.capacidad = capacidad;}
     public Boolean getActiva() {return activa;}
     public void setActiva(Boolean activa) {this.activa = activa;}
-    public List<Long> getTickets() {return Tickets;}
-    public void setTickets(List<Long> tickets) {Tickets = tickets;}
+    public List<Long> getTickets() {return tickets;}
+    public void setTickets(List<Long> tickets) {tickets = tickets;}
+
+    @Override
+    public String toString() {
+        return "Mesa{" +
+                "mesaId=" + mesaId +
+                ", numero=" + numero +
+                ", capacidad=" + capacidad +
+                ", activa=" + activa +
+                ", Tickets=" + tickets +
+                '}';
+    }
 }

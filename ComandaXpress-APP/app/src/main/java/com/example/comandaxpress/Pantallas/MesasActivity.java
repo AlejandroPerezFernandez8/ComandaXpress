@@ -29,6 +29,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.comandaxpress.API.ApiMapSingleton;
 import com.example.comandaxpress.API.Clases.Mesa;
@@ -47,12 +48,15 @@ import com.google.gson.Gson;
 
 import java.text.SimpleDateFormat;
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.TimeZone;
 
 public class MesasActivity extends AppCompatActivity implements GetAllMesasCallback, ModificacionMesaCallback, InsertTickectCallback {
     SharedPreferences sharedPreferences ;
+    SwipeRefreshLayout recarga;
     MesaAdapter adaptador;
     ListView lista;
     @Override
@@ -63,7 +67,9 @@ public class MesasActivity extends AppCompatActivity implements GetAllMesasCallb
         MesaService.getAllMesas(this,this);
         sharedPreferences= getApplicationContext().getSharedPreferences("preferencias", MODE_PRIVATE);
         ImageView fotoPerfil = findViewById(R.id.fotoPerfilMesas);
+        recarga = findViewById(R.id.recarga);
         lista = findViewById(R.id.listaMesas);
+
         try {
             Usuario usuario;
             String encriptedUser = sharedPreferences.getString("Usuario","");
@@ -81,11 +87,18 @@ public class MesasActivity extends AppCompatActivity implements GetAllMesasCallb
             }
         });
 
+        recarga.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                cargarDatos();
+            }
+        });
+
         lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Mesa mesa = adaptador.getItem(position);
-                if(!mesa.getActiva()){
+                Mesa mesaSeleccionada = adaptador.getItem(position);
+                if(!mesaSeleccionada.getActiva()){
                         AlertDialog.Builder builder = new AlertDialog.Builder(MesasActivity.this);
                         LayoutInflater inflater = MesasActivity.this.getLayoutInflater();
                         View dialogView = inflater.inflate(R.layout.abrir_mesa, null);
@@ -97,20 +110,34 @@ public class MesasActivity extends AppCompatActivity implements GetAllMesasCallb
                         Button btnCancel = dialogView.findViewById(R.id.btnCancel);
 
                         btnConfirm.setOnClickListener(b -> {
-                            mesa.setActiva(!mesa.getActiva());
-                            MesaService.updateMesa(MesasActivity.this,mesa,MesasActivity.this);
-                            Ticket ticket = new Ticket(mesa.getMesaId());
+                            mesaSeleccionada.setActiva(!mesaSeleccionada.getActiva());
+                            MesaService.updateMesa(MesasActivity.this,mesaSeleccionada,MesasActivity.this);
+                            Ticket ticket = new Ticket(mesaSeleccionada.getMesaId());
                             TicketService.insertTicket(MesasActivity.this,ticket,MesasActivity.this);
-                            Intent intentTicket = new Intent(MesasActivity.this,Mesa_ticket_Activity.class);
-                            sharedPreferences.edit().putString("Mesa",new Gson().toJson(mesa)).apply();
-                            someActivityResultLauncher.launch(intentTicket);
-                            dialog.dismiss();
+                            MesaService.getAllMesas(MesasActivity.this, new GetAllMesasCallback() {
+                                @Override
+                                public void onSuccess(List<Mesa> mesas) {
+                                        Optional<Mesa> mesaOptional = mesas.stream()
+                                            .filter(mesax -> mesax.getMesaId().equals(mesaSeleccionada.getMesaId()))
+                                            .findFirst();
+
+                                        Intent intentTicket = new Intent(MesasActivity.this, Mesa_ticket_Activity.class);
+                                        sharedPreferences.edit().putString("Mesa", new Gson().toJson(mesaSeleccionada)).apply();
+                                        someActivityResultLauncher.launch(intentTicket);
+                                        dialog.dismiss();
+                                }
+
+                                @Override
+                                public void onError(String error) {
+                                    Log.e("MESA_SERVICE_ERROR", error);
+                                }
+                            });
                         });
                         btnCancel.setOnClickListener(b -> {dialog.dismiss();});
                         dialog.show();
                 }else{
                     Intent intentTicket = new Intent(MesasActivity.this,Mesa_ticket_Activity.class);
-                    sharedPreferences.edit().putString("Mesa",new Gson().toJson(mesa)).apply();
+                    sharedPreferences.edit().putString("Mesa",new Gson().toJson(mesaSeleccionada)).apply();
                     someActivityResultLauncher.launch(intentTicket);
                 }
             }
@@ -173,4 +200,22 @@ public class MesasActivity extends AppCompatActivity implements GetAllMesasCallb
         Toast.makeText(this, "Error al generar un ticket nuevo", Toast.LENGTH_SHORT).show();
         Log.d("TicketError",errorMessage);
     }
+
+    private void cargarDatos() {
+        MesaService.getAllMesas(MesasActivity.this, new GetAllMesasCallback() {
+            @Override
+            public void onSuccess(List<Mesa> mesas) {
+                adaptador.clear();
+                adaptador.addAll(new ArrayList<>(mesas));
+                adaptador.notifyDataSetChanged();
+                recarga.setRefreshing(false);
+            }
+            @Override
+            public void onError(String error) {
+                Toast.makeText(MesasActivity.this, "Error al recargar datos: " + error, Toast.LENGTH_SHORT).show();
+                recarga.setRefreshing(false);
+            }
+        });
+    }
+
 }
