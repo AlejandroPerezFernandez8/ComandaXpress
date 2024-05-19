@@ -18,6 +18,7 @@ public class Api_Map {
     /**-------------------------TICKETDETALLE--------------------------------*/
     public static final String TICKET_DETALLE_BASE_URL = "/ticketDetalle";
     public static final String TICKET_DETALLE_ID_URL = "/{idTicket}";
+    public static final String TICKET_DETALLE_GUARDAR = "/guardar";
     /**-------------------------USUARIOS--------------------------------*/
     public static final String USUARIO_BASE_URL = "/usuarios";
     public static final String USUARIO_LOGIN_URL = "/login";

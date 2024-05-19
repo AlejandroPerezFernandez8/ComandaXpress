@@ -20,16 +20,16 @@ public class TicketDetalleDTO {
     @Data
     @NoArgsConstructor
     public static class ProductoCantidad {
-        private long idProducto;
-        private int cantidad; // Ahora es un entero, no una lista
+        private Producto producto;
+        private int cantidad;
 
-        public ProductoCantidad(long idProducto) {
-            this.idProducto = idProducto;
-            this.cantidad = 0; // Inicializamos la cantidad
+        public ProductoCantidad(Producto producto) {
+            this.producto = producto;
+            this.cantidad = 0;
         }
 
         public void addCantidad(int cantidad) {
-            this.cantidad += cantidad; // Sumamos la cantidad
+            this.cantidad += cantidad;
         }
     }
 
@@ -47,12 +47,12 @@ public class TicketDetalleDTO {
 
         for (TicketDetalle detalle : detalles) {
             long ticketId = detalle.getTicket().getTicketId();
-            long productoId = detalle.getProducto().getProductoId();
+            Producto producto = detalle.getProducto();
             int cantidad = detalle.getCantidad();
 
-            ProductoCantidad producto = resultado.computeIfAbsent(ticketId, k -> new HashMap<>())
-                    .computeIfAbsent(productoId, ProductoCantidad::new);
-            producto.addCantidad(cantidad);
+            ProductoCantidad productoCantidad = resultado.computeIfAbsent(ticketId, k -> new HashMap<>())
+                    .computeIfAbsent(producto.getProductoId(), k -> new ProductoCantidad(producto));
+            productoCantidad.addCantidad(cantidad);
         }
         return convertirListaAModeloDTO(resultado);
     }
@@ -60,12 +60,12 @@ public class TicketDetalleDTO {
     public static TicketDetalleDTO agruparDetalles(TicketDetalle detalle) {
         Map<Long, Map<Long, ProductoCantidad>> resultado = new HashMap<>();
         long ticketId = detalle.getTicket().getTicketId();
-        long productoId = detalle.getProducto().getProductoId();
+        Producto producto = detalle.getProducto();
         int cantidad = detalle.getCantidad();
 
-        ProductoCantidad producto = resultado.computeIfAbsent(ticketId, k -> new HashMap<>())
-                .computeIfAbsent(productoId, ProductoCantidad::new);
-        producto.addCantidad(cantidad);
+        ProductoCantidad productoCantidad = resultado.computeIfAbsent(ticketId, k -> new HashMap<>())
+                .computeIfAbsent(producto.getProductoId(), k -> new ProductoCantidad(producto));
+        productoCantidad.addCantidad(cantidad);
         return convertirAModeloDTO(resultado);
     }
 
@@ -98,8 +98,7 @@ public class TicketDetalleDTO {
         ticket.setTicketId(ticketDetalleDTO.getIdTicket());
 
         for (ProductoCantidad productoCantidad : ticketDetalleDTO.getProductos()) {
-            Producto producto = new Producto();
-            producto.setProductoId(productoCantidad.getIdProducto());
+            Producto producto = productoCantidad.getProducto();
 
             TicketDetalle detalle = new TicketDetalle();
             detalle.setTicket(ticket);

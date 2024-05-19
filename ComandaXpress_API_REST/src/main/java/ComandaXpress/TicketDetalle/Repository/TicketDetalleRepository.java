@@ -7,6 +7,6 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface TicketDetalleRepository extends JpaRepository<TicketDetalle,Long> {
+public interface TicketDetalleRepository extends JpaRepository<TicketDetalle,TicketDetalleID> {
     List<TicketDetalle> findByTicket_ticketId(Long ticketId);
 }
