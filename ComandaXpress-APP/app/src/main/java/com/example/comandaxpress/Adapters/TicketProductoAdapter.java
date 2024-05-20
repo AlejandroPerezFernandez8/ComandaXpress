@@ -46,4 +46,8 @@ public class TicketProductoAdapter extends ArrayAdapter<ProductoCantidad> {
 
         return convertView;
     }
+
+    public List<ProductoCantidad> getProductoCantidadList() {
+        return productoCantidadList;
+    }
 }

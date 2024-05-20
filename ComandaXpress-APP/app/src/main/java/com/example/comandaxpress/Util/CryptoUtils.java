@@ -49,7 +49,6 @@ public class CryptoUtils {
     public static Bitmap decodeBase64ToBitmap(String base64String) {
         // Decodifica la cadena Base64 a un array de bytes
         byte[] decodedBytes = Base64.decode(base64String, Base64.DEFAULT);
-
         // Convierte el array de bytes a un Bitmap
         Bitmap bitmap = BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length);
         return bitmap;

@@ -113,23 +113,31 @@ public class MesasActivity extends AppCompatActivity implements GetAllMesasCallb
                             mesaSeleccionada.setActiva(!mesaSeleccionada.getActiva());
                             MesaService.updateMesa(MesasActivity.this,mesaSeleccionada,MesasActivity.this);
                             Ticket ticket = new Ticket(mesaSeleccionada.getMesaId());
-                            TicketService.insertTicket(MesasActivity.this,ticket,MesasActivity.this);
-                            MesaService.getAllMesas(MesasActivity.this, new GetAllMesasCallback() {
+                            TicketService.insertTicket(MesasActivity.this, ticket, new InsertTickectCallback() {
                                 @Override
-                                public void onSuccess(List<Mesa> mesas) {
-                                        Optional<Mesa> mesaOptional = mesas.stream()
-                                            .filter(mesax -> mesax.getMesaId().equals(mesaSeleccionada.getMesaId()))
-                                            .findFirst();
+                                public void onInsertSuccess(String response) {
+                                    MesaService.getAllMesas(MesasActivity.this, new GetAllMesasCallback() {
+                                        @Override
+                                        public void onSuccess(List<Mesa> mesas) {
+                                            Optional<Mesa> mesaOptional = mesas.stream()
+                                                    .filter(mesax -> mesax.getMesaId().equals(mesaSeleccionada.getMesaId()))
+                                                    .findFirst();
+                                            Intent intentTicket = new Intent(MesasActivity.this, Mesa_ticket_Activity.class);
+                                            sharedPreferences.edit().putString("Mesa", new Gson().toJson(mesaOptional.get())).apply();
+                                            someActivityResultLauncher.launch(intentTicket);
+                                            dialog.dismiss();
+                                        }
 
-                                        Intent intentTicket = new Intent(MesasActivity.this, Mesa_ticket_Activity.class);
-                                        sharedPreferences.edit().putString("Mesa", new Gson().toJson(mesaSeleccionada)).apply();
-                                        someActivityResultLauncher.launch(intentTicket);
-                                        dialog.dismiss();
+                                        @Override
+                                        public void onError(String error) {
+                                            Log.e("MESA_SERVICE_ERROR", error);
+                                        }
+                                    });
                                 }
 
                                 @Override
-                                public void onError(String error) {
-                                    Log.e("MESA_SERVICE_ERROR", error);
+                                public void onInsertFailed(String errorMessage) {
+                                    Log.e("Ticket","Error de insercion de ticket" + errorMessage);
                                 }
                             });
                         });

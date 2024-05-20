@@ -24,6 +24,8 @@ import com.example.comandaxpress.API.Clases.Mesa;
 import com.example.comandaxpress.API.Clases.Usuario;
 import com.example.comandaxpress.API.Interfaces.GetAllCategoriasCallback;
 import com.example.comandaxpress.API.Interfaces.GetProductoCantidadCallback;
+import com.example.comandaxpress.API.Interfaces.ModificacionMesaCallback;
+import com.example.comandaxpress.API.MesaService;
 import com.example.comandaxpress.API.TicketService;
 import com.example.comandaxpress.Adapters.TicketProductoAdapter;
 import com.example.comandaxpress.ClasesHelper.ProductoCantidad;
@@ -34,6 +36,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,7 +44,8 @@ public class Mesa_ticket_Activity extends AppCompatActivity implements GetAllCat
     SharedPreferences sharedPreferences;
     ArrayList<ProductoCantidad> pcList = new ArrayList<>();
     TicketProductoAdapter adapter;
-
+    Mesa mesa;
+    TextView tvTotal;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,13 +57,14 @@ public class Mesa_ticket_Activity extends AppCompatActivity implements GetAllCat
         ImageView fotoperfil = findViewById(R.id.fotoPerfilMesaTicket);
         ListView lista = findViewById(R.id.listaProductosAgregados);
         Button btnAñadirProducto = findViewById(R.id.btnAñadirProducto);
-
+        Button btncobrarMesa = findViewById(R.id.btnCobrarMesa);
+        tvTotal = findViewById(R.id.tvTotal);
         adapter = new TicketProductoAdapter(Mesa_ticket_Activity.this, pcList);
         lista.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 
         try {
-            Mesa mesa = new Gson().fromJson(sharedPreferences.getString("Mesa", ""), Mesa.class);
+            mesa = new Gson().fromJson(sharedPreferences.getString("Mesa", ""), Mesa.class);
             numeroMesa.setText("Mesa Número " + mesa.getNumero());
             numeroComensales.setText("Comensales: " + mesa.getCapacidad());
             if(!mesa.getTickets().isEmpty()){
@@ -94,6 +99,28 @@ public class Mesa_ticket_Activity extends AppCompatActivity implements GetAllCat
                 someActivityResultLauncher.launch(intentAjustes);
             }
         });
+
+        btncobrarMesa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mesa.setActiva(false);
+                MesaService.updateMesa(Mesa_ticket_Activity.this, mesa, new ModificacionMesaCallback() {
+                    @Override
+                    public void onModificacionSuccess(String response) {
+                        Log.d("Mesa_Ticket_activity_Response","Mesa cerrada"+mesa.getMesaId());
+                        sharedPreferences.edit().remove("Mesa").apply();
+                        finish();
+                    }
+
+                    @Override
+                    public void onModificacionFailed(String errorMessage) {
+                        Toast.makeText(Mesa_ticket_Activity.this, "Error en el cierre de la mesa", Toast.LENGTH_SHORT).show();
+                        Log.d("Mesa_Ticket_activity_Response","Error en el cierre de mesa : "+errorMessage);
+                    }
+                });
+            }
+        });
+        actualizarTotal();
     }
 
     ActivityResultLauncher<Intent> someActivityResultLauncher = registerForActivityResult(
@@ -151,6 +178,7 @@ public class Mesa_ticket_Activity extends AppCompatActivity implements GetAllCat
             }
         }
         adapter.notifyDataSetChanged();
+        actualizarTotal();
     }
     @Override
     public void onCategoriaSeleccionada(Categoria categoria) {
@@ -164,6 +192,7 @@ public class Mesa_ticket_Activity extends AppCompatActivity implements GetAllCat
         try {
             adapter.addAll(new ArrayList<>(productoCantidadList));
             adapter.notifyDataSetChanged();
+            actualizarTotal();
         }catch (Exception ex){
             Log.d("ErrorCARGA",ex.getMessage());
         }
@@ -174,4 +203,17 @@ public class Mesa_ticket_Activity extends AppCompatActivity implements GetAllCat
         Log.d("GetProductosError",error);
         Toast.makeText(this, "Error al recuperar los detalles del ticket", Toast.LENGTH_SHORT).show();
     }
+
+    private void actualizarTotal(){
+        BigDecimal total = BigDecimal.ZERO;
+        if(!adapter.getProductoCantidadList().isEmpty()){
+            for (ProductoCantidad pc : adapter.getProductoCantidadList()) {
+                BigDecimal precio = pc.getProducto().getPrecio();
+                BigDecimal cantidad = BigDecimal.valueOf(pc.getCantidad());
+                total = total.add(precio.multiply(cantidad));
+            }
+            tvTotal.setText("Total : "+total.toString() + "€");
+        }
+    }
+
 }

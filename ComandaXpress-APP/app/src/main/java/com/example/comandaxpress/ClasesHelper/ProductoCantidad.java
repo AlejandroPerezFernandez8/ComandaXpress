@@ -5,7 +5,6 @@ import com.example.comandaxpress.API.Clases.Producto;
 public class ProductoCantidad {
     private Producto producto;
     private int cantidad;
-
     public ProductoCantidad() {}
 
     public ProductoCantidad(Producto producto, int cantidad) {
