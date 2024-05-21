@@ -1,3 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">ComandaXpress</string>
+
+    <!--TEXTOS EN GALEGO-->
+    <!--Modal xerar ticket e abrir mesa-->
+    <string name="tvAbrirMesa">¿Queres marcar esta mesa como ocupada e xerar un novo ticket?</string>
+    <!--PANTALLA AJUSTES-->
+    <string name="tvNombreDeUsuario">Nome de Usuario</string>
+    <string name="etNombre">Nome</string>
+    <string name="etApellidos">Apelidos</string>
+    <string name="etNombreUsuario">Nome de usuario</string>
+    <string name="etContraseña">Contrasinal</string>
+    <string name="etEmail">Correo electrónico</string>
+    <string name="btnModificarUsuario">Modificar Usuario</string>
+    <string name="tvcambioIdioma">Cambio de idioma</string>
+    <string name="tvCambioIP">Cambio de IP</string>
+    <string name="etEjemploIP">Exemplo: 192.168.0.1</string>
+    <string name="btnCambiarIP">Cambiar IP</string>
+    <!--PANTALLA DE LOGIN-->
+    <string name="tvTitulo">Benvido a ComandaXpress</string>
+    <string name="btnIniciarSesion">Iniciar Sesión</string>
+    <string name="tvInfoCuenta">¿Non tes unha conta?</string>
+    <string name="btnRegistrarse">Rexistrarse</string>
+    <string name="tvProblemasConexion">¿Tes problemas de conexión?</string>
+    <string name="btnCambiarIP2">Cambiar dirección IP</string>
+    <!--Pantalla Ticket Mesa-->
+    <string name="tvNumeroMesa">Mesa Número 0</string>
+    <string name="tvComensales">Comensais: 0</string>
+    <string name="btnCobrarMesa">Cobrar Mesa</string>
+    <string name="btnAñadirProducto">Engadir Produto</string>
+    <!-- Pantalla de mesas-->
+    <string name="tvGestionMesas">Xestión de Mesas</string>
+    <!--Pantalla de productos-->
+    <string name="tvProductos">Engadir Produtos</string>
+    <string name="btnProductos">Engadir</string>
+    <!--Pantalla de rexistro-->
+    <string name="tvTituloRegistro">Rexistrarse</string>
+    <string name="btnSacarFoto">Sacar Foto</string>
+    <!--Modal Categorias-->
+    <string name="tvCategorias">Categorías</string>
+    <!--Modal pechar sesión -->
+    <string name="tvPreguntaLogout">¿Estás seguro de que queres pechar sesión?</string>
+    <string name="btnAceptar">Aceptar</string>
+    <string name="btnCancelar">Cancelar</string>
+
 </resources>

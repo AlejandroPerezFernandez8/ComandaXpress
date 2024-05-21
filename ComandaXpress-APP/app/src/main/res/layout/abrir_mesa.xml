@@ -11,7 +11,7 @@
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="¿Quieres marcar esta mesa como ocupada y generar un nuevo ticket?"
+        android:text="@string/tvAbrirMesa"
         android:textSize="18sp"
         android:textAlignment="center"
         android:layout_marginBottom="20dp"
@@ -23,7 +23,7 @@
         android:id="@+id/btnConfirm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Aceptar"
+        android:text="@string/btnAceptar"
         android:textColor="@color/colorOffWhite"
         android:backgroundTint="@color/colorLightBlue"
         />
@@ -32,7 +32,7 @@
         android:id="@+id/btnCancel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Cancelar"
+        android:text="@string/btnCancelar"
         android:backgroundTint="@color/colorLightBlue"
         android:textColor="@android:color/white"
         android:layout_marginTop="16dp"/>

@@ -1,8 +1,49 @@
 <resources>
     <string name="app_name">ComandaXpress</string>
-    <string name="idiomas">Seleccionar Idioma</string>
+    <string name="idiomas" translatable="false">Seleccionar Idioma</string>
     <string-array name="languages_array">
         <item>Castellano</item>
-        <item>Gallego</item>
+        <item>Galego</item>
     </string-array>
+    <!--TEXTOS EN CASTELLANO-->
+    <!--Modal generar ticket y abrir mesa-->
+    <string name="tvAbrirMesa">¿Quieres marcar esta mesa como ocupada y generar un nuevo ticket?</string>
+    <!--PANTALLA AJUSTES-->
+    <string name="tvNombreDeUsuario">Nombre de Usuario</string>
+    <string name="etNombre">Nombre</string>
+    <string name="etApellidos">Apellidos</string>
+    <string name="etNombreUsuario">Nombre de usuario</string>
+    <string name="etContraseña">Contraseña</string>
+    <string name="etEmail">Correo electrónico</string>
+    <string name="btnModificarUsuario">Modificar Usuario</string>
+    <string name="tvcambioIdioma">Cambio de idioma</string>
+    <string name="tvCambioIP">Cambio de IP</string>
+    <string name="etEjemploIP">Ejemplo: 192.168.0.1</string>
+    <string name="btnCambiarIP">Cambiar IP</string>
+    <!--PANTALLA DE LOGIN-->
+    <string name="tvTitulo">Bienvenido a ComandaXpress</string>
+    <string name="btnIniciarSesion">Iniciar Sesión</string>
+    <string name="tvInfoCuenta">¿No tienes una cuenta?</string>
+    <string name="btnRegistrarse">Registrarse</string>
+    <string name="tvProblemasConexion">¿Tienes problemas de conexión?</string>
+    <string name="btnCambiarIP2">Cambiar dirección IP</string>
+    <!--Pantalla Ticket Mesa-->
+    <string name="tvNumeroMesa">Mesa Número 0</string>
+    <string name="tvComensales">Comensales: 0</string>
+    <string name="btnCobrarMesa">Cobrar Mesa</string>
+    <string name="btnAñadirProducto">Añadir Producto</string>
+    <!-- Pantalla de mesas-->
+    <string name="tvGestionMesas">Gestión de Mesas</string>
+    <!--Pantalla de productos-->
+    <string name="tvProductos">Agregar Productos</string>
+    <string name="btnProductos">Agregar</string>
+    <!--Pantalla de registro-->
+    <string name="tvTituloRegistro">Registrarse</string>
+    <string name="btnSacarFoto">Sacar Foto</string>
+    <!--Modal Categorias-->
+    <string name="tvCategorias">Categorías</string>
+    <!--Modal cerrar sesion -->
+    <string name="tvPreguntaLogout">¿Estás seguro de que desea cerrar sesión?</string>
+    <string name="btnAceptar">Aceptar</string>
+    <string name="btnCancelar">Cancelar</string>
 </resources>

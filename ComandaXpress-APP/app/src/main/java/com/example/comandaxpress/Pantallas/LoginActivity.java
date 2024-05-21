@@ -28,12 +28,14 @@ import com.example.comandaxpress.API.UsuarioService;
 import com.example.comandaxpress.R;
 import com.example.comandaxpress.SQLite.FeedReaderDbHelper;
 import com.example.comandaxpress.Util.CryptoUtils;
+import com.example.comandaxpress.Util.LocaleUtil;
 import com.example.comandaxpress.Util.SQLiteUtils;
 
 public class LoginActivity extends AppCompatActivity implements LoginCallBack {
     SharedPreferences sharedPreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        LocaleUtil.setLocale(LoginActivity.this,"gl");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         EdgeToEdge.enable(this);
