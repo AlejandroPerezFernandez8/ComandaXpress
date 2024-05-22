@@ -39,6 +39,7 @@ import com.example.comandaxpress.API.Clases.Usuario;
 import com.example.comandaxpress.API.Interfaces.RegistroCallback;
 import com.example.comandaxpress.API.UsuarioService;
 import com.example.comandaxpress.R;
+import com.example.comandaxpress.Util.ErrorUtils;
 import com.example.comandaxpress.Util.ImageUtils;
 
 import java.io.File;
@@ -125,9 +126,10 @@ public class RegistroActivity extends AppCompatActivity implements RegistroCallb
     }
     @Override
     public void onRegistroFailed(String error) {
-        Toast.makeText(this,error, Toast.LENGTH_LONG).show();
+        ErrorUtils.mostrarMensaje(RegistroActivity.this,R.string.errorRegistroUsuario);
         if(error.contains("Usuario duplicado")) {
             nombreUsuario.setTextColor(Color.RED);
+            ErrorUtils.mostrarMensaje(RegistroActivity.this,R.string.errorUsuarioDuplicado);
         }
     }
     public boolean comprobarVacio(List<EditText> editTexts){
@@ -152,7 +154,7 @@ public class RegistroActivity extends AppCompatActivity implements RegistroCallb
                         ImageView imageView = findViewById(R.id.fotoPerfil);
                         imageView.setImageBitmap(imageBitmap);
                     } else {
-                        Toast.makeText(RegistroActivity.this, "Foto no capturada", Toast.LENGTH_SHORT).show();
+                        ErrorUtils.mostrarMensaje(RegistroActivity.this,R.string.errorFotoPerfil);
                     }
                 }
             });
@@ -164,8 +166,7 @@ public class RegistroActivity extends AppCompatActivity implements RegistroCallb
                 // Iniciar la cámara después de que el permiso ha sido concedido
                 openCamera();
             } else {
-                Toast.makeText(this, "Permiso de cámara denegado", Toast.LENGTH_LONG).show();
-            }
+                ErrorUtils.mostrarMensaje(RegistroActivity.this,R.string.errorPermisoCamaraDenegado);}
         }
     }
     private void openCamera() {

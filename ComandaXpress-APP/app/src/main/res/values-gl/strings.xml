@@ -43,5 +43,22 @@
     <string name="tvPreguntaLogout">¿Estás seguro de que queres pechar sesión?</string>
     <string name="btnAceptar">Aceptar</string>
     <string name="btnCancelar">Cancelar</string>
-
+    <!-- String de errores varios-->
+    <string name="errorUsuarioNoExiste">O usuario non existe</string>
+    <string name="errorServidor">Non se atopa o servidor</string>
+    <string name="errorInesperado">Erro inesperado</string>
+    <string name="errorCambioIP">Erro ao cambiar o IP</string>
+    <string name="errorModificacion">Erro durante a modificación</string>
+    <string name="errorUsuarioDuplicado">Erro, o usuario xa existe</string>
+    <string name="errorCierreMesa">Erro durante o peche da mesa</string>
+    <string name="errorCargaCategorias">Erro ao cargar categorías</string>
+    <string name="errorTicketDetalle">Erro ao recuperar os detalles do ticket</string>
+    <string name="errorCargaMesas">Erro cargando mesas</string>
+    <string name="errorModificacionEstadoMesa">Erro ao modificar o estado da mesa</string>
+    <string name="errorNuevoTiket">Erro ao xerar un ticket novo</string>
+    <string name="errorRecargaDatos">Erro ao recargar datos</string>
+    <string name="errorCargaProductos">Erro ao cargar os produtos</string>
+    <string name="errorRegistroUsuario">Erro durante o rexistro</string>
+    <string name="errorFotoPerfil">Foto de perfil non capturada</string>
+    <string name="errorPermisoCamaraDenegado">Permiso de cámara denegado</string>
 </resources>

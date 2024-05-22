@@ -43,6 +43,7 @@ import com.example.comandaxpress.API.TicketService;
 import com.example.comandaxpress.Adapters.MesaAdapter;
 import com.example.comandaxpress.R;
 import com.example.comandaxpress.Util.CryptoUtils;
+import com.example.comandaxpress.Util.ErrorUtils;
 import com.example.comandaxpress.Util.SQLiteUtils;
 import com.google.gson.Gson;
 
@@ -174,7 +175,7 @@ public class MesasActivity extends AppCompatActivity implements GetAllMesasCallb
     }
     @Override
     public void onError(String error) {
-        Toast.makeText(this, "Error cargando Mesas", Toast.LENGTH_LONG).show();
+        ErrorUtils.mostrarMensaje(MesasActivity.this,R.string.errorCargaMesas);
     }
 
 
@@ -195,7 +196,7 @@ public class MesasActivity extends AppCompatActivity implements GetAllMesasCallb
 
     @Override
     public void onModificacionFailed(String errorMessage) {
-        Toast.makeText(this, "Error al modificar estado de la mesa", Toast.LENGTH_SHORT).show();
+        ErrorUtils.mostrarMensaje(MesasActivity.this,R.string.errorModificacionEstadoMesa);
     }
 
     @Override
@@ -205,7 +206,7 @@ public class MesasActivity extends AppCompatActivity implements GetAllMesasCallb
 
     @Override
     public void onInsertFailed(String errorMessage) {
-        Toast.makeText(this, "Error al generar un ticket nuevo", Toast.LENGTH_SHORT).show();
+        ErrorUtils.mostrarMensaje(MesasActivity.this,R.string.errorNuevoTiket);
         Log.d("TicketError",errorMessage);
     }
 
@@ -220,7 +221,7 @@ public class MesasActivity extends AppCompatActivity implements GetAllMesasCallb
             }
             @Override
             public void onError(String error) {
-                Toast.makeText(MesasActivity.this, "Error al recargar datos: " + error, Toast.LENGTH_SHORT).show();
+                ErrorUtils.mostrarMensaje(MesasActivity.this,R.string.errorRecargaDatos);
                 recarga.setRefreshing(false);
             }
         });

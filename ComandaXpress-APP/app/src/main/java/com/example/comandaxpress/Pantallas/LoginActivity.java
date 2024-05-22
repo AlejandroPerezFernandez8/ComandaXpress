@@ -11,7 +11,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.activity.result.ActivityResult;
@@ -28,6 +27,7 @@ import com.example.comandaxpress.API.UsuarioService;
 import com.example.comandaxpress.R;
 import com.example.comandaxpress.SQLite.FeedReaderDbHelper;
 import com.example.comandaxpress.Util.CryptoUtils;
+import com.example.comandaxpress.Util.ErrorUtils;
 import com.example.comandaxpress.Util.LocaleUtil;
 import com.example.comandaxpress.Util.SQLiteUtils;
 
@@ -35,7 +35,8 @@ public class LoginActivity extends AppCompatActivity implements LoginCallBack {
     SharedPreferences sharedPreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        LocaleUtil.setLocale(LoginActivity.this,"gl");
+
+        LocaleUtil.loadLocale(LoginActivity.this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         EdgeToEdge.enable(this);
@@ -99,9 +100,6 @@ public class LoginActivity extends AppCompatActivity implements LoginCallBack {
         }catch (Exception ex){
             Log.d("ERROR",ex.getMessage());
         }
-
-        //SE NOTIFICA AL USUARIO DE LA BIENVENIDA
-        Toast.makeText(this,"Bienvenido " + usuario.getUsuario()+" !!",Toast.LENGTH_LONG).show();
         //SE PASA A LA PANTALLA DE MESAS
         Intent intentMesas = new Intent(getApplicationContext(),MesasActivity.class);
         someActivityResultLauncher.launch(intentMesas);
@@ -112,12 +110,12 @@ public class LoginActivity extends AppCompatActivity implements LoginCallBack {
     public void onError(String message) {
         //SE NOTIFICA AL USUARIO DE QUE EL USUARIO NO EXISTE
         if (message.contains("AuthFailureError")){
-            Toast.makeText(this,"El usuario no existe",Toast.LENGTH_LONG).show();
+            ErrorUtils.mostrarMensaje(this,R.string.errorUsuarioNoExiste);
         }else if (message.contains("host")){
-            Toast.makeText(this,"No se encuentra el servidor",Toast.LENGTH_LONG).show();
+            ErrorUtils.mostrarMensaje(this,R.string.errorServidor);
         }else{
             Log.d("Login activity", message+"a");
-            Toast.makeText(this, "error inesperado", Toast.LENGTH_SHORT).show();
+            ErrorUtils.mostrarMensaje(this,R.string.errorInesperado);
         }
     }
 

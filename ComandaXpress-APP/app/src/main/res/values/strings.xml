@@ -46,4 +46,23 @@
     <string name="tvPreguntaLogout">¿Estás seguro de que desea cerrar sesión?</string>
     <string name="btnAceptar">Aceptar</string>
     <string name="btnCancelar">Cancelar</string>
+    <!-- MENSAJES DE ERROR VARIADOS-->
+    <string name="errorUsuarioNoExiste">El usuario no existe</string>
+    <string name="errorServidor">No se encuentra el servidor</string>
+    <string name="errorInesperado">Error inesperado</string>
+    <string name="errorCambioIP">Error al cambiar la IP</string>
+    <string name="errorModificacion">Error durante la modificación</string>
+    <string name="errorUsuarioDuplicado">Error, el usuario ya existe</string>
+    <string name="errorCierreMesa">Error durante el cierre de la mesa</string>
+    <string name="errorCargaCategorias">Error al cargar categorías</string>
+    <string name="errorTicketDetalle">Error al recuperar los detalles del ticket</string>
+    <string name="errorCargaMesas">Error cargando mesas</string>
+    <string name="errorModificacionEstadoMesa">Error al modificar el estado de la mesa</string>
+    <string name="errorNuevoTiket">Error al generar un ticket nuevo</string>
+    <string name="errorRecargaDatos">Error al recargar datos</string>
+    <string name="errorCargaProductos">Error al cargar los productos</string>
+    <string name="errorRegistroUsuario">Error durante el registro</string>
+    <string name="errorFotoPerfil">Foto de perfil no capturada</string>
+    <string name="errorPermisoCamaraDenegado">Permiso de cámara denegado</string>
+
 </resources>

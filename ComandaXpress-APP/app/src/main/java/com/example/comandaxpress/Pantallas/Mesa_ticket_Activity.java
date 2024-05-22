@@ -9,7 +9,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.activity.result.ActivityResult;
@@ -32,6 +31,7 @@ import com.example.comandaxpress.ClasesHelper.ProductoCantidad;
 import com.example.comandaxpress.Pantallas.Fragment.DialogoCategoriasFragment;
 import com.example.comandaxpress.R;
 import com.example.comandaxpress.Util.CryptoUtils;
+import com.example.comandaxpress.Util.ErrorUtils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -114,7 +114,7 @@ public class Mesa_ticket_Activity extends AppCompatActivity implements GetAllCat
 
                     @Override
                     public void onModificacionFailed(String errorMessage) {
-                        Toast.makeText(Mesa_ticket_Activity.this, "Error en el cierre de la mesa", Toast.LENGTH_SHORT).show();
+                        ErrorUtils.mostrarMensaje(Mesa_ticket_Activity.this,R.string.errorCierreMesa);
                         Log.d("Mesa_Ticket_activity_Response","Error en el cierre de mesa : "+errorMessage);
                     }
                 });
@@ -157,7 +157,7 @@ public class Mesa_ticket_Activity extends AppCompatActivity implements GetAllCat
     @Override
     public void onError(String error) {
         Log.d("Error carga categorias", error);
-        Toast.makeText(this, "Error al cargar categorias", Toast.LENGTH_SHORT).show();
+        ErrorUtils.mostrarMensaje(Mesa_ticket_Activity.this,R.string.errorCargaCategorias);
     }
 
     public void añadirProductos(List<ProductoCantidad> nuevosProductos) {
@@ -201,7 +201,7 @@ public class Mesa_ticket_Activity extends AppCompatActivity implements GetAllCat
     @Override
     public void onGetProductosError(String error) {
         Log.d("GetProductosError",error);
-        Toast.makeText(this, "Error al recuperar los detalles del ticket", Toast.LENGTH_SHORT).show();
+        ErrorUtils.mostrarMensaje(Mesa_ticket_Activity.this,R.string.errorTicketDetalle);
     }
 
     private void actualizarTotal(){
