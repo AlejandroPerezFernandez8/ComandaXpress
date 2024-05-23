@@ -117,12 +117,12 @@ public class LoginActivity extends AppCompatActivity implements LoginCallBack {
         dialogoDeCarga.dismissDialog();
         //SE NOTIFICA AL USUARIO DE QUE EL USUARIO NO EXISTE
         if (message.contains("AuthFailureError")){
-            MensajeUtils.mostrarMensaje(this,R.string.errorUsuarioNoExiste);
+            MensajeUtils.mostrarError(this,R.string.errorUsuarioNoExiste);
         }else if (message.contains("host")){
-            MensajeUtils.mostrarMensaje(this,R.string.errorServidor);
+            MensajeUtils.mostrarError(this,R.string.errorServidor);
         }else{
             Log.d("Login activity", message+"a");
-            MensajeUtils.mostrarMensaje(this,R.string.errorInesperado);
+            MensajeUtils.mostrarError(this,R.string.errorInesperado);
         }
     }
 

@@ -11,8 +11,7 @@
         android:id="@+id/toast_icon"
         android:layout_width="32dp"
         android:layout_height="32dp"
-        android:layout_marginEnd="12dp"
-        android:src="@drawable/error" />
+        android:layout_marginEnd="12dp" />
 
     <TextView
         android:id="@+id/toast_message"

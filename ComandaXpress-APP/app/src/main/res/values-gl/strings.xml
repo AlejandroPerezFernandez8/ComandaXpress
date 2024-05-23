@@ -64,4 +64,10 @@
     <string name="errorPermisoCamaraDenegado">Permiso de cámara denegado</string>
     <string name="errorCorreo">O correo non e válido</string>
     <string name="errorCamposVacios">Debes encher todos os campos</string>
+
+    <!-- MENSAJE INFORMATIVOS-->
+    <string name="CambioIP">IP cambiada</string>
+    <string name="ModificacionUsuario">Usuario modificado correctamente</string>
+    <string name="UsuarioRegistrado">Usuario rexistrado correctamente</string>
+    <string name="CobroMesa">Mesa cobrada correctamente</string>
 </resources>

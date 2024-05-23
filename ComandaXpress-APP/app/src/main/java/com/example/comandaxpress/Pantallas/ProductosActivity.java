@@ -46,7 +46,7 @@ public class ProductosActivity extends AppCompatActivity implements GetProductos
             int idCategoria = this.getIntent().getExtras().getInt("categoriaId");
             ProductosService.getProductosPorCategoria(ProductosActivity.this,Long.valueOf(idCategoria),ProductosActivity.this);
         }catch (Exception ex){
-            MensajeUtils.mostrarMensaje(ProductosActivity.this,R.string.errorCargaProductos);
+            MensajeUtils.mostrarError(ProductosActivity.this,R.string.errorCargaProductos);
         }
 
         btnAñadir.setOnClickListener(new View.OnClickListener() {

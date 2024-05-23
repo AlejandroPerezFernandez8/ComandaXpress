@@ -158,7 +158,7 @@ public class MesasActivity extends AppCompatActivity implements GetAllMesasCallb
     }
     @Override
     public void onError(String error) {
-        MensajeUtils.mostrarMensaje(MesasActivity.this,R.string.errorCargaMesas);
+        MensajeUtils.mostrarError(MesasActivity.this,R.string.errorCargaMesas);
     }
 
 
@@ -179,7 +179,7 @@ public class MesasActivity extends AppCompatActivity implements GetAllMesasCallb
 
     @Override
     public void onModificacionFailed(String errorMessage) {
-        MensajeUtils.mostrarMensaje(MesasActivity.this,R.string.errorModificacionEstadoMesa);
+        MensajeUtils.mostrarError(MesasActivity.this,R.string.errorModificacionEstadoMesa);
     }
 
     @Override
@@ -189,7 +189,7 @@ public class MesasActivity extends AppCompatActivity implements GetAllMesasCallb
 
     @Override
     public void onInsertFailed(String errorMessage) {
-        MensajeUtils.mostrarMensaje(MesasActivity.this,R.string.errorNuevoTiket);
+        MensajeUtils.mostrarError(MesasActivity.this,R.string.errorNuevoTiket);
         Log.d("TicketError",errorMessage);
     }
 
@@ -204,7 +204,7 @@ public class MesasActivity extends AppCompatActivity implements GetAllMesasCallb
             }
             @Override
             public void onError(String error) {
-                MensajeUtils.mostrarMensaje(MesasActivity.this,R.string.errorRecargaDatos);
+                MensajeUtils.mostrarError(MesasActivity.this,R.string.errorRecargaDatos);
                 recarga.setRefreshing(false);
             }
         });

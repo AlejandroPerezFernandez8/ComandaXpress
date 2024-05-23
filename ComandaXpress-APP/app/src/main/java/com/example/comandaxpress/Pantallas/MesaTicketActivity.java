@@ -120,6 +120,7 @@ public class MesaTicketActivity extends AppCompatActivity implements GetAllCateg
                     MesaService.updateMesa(MesaTicketActivity.this, mesa, new ModificacionMesaCallback() {
                         @Override
                         public void onModificacionSuccess(String response) {
+                            MensajeUtils.mostrarMensaje(MesaTicketActivity.this,R.string.CobroMesa);
                             Log.d("Mesa_Ticket_activity_Response","Mesa cerrada"+mesa.getMesaId());
                             sharedPreferences.edit().remove("Mesa").apply();
                             finish();
@@ -127,7 +128,7 @@ public class MesaTicketActivity extends AppCompatActivity implements GetAllCateg
 
                         @Override
                         public void onModificacionFailed(String errorMessage) {
-                            MensajeUtils.mostrarMensaje(MesaTicketActivity.this,R.string.errorCierreMesa);
+                            MensajeUtils.mostrarError(MesaTicketActivity.this,R.string.errorCierreMesa);
                             Log.d("Mesa_Ticket_activity_Response","Error en el cierre de mesa : "+errorMessage);
                         }
                     });
@@ -176,7 +177,7 @@ public class MesaTicketActivity extends AppCompatActivity implements GetAllCateg
     @Override
     public void onError(String error) {
         Log.d("Error carga categorias", error);
-        MensajeUtils.mostrarMensaje(MesaTicketActivity.this,R.string.errorCargaCategorias);
+        MensajeUtils.mostrarError(MesaTicketActivity.this,R.string.errorCargaCategorias);
     }
 
     public void añadirProductos(List<ProductoCantidad> nuevosProductos) {
@@ -220,7 +221,7 @@ public class MesaTicketActivity extends AppCompatActivity implements GetAllCateg
     @Override
     public void onGetProductosError(String error) {
         Log.d("GetProductosError",error);
-        MensajeUtils.mostrarMensaje(MesaTicketActivity.this,R.string.errorTicketDetalle);
+        MensajeUtils.mostrarError(MesaTicketActivity.this,R.string.errorTicketDetalle);
     }
 
     private void actualizarTotal(){

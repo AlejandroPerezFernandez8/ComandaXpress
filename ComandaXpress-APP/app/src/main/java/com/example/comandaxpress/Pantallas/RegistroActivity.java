@@ -1,7 +1,6 @@
 package com.example.comandaxpress.Pantallas;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -83,7 +82,7 @@ public class RegistroActivity extends AppCompatActivity implements RegistroCallb
                 // Validar correo electrónico
                 if (!email.getText().toString().trim().matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")) {
                     email.setError(RegistroActivity.this.getString(R.string.errorCorreo));
-                    MensajeUtils.mostrarMensaje(RegistroActivity.this, R.string.errorCorreo);
+                    MensajeUtils.mostrarError(RegistroActivity.this, R.string.errorCorreo);
                     return;
                 }
                 Usuario usuario = new Usuario(
@@ -112,7 +111,7 @@ public class RegistroActivity extends AppCompatActivity implements RegistroCallb
     }
     @Override
     public void onRegistroSuccess(String response) {
-        Toast.makeText(this,response,Toast.LENGTH_LONG).show();
+        MensajeUtils.mostrarMensaje(RegistroActivity.this,R.string.UsuarioRegistrado);
         //Se pasa a la pantalla de login
         Intent intentLogin = new Intent(RegistroActivity.this,LoginActivity.class);
         intentLogin.putExtra("NombreUsuario",nombreUsuario.getText().toString().trim());
@@ -121,10 +120,10 @@ public class RegistroActivity extends AppCompatActivity implements RegistroCallb
     }
     @Override
     public void onRegistroFailed(String error) {
-        MensajeUtils.mostrarMensaje(RegistroActivity.this,R.string.errorRegistroUsuario);
+        MensajeUtils.mostrarError(RegistroActivity.this,R.string.errorRegistroUsuario);
         if(error.contains("Usuario duplicado")) {
             nombreUsuario.setTextColor(Color.RED);
-            MensajeUtils.mostrarMensaje(RegistroActivity.this,R.string.errorUsuarioDuplicado);
+            MensajeUtils.mostrarError(RegistroActivity.this,R.string.errorUsuarioDuplicado);
         }
     }
     public boolean comprobarVacio(List<EditText> campos) {
@@ -149,7 +148,7 @@ public class RegistroActivity extends AppCompatActivity implements RegistroCallb
                         ImageView imageView = findViewById(R.id.fotoPerfil);
                         imageView.setImageBitmap(imageBitmap);
                     } else {
-                        MensajeUtils.mostrarMensaje(RegistroActivity.this,R.string.errorFotoPerfil);
+                        MensajeUtils.mostrarError(RegistroActivity.this,R.string.errorFotoPerfil);
                     }
                 }
             });
@@ -161,7 +160,7 @@ public class RegistroActivity extends AppCompatActivity implements RegistroCallb
                 // Iniciar la cámara después de que el permiso ha sido concedido
                 openCamera();
             } else {
-                MensajeUtils.mostrarMensaje(RegistroActivity.this,R.string.errorPermisoCamaraDenegado);}
+                MensajeUtils.mostrarError(RegistroActivity.this,R.string.errorPermisoCamaraDenegado);}
         }
     }
     private void openCamera() {

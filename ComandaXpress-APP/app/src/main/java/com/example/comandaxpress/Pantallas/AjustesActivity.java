@@ -124,10 +124,10 @@ public class AjustesActivity extends AppCompatActivity implements ModificacionCa
                 if (!isEmailValid || areFieldsEmpty) {
                     if (!isEmailValid) {
                         emailModificar.setError(AjustesActivity.this.getString(R.string.errorCorreo));
-                        MensajeUtils.mostrarMensaje(AjustesActivity.this, R.string.errorCorreo);
+                        MensajeUtils.mostrarError(AjustesActivity.this, R.string.errorCorreo);
                     }
                     if (areFieldsEmpty) {
-                        MensajeUtils.mostrarMensaje(AjustesActivity.this, R.string.errorCamposVacios);
+                        MensajeUtils.mostrarError(AjustesActivity.this, R.string.errorCamposVacios);
                     }
                     return;
                 }
@@ -182,9 +182,9 @@ public class AjustesActivity extends AppCompatActivity implements ModificacionCa
                             SQLiteUtils.insertarIP(AjustesActivity.this, ip);
                         }
                         ApiMapSingleton.getInstance().setIP(SQLiteUtils.getIP(AjustesActivity.this));
-                        Toast.makeText(AjustesActivity.this, "IP cambiada", Toast.LENGTH_SHORT).show();
+                        MensajeUtils.mostrarMensaje(AjustesActivity.this,R.string.CambioIP);
                     } catch (Exception ex) {
-                        MensajeUtils.mostrarMensaje(AjustesActivity.this,R.string.errorCambioIP);
+                        MensajeUtils.mostrarError(AjustesActivity.this,R.string.errorCambioIP);
                         Log.d("Error IP", ex.getMessage());
                     }
                 }
@@ -258,13 +258,13 @@ public class AjustesActivity extends AppCompatActivity implements ModificacionCa
         try {
             // GUARDAR EL USUARIO ENCRIPTADO EN LAS PREFERENCIAS
             sharedPreferences.edit().putString("Usuario", CryptoUtils.encriptar(new Gson().toJson(usuario), "abc123.")).apply();
-            Toast.makeText(this, "Usuario Modificado", Toast.LENGTH_SHORT).show();
+            MensajeUtils.mostrarMensaje(AjustesActivity.this,R.string.ModificacionUsuario);
             // VOLVER AL LOGIN
             Intent intentLogin = new Intent(AjustesActivity.this, LoginActivity.class);
             intentLogin.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             someActivityResultLauncher.launch(intentLogin);
         } catch (Exception ex) {
-            MensajeUtils.mostrarMensaje(AjustesActivity.this,R.string.errorModificacion);
+            MensajeUtils.mostrarError(AjustesActivity.this,R.string.errorModificacion);
             Log.d("Modificacion Error", ex.getMessage());
         }
     }
@@ -272,9 +272,9 @@ public class AjustesActivity extends AppCompatActivity implements ModificacionCa
     @Override
     public void onRegistroFailed(String error) {
         if (error.contains("Usuario duplicado")) {
-            MensajeUtils.mostrarMensaje(AjustesActivity.this,R.string.errorUsuarioDuplicado);
+            MensajeUtils.mostrarError(AjustesActivity.this,R.string.errorUsuarioDuplicado);
         } else {
-            MensajeUtils.mostrarMensaje(AjustesActivity.this,R.string.errorModificacion);
+            MensajeUtils.mostrarError(AjustesActivity.this,R.string.errorModificacion);
             Log.d("Modificacion Error", error);
         }
     }
