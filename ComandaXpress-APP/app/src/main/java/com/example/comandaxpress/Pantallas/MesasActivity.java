@@ -3,22 +3,14 @@ package com.example.comandaxpress.Pantallas;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Configuration;
-import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.activity.result.ActivityResult;
@@ -26,12 +18,8 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.example.comandaxpress.API.ApiMapSingleton;
 import com.example.comandaxpress.API.Clases.Mesa;
 import com.example.comandaxpress.API.Clases.Ticket;
 import com.example.comandaxpress.API.Clases.Usuario;
@@ -44,16 +32,11 @@ import com.example.comandaxpress.Adapters.MesaAdapter;
 import com.example.comandaxpress.R;
 import com.example.comandaxpress.Util.CryptoUtils;
 import com.example.comandaxpress.Util.ErrorUtils;
-import com.example.comandaxpress.Util.SQLiteUtils;
 import com.google.gson.Gson;
 
-import java.text.SimpleDateFormat;
-import java.time.OffsetDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-import java.util.TimeZone;
 
 public class MesasActivity extends AppCompatActivity implements GetAllMesasCallback, ModificacionMesaCallback, InsertTickectCallback {
     SharedPreferences sharedPreferences ;
@@ -123,7 +106,7 @@ public class MesasActivity extends AppCompatActivity implements GetAllMesasCallb
                                             Optional<Mesa> mesaOptional = mesas.stream()
                                                     .filter(mesax -> mesax.getMesaId().equals(mesaSeleccionada.getMesaId()))
                                                     .findFirst();
-                                            Intent intentTicket = new Intent(MesasActivity.this, Mesa_ticket_Activity.class);
+                                            Intent intentTicket = new Intent(MesasActivity.this, MesaTicketActivity.class);
                                             sharedPreferences.edit().putString("Mesa", new Gson().toJson(mesaOptional.get())).apply();
                                             someActivityResultLauncher.launch(intentTicket);
                                             dialog.dismiss();
@@ -145,7 +128,7 @@ public class MesasActivity extends AppCompatActivity implements GetAllMesasCallb
                         btnCancel.setOnClickListener(b -> {dialog.dismiss();});
                         dialog.show();
                 }else{
-                    Intent intentTicket = new Intent(MesasActivity.this,Mesa_ticket_Activity.class);
+                    Intent intentTicket = new Intent(MesasActivity.this, MesaTicketActivity.class);
                     sharedPreferences.edit().putString("Mesa",new Gson().toJson(mesaSeleccionada)).apply();
                     someActivityResultLauncher.launch(intentTicket);
                 }

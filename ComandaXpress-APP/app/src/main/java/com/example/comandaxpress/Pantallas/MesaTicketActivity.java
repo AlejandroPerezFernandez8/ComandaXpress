@@ -40,7 +40,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Mesa_ticket_Activity extends AppCompatActivity implements GetAllCategoriasCallback, GetProductoCantidadCallback,DialogoCategoriasFragment.CategoriaSeleccionadaListener {
+public class MesaTicketActivity extends AppCompatActivity implements GetAllCategoriasCallback, GetProductoCantidadCallback,DialogoCategoriasFragment.CategoriaSeleccionadaListener {
     SharedPreferences sharedPreferences;
     ArrayList<ProductoCantidad> pcList = new ArrayList<>();
     TicketProductoAdapter adapter;
@@ -59,7 +59,7 @@ public class Mesa_ticket_Activity extends AppCompatActivity implements GetAllCat
         Button btnAñadirProducto = findViewById(R.id.btnAñadirProducto);
         Button btncobrarMesa = findViewById(R.id.btnCobrarMesa);
         tvTotal = findViewById(R.id.tvTotal);
-        adapter = new TicketProductoAdapter(Mesa_ticket_Activity.this, pcList);
+        adapter = new TicketProductoAdapter(MesaTicketActivity.this, pcList);
         lista.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 
@@ -68,7 +68,7 @@ public class Mesa_ticket_Activity extends AppCompatActivity implements GetAllCat
             numeroMesa.setText("Mesa Número " + mesa.getNumero());
             numeroComensales.setText("Comensales: " + mesa.getCapacidad());
             if(!mesa.getTickets().isEmpty()){
-                TicketService.getDetallesDeTicket(Mesa_ticket_Activity.this,mesa.getTickets().get(mesa.getTickets().size()-1).longValue(),Mesa_ticket_Activity.this);
+                TicketService.getDetallesDeTicket(MesaTicketActivity.this,mesa.getTickets().get(mesa.getTickets().size()-1).longValue(), MesaTicketActivity.this);
             }
         } catch (Exception ex) {
             Log.d("Mesa_Ticket_Error",ex.getMessage());
@@ -77,7 +77,7 @@ public class Mesa_ticket_Activity extends AppCompatActivity implements GetAllCat
         btnAñadirProducto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CategoriaService.getAllCategorias(Mesa_ticket_Activity.this, Mesa_ticket_Activity.this);
+                CategoriaService.getAllCategorias(MesaTicketActivity.this, MesaTicketActivity.this);
             }
         });
 
@@ -104,7 +104,7 @@ public class Mesa_ticket_Activity extends AppCompatActivity implements GetAllCat
             @Override
             public void onClick(View v) {
                 mesa.setActiva(false);
-                MesaService.updateMesa(Mesa_ticket_Activity.this, mesa, new ModificacionMesaCallback() {
+                MesaService.updateMesa(MesaTicketActivity.this, mesa, new ModificacionMesaCallback() {
                     @Override
                     public void onModificacionSuccess(String response) {
                         Log.d("Mesa_Ticket_activity_Response","Mesa cerrada"+mesa.getMesaId());
@@ -114,7 +114,7 @@ public class Mesa_ticket_Activity extends AppCompatActivity implements GetAllCat
 
                     @Override
                     public void onModificacionFailed(String errorMessage) {
-                        ErrorUtils.mostrarMensaje(Mesa_ticket_Activity.this,R.string.errorCierreMesa);
+                        ErrorUtils.mostrarMensaje(MesaTicketActivity.this,R.string.errorCierreMesa);
                         Log.d("Mesa_Ticket_activity_Response","Error en el cierre de mesa : "+errorMessage);
                     }
                 });
@@ -157,7 +157,7 @@ public class Mesa_ticket_Activity extends AppCompatActivity implements GetAllCat
     @Override
     public void onError(String error) {
         Log.d("Error carga categorias", error);
-        ErrorUtils.mostrarMensaje(Mesa_ticket_Activity.this,R.string.errorCargaCategorias);
+        ErrorUtils.mostrarMensaje(MesaTicketActivity.this,R.string.errorCargaCategorias);
     }
 
     public void añadirProductos(List<ProductoCantidad> nuevosProductos) {
@@ -182,7 +182,7 @@ public class Mesa_ticket_Activity extends AppCompatActivity implements GetAllCat
     }
     @Override
     public void onCategoriaSeleccionada(Categoria categoria) {
-        Intent intent = new Intent(Mesa_ticket_Activity.this, ProductosActivity.class);
+        Intent intent = new Intent(MesaTicketActivity.this, ProductosActivity.class);
         intent.putExtra("categoriaId", Integer.parseInt(categoria.getCategoriaId().toString()));
         someActivityResultLauncher.launch(intent);
     }
@@ -201,7 +201,7 @@ public class Mesa_ticket_Activity extends AppCompatActivity implements GetAllCat
     @Override
     public void onGetProductosError(String error) {
         Log.d("GetProductosError",error);
-        ErrorUtils.mostrarMensaje(Mesa_ticket_Activity.this,R.string.errorTicketDetalle);
+        ErrorUtils.mostrarMensaje(MesaTicketActivity.this,R.string.errorTicketDetalle);
     }
 
     private void actualizarTotal(){

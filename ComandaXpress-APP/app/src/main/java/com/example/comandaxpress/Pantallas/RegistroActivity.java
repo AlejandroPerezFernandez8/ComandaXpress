@@ -121,7 +121,8 @@ public class RegistroActivity extends AppCompatActivity implements RegistroCallb
         Toast.makeText(this,response,Toast.LENGTH_LONG).show();
         //Se pasa a la pantalla de login
         Intent intentLogin = new Intent(RegistroActivity.this,LoginActivity.class);
-        someActivityResultLauncher.launch(intentLogin);
+        intentLogin.putExtra("NombreUsuario",nombreUsuario.getText().toString().trim());
+        setResult(RESULT_OK,intentLogin);
         finish();
     }
     @Override

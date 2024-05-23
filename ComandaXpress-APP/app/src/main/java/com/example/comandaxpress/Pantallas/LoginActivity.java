@@ -24,6 +24,7 @@ import com.example.comandaxpress.API.ApiMapSingleton;
 import com.example.comandaxpress.API.Clases.Usuario;
 import com.example.comandaxpress.API.Interfaces.LoginCallBack;
 import com.example.comandaxpress.API.UsuarioService;
+import com.example.comandaxpress.Pantallas.PantallasSecundarias.DialogoDeCarga;
 import com.example.comandaxpress.R;
 import com.example.comandaxpress.SQLite.FeedReaderDbHelper;
 import com.example.comandaxpress.Util.CryptoUtils;
@@ -33,9 +34,10 @@ import com.example.comandaxpress.Util.SQLiteUtils;
 
 public class LoginActivity extends AppCompatActivity implements LoginCallBack {
     SharedPreferences sharedPreferences;
+    DialogoDeCarga dialogoDeCarga = new DialogoDeCarga(this);
+    EditText nombreUsuario;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         LocaleUtil.loadLocale(LoginActivity.this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
@@ -54,7 +56,7 @@ public class LoginActivity extends AppCompatActivity implements LoginCallBack {
             finish();
         }
         //Referencias a variables de actividad
-        EditText nombreUsuario = findViewById(R.id.NombreUsuario);
+        nombreUsuario = findViewById(R.id.NombreUsuario);
         EditText contraseña = findViewById(R.id.Contraseña);
         Button btnRegistro = findViewById(R.id.btnRegistrarse);
         Button btnLogin = findViewById(R.id.btnLogin);
@@ -70,6 +72,7 @@ public class LoginActivity extends AppCompatActivity implements LoginCallBack {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                dialogoDeCarga.startLoadingDialog();
                 UsuarioService.loginUsuario(getApplicationContext(),nombreUsuario.getText().toString().trim(),contraseña.getText().toString().trim(),LoginActivity.this);
             }
         });
@@ -86,6 +89,11 @@ public class LoginActivity extends AppCompatActivity implements LoginCallBack {
             new ActivityResultCallback<ActivityResult>() {
                 @Override
                 public void onActivityResult(ActivityResult result) {
+                    if(result.getResultCode() == RESULT_OK){
+                        try {
+                            nombreUsuario.setText(result.getData().getExtras().getString("NombreUsuario").trim());
+                        }catch (Exception ex){}
+                    }
                 }
     });
 
@@ -101,6 +109,7 @@ public class LoginActivity extends AppCompatActivity implements LoginCallBack {
             Log.d("ERROR",ex.getMessage());
         }
         //SE PASA A LA PANTALLA DE MESAS
+        dialogoDeCarga.dismissDialog();
         Intent intentMesas = new Intent(getApplicationContext(),MesasActivity.class);
         someActivityResultLauncher.launch(intentMesas);
         finish();
@@ -108,6 +117,7 @@ public class LoginActivity extends AppCompatActivity implements LoginCallBack {
 
     @Override
     public void onError(String message) {
+        dialogoDeCarga.dismissDialog();
         //SE NOTIFICA AL USUARIO DE QUE EL USUARIO NO EXISTE
         if (message.contains("AuthFailureError")){
             ErrorUtils.mostrarMensaje(this,R.string.errorUsuarioNoExiste);
