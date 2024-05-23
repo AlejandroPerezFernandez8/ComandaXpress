@@ -31,7 +31,7 @@ import com.example.comandaxpress.API.TicketService;
 import com.example.comandaxpress.Adapters.MesaAdapter;
 import com.example.comandaxpress.R;
 import com.example.comandaxpress.Util.CryptoUtils;
-import com.example.comandaxpress.Util.ErrorUtils;
+import com.example.comandaxpress.Util.MensajeUtils;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -158,7 +158,7 @@ public class MesasActivity extends AppCompatActivity implements GetAllMesasCallb
     }
     @Override
     public void onError(String error) {
-        ErrorUtils.mostrarMensaje(MesasActivity.this,R.string.errorCargaMesas);
+        MensajeUtils.mostrarMensaje(MesasActivity.this,R.string.errorCargaMesas);
     }
 
 
@@ -179,7 +179,7 @@ public class MesasActivity extends AppCompatActivity implements GetAllMesasCallb
 
     @Override
     public void onModificacionFailed(String errorMessage) {
-        ErrorUtils.mostrarMensaje(MesasActivity.this,R.string.errorModificacionEstadoMesa);
+        MensajeUtils.mostrarMensaje(MesasActivity.this,R.string.errorModificacionEstadoMesa);
     }
 
     @Override
@@ -189,7 +189,7 @@ public class MesasActivity extends AppCompatActivity implements GetAllMesasCallb
 
     @Override
     public void onInsertFailed(String errorMessage) {
-        ErrorUtils.mostrarMensaje(MesasActivity.this,R.string.errorNuevoTiket);
+        MensajeUtils.mostrarMensaje(MesasActivity.this,R.string.errorNuevoTiket);
         Log.d("TicketError",errorMessage);
     }
 
@@ -204,7 +204,7 @@ public class MesasActivity extends AppCompatActivity implements GetAllMesasCallb
             }
             @Override
             public void onError(String error) {
-                ErrorUtils.mostrarMensaje(MesasActivity.this,R.string.errorRecargaDatos);
+                MensajeUtils.mostrarMensaje(MesasActivity.this,R.string.errorRecargaDatos);
                 recarga.setRefreshing(false);
             }
         });

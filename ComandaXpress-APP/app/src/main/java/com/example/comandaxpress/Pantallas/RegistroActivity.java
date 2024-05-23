@@ -1,16 +1,12 @@
 package com.example.comandaxpress.Pantallas;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Picture;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -29,24 +25,15 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.core.content.FileProvider;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
-import com.caverock.androidsvg.SVG;
 import com.example.comandaxpress.API.Clases.Usuario;
 import com.example.comandaxpress.API.Interfaces.RegistroCallback;
 import com.example.comandaxpress.API.UsuarioService;
 import com.example.comandaxpress.R;
-import com.example.comandaxpress.Util.ErrorUtils;
+import com.example.comandaxpress.Util.MensajeUtils;
 import com.example.comandaxpress.Util.ImageUtils;
 
-import java.io.File;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class RegistroActivity extends AppCompatActivity implements RegistroCallback {
@@ -91,7 +78,14 @@ public class RegistroActivity extends AppCompatActivity implements RegistroCallb
                 editTexts.add(email);
                 editTexts.add(nombreUsuario);
                 editTexts.add(contraseña);
-                if(!comprobarVacio(editTexts)){return;}
+                // Comprobar campos vacíos
+                if (comprobarVacio(editTexts)) {return;}
+                // Validar correo electrónico
+                if (!email.getText().toString().trim().matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")) {
+                    email.setError(RegistroActivity.this.getString(R.string.errorCorreo));
+                    MensajeUtils.mostrarMensaje(RegistroActivity.this, R.string.errorCorreo);
+                    return;
+                }
                 Usuario usuario = new Usuario(
                     nombre.getText().toString().trim(),
                     apellidos.getText().toString().trim(),
@@ -127,22 +121,22 @@ public class RegistroActivity extends AppCompatActivity implements RegistroCallb
     }
     @Override
     public void onRegistroFailed(String error) {
-        ErrorUtils.mostrarMensaje(RegistroActivity.this,R.string.errorRegistroUsuario);
+        MensajeUtils.mostrarMensaje(RegistroActivity.this,R.string.errorRegistroUsuario);
         if(error.contains("Usuario duplicado")) {
             nombreUsuario.setTextColor(Color.RED);
-            ErrorUtils.mostrarMensaje(RegistroActivity.this,R.string.errorUsuarioDuplicado);
+            MensajeUtils.mostrarMensaje(RegistroActivity.this,R.string.errorUsuarioDuplicado);
         }
     }
-    public boolean comprobarVacio(List<EditText> editTexts){
-        for (EditText editText: editTexts) {
-            if(editText.getText().toString().isEmpty()){
-                editText.setHintTextColor(Color.RED);
-                editText.requestFocus();
-                return false;
+    public boolean comprobarVacio(List<EditText> campos) {
+        for (EditText campo : campos) {
+            if (campo.getText().toString().isEmpty()) {
+                campo.setError(RegistroActivity.this.getString((R.string.errorCamposVacios)));
+                return true;
             }
         }
-        return true;
+        return false;
     }
+
     ActivityResultLauncher someActivityResultLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
@@ -155,7 +149,7 @@ public class RegistroActivity extends AppCompatActivity implements RegistroCallb
                         ImageView imageView = findViewById(R.id.fotoPerfil);
                         imageView.setImageBitmap(imageBitmap);
                     } else {
-                        ErrorUtils.mostrarMensaje(RegistroActivity.this,R.string.errorFotoPerfil);
+                        MensajeUtils.mostrarMensaje(RegistroActivity.this,R.string.errorFotoPerfil);
                     }
                 }
             });
@@ -167,7 +161,7 @@ public class RegistroActivity extends AppCompatActivity implements RegistroCallb
                 // Iniciar la cámara después de que el permiso ha sido concedido
                 openCamera();
             } else {
-                ErrorUtils.mostrarMensaje(RegistroActivity.this,R.string.errorPermisoCamaraDenegado);}
+                MensajeUtils.mostrarMensaje(RegistroActivity.this,R.string.errorPermisoCamaraDenegado);}
         }
     }
     private void openCamera() {

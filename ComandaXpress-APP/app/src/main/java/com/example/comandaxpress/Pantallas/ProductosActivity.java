@@ -7,17 +7,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.example.comandaxpress.API.Clases.Mesa;
 import com.example.comandaxpress.API.Clases.Producto;
@@ -29,11 +21,9 @@ import com.example.comandaxpress.API.TicketService;
 import com.example.comandaxpress.Adapters.ProductoAdapter;
 import com.example.comandaxpress.ClasesHelper.ProductoCantidad;
 import com.example.comandaxpress.R;
-import com.example.comandaxpress.Util.ErrorUtils;
+import com.example.comandaxpress.Util.MensajeUtils;
 import com.google.gson.Gson;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ProductosActivity extends AppCompatActivity implements GetProductosCallback, InsertProductosCallback {
@@ -56,7 +46,7 @@ public class ProductosActivity extends AppCompatActivity implements GetProductos
             int idCategoria = this.getIntent().getExtras().getInt("categoriaId");
             ProductosService.getProductosPorCategoria(ProductosActivity.this,Long.valueOf(idCategoria),ProductosActivity.this);
         }catch (Exception ex){
-            ErrorUtils.mostrarMensaje(ProductosActivity.this,R.string.errorCargaProductos);
+            MensajeUtils.mostrarMensaje(ProductosActivity.this,R.string.errorCargaProductos);
         }
 
         btnAñadir.setOnClickListener(new View.OnClickListener() {

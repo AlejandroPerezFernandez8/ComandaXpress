@@ -32,6 +32,7 @@
     <string name="tvComensales">Comensales: 0</string>
     <string name="btnCobrarMesa">Cobrar Mesa</string>
     <string name="btnAñadirProducto">Añadir Producto</string>
+    <string name="tvPreguntaCobrarMesa">¿Deseas cerrar la mesa y dejarla libre?</string>
     <!-- Pantalla de mesas-->
     <string name="tvGestionMesas">Gestión de Mesas</string>
     <!--Pantalla de productos-->
@@ -64,5 +65,6 @@
     <string name="errorRegistroUsuario">Error durante el registro</string>
     <string name="errorFotoPerfil">Foto de perfil no capturada</string>
     <string name="errorPermisoCamaraDenegado">Permiso de cámara denegado</string>
-
+    <string name="errorCorreo">El correo no es valido</string>
+    <string name="errorCamposVacios">Debes rellenar todos los campos</string>
 </resources>

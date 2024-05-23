@@ -8,6 +8,8 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,7 +35,7 @@ import com.example.comandaxpress.API.Interfaces.ModificacionCallback;
 import com.example.comandaxpress.API.UsuarioService;
 import com.example.comandaxpress.R;
 import com.example.comandaxpress.Util.CryptoUtils;
-import com.example.comandaxpress.Util.ErrorUtils;
+import com.example.comandaxpress.Util.MensajeUtils;
 import com.example.comandaxpress.Util.ImageUtils;
 import com.example.comandaxpress.Util.LocaleUtil;
 import com.example.comandaxpress.Util.SQLiteUtils;
@@ -95,6 +97,18 @@ public class AjustesActivity extends AppCompatActivity implements ModificacionCa
             }
         });
 
+        emailModificar.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+            @Override
+            public void afterTextChanged(Editable s) {
+                int color = getResources().getColor(R.color.colorLightBlue);
+                emailModificar.setTextColor(color);
+            }
+        });
+
         btnRegistrarse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -104,28 +118,40 @@ public class AjustesActivity extends AppCompatActivity implements ModificacionCa
                 campos.add(emailModificar);
                 campos.add(nombreUsuarioModificar);
                 campos.add(contraseñaModificar);
-                comprobarVacio(campos);
-                // HACER LA PETICION (PASANDOLE EL ID DEL USUARIO ACTUAL)
-                String usuarioJson = null;
-                try {
-                    Gson gson = new Gson();
-                    usuarioJson = CryptoUtils.desencriptar(sharedPreferences.getString("Usuario", ""), "abc123.");
-                    usuario = gson.fromJson(usuarioJson, Usuario.class);
-                } catch (Exception e) {
-                    e.printStackTrace();
+
+                boolean isEmailValid = emailModificar.getText().toString().trim().matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$");
+                boolean areFieldsEmpty = comprobarVacio(campos);
+                if (!isEmailValid || areFieldsEmpty) {
+                    if (!isEmailValid) {
+                        emailModificar.setError(AjustesActivity.this.getString(R.string.errorCorreo));
+                        MensajeUtils.mostrarMensaje(AjustesActivity.this, R.string.errorCorreo);
+                    }
+                    if (areFieldsEmpty) {
+                        MensajeUtils.mostrarMensaje(AjustesActivity.this, R.string.errorCamposVacios);
+                    }
+                    return;
                 }
-                // GUARDAR LOS DATOS DEL NUEVO USUARIO
-                usuario.setNombre(nombreModificar.getText().toString().trim());
-                usuario.setApellido(apellidosModificar.getText().toString().trim());
-                usuario.setEmail(emailModificar.getText().toString().trim());
-                usuario.setUsuario(nombreUsuarioModificar.getText().toString().trim());
-                usuario.setContraseña(contraseñaModificar.getText().toString().trim());
-                usuario.setFoto(ImageUtils.encodeImageViewToBase64(fotoPerfilModificar));
-                // OBTENER EL USUARIO CON EL ID
-                usuario_id = usuario.getUsuario_id();
-                // HACER LA MODIFICACION
-                UsuarioService.modificarUsuario(AjustesActivity.this, usuario_id, usuario, AjustesActivity.this);
-            }
+                // HACER LA PETICION (PASANDOLE EL ID DEL USUARIO ACTUAL)
+                    String usuarioJson = null;
+                    try {
+                        Gson gson = new Gson();
+                        usuarioJson = CryptoUtils.desencriptar(sharedPreferences.getString("Usuario", ""), "abc123.");
+                        usuario = gson.fromJson(usuarioJson, Usuario.class);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    // GUARDAR LOS DATOS DEL NUEVO USUARIO
+                    usuario.setNombre(nombreModificar.getText().toString().trim());
+                    usuario.setApellido(apellidosModificar.getText().toString().trim());
+                    usuario.setEmail(emailModificar.getText().toString().trim());
+                    usuario.setUsuario(nombreUsuarioModificar.getText().toString().trim());
+                    usuario.setContraseña(contraseñaModificar.getText().toString().trim());
+                    usuario.setFoto(ImageUtils.encodeImageViewToBase64(fotoPerfilModificar));
+                    // OBTENER EL USUARIO CON EL ID
+                    usuario_id = usuario.getUsuario_id();
+                    // HACER LA MODIFICACION
+                    UsuarioService.modificarUsuario(AjustesActivity.this, usuario_id, usuario, AjustesActivity.this);
+                }
         });
 
         sharedPreferences = getApplicationContext().getSharedPreferences("preferencias", MODE_PRIVATE);
@@ -158,7 +184,7 @@ public class AjustesActivity extends AppCompatActivity implements ModificacionCa
                         ApiMapSingleton.getInstance().setIP(SQLiteUtils.getIP(AjustesActivity.this));
                         Toast.makeText(AjustesActivity.this, "IP cambiada", Toast.LENGTH_SHORT).show();
                     } catch (Exception ex) {
-                        ErrorUtils.mostrarMensaje(AjustesActivity.this,R.string.errorCambioIP);
+                        MensajeUtils.mostrarMensaje(AjustesActivity.this,R.string.errorCambioIP);
                         Log.d("Error IP", ex.getMessage());
                     }
                 }
@@ -238,7 +264,7 @@ public class AjustesActivity extends AppCompatActivity implements ModificacionCa
             intentLogin.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             someActivityResultLauncher.launch(intentLogin);
         } catch (Exception ex) {
-            ErrorUtils.mostrarMensaje(AjustesActivity.this,R.string.errorModificacion);
+            MensajeUtils.mostrarMensaje(AjustesActivity.this,R.string.errorModificacion);
             Log.d("Modificacion Error", ex.getMessage());
         }
     }
@@ -246,19 +272,21 @@ public class AjustesActivity extends AppCompatActivity implements ModificacionCa
     @Override
     public void onRegistroFailed(String error) {
         if (error.contains("Usuario duplicado")) {
-            ErrorUtils.mostrarMensaje(AjustesActivity.this,R.string.errorUsuarioDuplicado);
+            MensajeUtils.mostrarMensaje(AjustesActivity.this,R.string.errorUsuarioDuplicado);
         } else {
-            ErrorUtils.mostrarMensaje(AjustesActivity.this,R.string.errorModificacion);
+            MensajeUtils.mostrarMensaje(AjustesActivity.this,R.string.errorModificacion);
             Log.d("Modificacion Error", error);
         }
     }
 
-    public void comprobarVacio(List<EditText> campos) {
+    public boolean comprobarVacio(List<EditText> campos) {
         for (EditText campo : campos) {
             if (campo.getText().toString().isEmpty()) {
-                campo.setError("No puede estar vacío");
+                campo.setError(AjustesActivity.this.getString((R.string.errorCamposVacios)));
+                return true;
             }
         }
+        return false;
     }
 
     private void animacionFlip() {

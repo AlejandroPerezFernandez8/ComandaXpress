@@ -1,7 +1,6 @@
 package com.example.comandaxpress.Pantallas;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -19,16 +18,14 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.comandaxpress.API.ApiMap;
 import com.example.comandaxpress.API.ApiMapSingleton;
 import com.example.comandaxpress.API.Clases.Usuario;
 import com.example.comandaxpress.API.Interfaces.LoginCallBack;
 import com.example.comandaxpress.API.UsuarioService;
 import com.example.comandaxpress.Pantallas.PantallasSecundarias.DialogoDeCarga;
 import com.example.comandaxpress.R;
-import com.example.comandaxpress.SQLite.FeedReaderDbHelper;
 import com.example.comandaxpress.Util.CryptoUtils;
-import com.example.comandaxpress.Util.ErrorUtils;
+import com.example.comandaxpress.Util.MensajeUtils;
 import com.example.comandaxpress.Util.LocaleUtil;
 import com.example.comandaxpress.Util.SQLiteUtils;
 
@@ -120,12 +117,12 @@ public class LoginActivity extends AppCompatActivity implements LoginCallBack {
         dialogoDeCarga.dismissDialog();
         //SE NOTIFICA AL USUARIO DE QUE EL USUARIO NO EXISTE
         if (message.contains("AuthFailureError")){
-            ErrorUtils.mostrarMensaje(this,R.string.errorUsuarioNoExiste);
+            MensajeUtils.mostrarMensaje(this,R.string.errorUsuarioNoExiste);
         }else if (message.contains("host")){
-            ErrorUtils.mostrarMensaje(this,R.string.errorServidor);
+            MensajeUtils.mostrarMensaje(this,R.string.errorServidor);
         }else{
             Log.d("Login activity", message+"a");
-            ErrorUtils.mostrarMensaje(this,R.string.errorInesperado);
+            MensajeUtils.mostrarMensaje(this,R.string.errorInesperado);
         }
     }
 
