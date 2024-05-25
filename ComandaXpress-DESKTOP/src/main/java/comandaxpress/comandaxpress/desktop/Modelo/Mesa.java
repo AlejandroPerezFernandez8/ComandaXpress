@@ -1,0 +1,25 @@
+package comandaxpress.comandaxpress.desktop.Modelo;
+import lombok.Data;
+import java.util.List;
+import javax.persistence.*;
+
+@Data
+@Entity
+@Table(name = "mesa")
+public class Mesa {
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private Long mesaId;
+
+        @Column(nullable = false, unique = true)
+        private Integer numero;
+
+        @Column(nullable = false)
+        private Integer capacidad;
+
+        @Column(nullable = false)
+        private Boolean activa;
+
+        @OneToMany(mappedBy = "mesa", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+        private List<Ticket> tickets;
+}
