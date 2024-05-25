@@ -21,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.EdgeToEdge;
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
@@ -34,11 +35,13 @@ import com.example.comandaxpress.API.Clases.Usuario;
 import com.example.comandaxpress.API.Interfaces.ModificacionCallback;
 import com.example.comandaxpress.API.UsuarioService;
 import com.example.comandaxpress.R;
+import com.example.comandaxpress.Util.BotonUtils;
 import com.example.comandaxpress.Util.CryptoUtils;
 import com.example.comandaxpress.Util.MensajeUtils;
 import com.example.comandaxpress.Util.ImageUtils;
 import com.example.comandaxpress.Util.LocaleUtil;
 import com.example.comandaxpress.Util.SQLiteUtils;
+import com.google.android.material.internal.EdgeToEdgeUtils;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -60,7 +63,7 @@ public class AjustesActivity extends AppCompatActivity implements ModificacionCa
         LocaleUtil.loadLocale(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ajustes);
-
+        EdgeToEdge.enable(this);
         sharedPreferences = getApplicationContext().getSharedPreferences("preferencias", MODE_PRIVATE);
         ImageView fotoPerfil = findViewById(R.id.fotoPerfilAjustes);
         TextView nombreUsuario = findViewById(R.id.nombreUsuarioAjustes);
@@ -85,9 +88,29 @@ public class AjustesActivity extends AppCompatActivity implements ModificacionCa
 
         imagenBandera.setOnClickListener(v -> animacionFlip());
 
+        String usuarioJson = null;
+        try {
+            Gson gson = new Gson();
+            usuarioJson = CryptoUtils.desencriptar(sharedPreferences.getString("Usuario", ""), "abc123.");
+            usuario = gson.fromJson(usuarioJson, Usuario.class);
+
+            nombreModificar.setText(usuario.getNombre());
+            apellidosModificar.setText(usuario.getApellido());
+            emailModificar.setText(usuario.getEmail());
+            nombreUsuarioModificar.setText(usuario.getUsuario());
+            contraseñaModificar.setText(usuario.getContraseña());
+            if(ImageUtils.decodeBase64ToBitmap(usuario.getFoto()) != null){
+                fotoPerfilModificar.setImageBitmap(ImageUtils.decodeBase64ToBitmap(usuario.getFoto()));
+            };
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
         btnSacarFotoModificar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                BotonUtils.deshabilitarTemporalmente(btnSacarFotoModificar);
                 if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
                     openCamera();
                 } else {
@@ -112,6 +135,7 @@ public class AjustesActivity extends AppCompatActivity implements ModificacionCa
         btnRegistrarse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                BotonUtils.deshabilitarTemporalmente(btnRegistrarse);
                 // COMPROBAR LOS CAMPOS VACIOS
                 campos.add(nombreModificar);
                 campos.add(apellidosModificar);
@@ -173,6 +197,7 @@ public class AjustesActivity extends AppCompatActivity implements ModificacionCa
         btnCambiarIP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                BotonUtils.deshabilitarTemporalmente(btnCambiarIP);
                 String ip = etCambiarIP.getText().toString();
                 if (ip != null && !ip.isEmpty()) {
                     try {
@@ -182,7 +207,7 @@ public class AjustesActivity extends AppCompatActivity implements ModificacionCa
                             SQLiteUtils.insertarIP(AjustesActivity.this, ip);
                         }
                         ApiMapSingleton.getInstance().setIP(SQLiteUtils.getIP(AjustesActivity.this));
-                        MensajeUtils.mostrarMensaje(AjustesActivity.this,R.string.CambioIP);
+                        MensajeUtils.mostrarMensaje(AjustesActivity.this,R.string.CambioIP + ": " + ApiMapSingleton.getInstance().getIP());
                     } catch (Exception ex) {
                         MensajeUtils.mostrarError(AjustesActivity.this,R.string.errorCambioIP);
                         Log.d("Error IP", ex.getMessage());
@@ -271,7 +296,7 @@ public class AjustesActivity extends AppCompatActivity implements ModificacionCa
 
     @Override
     public void onRegistroFailed(String error) {
-        if (error.contains("Usuario duplicado")) {
+        if (error.contains("Duplicated Entry")) {
             MensajeUtils.mostrarError(AjustesActivity.this,R.string.errorUsuarioDuplicado);
         } else {
             MensajeUtils.mostrarError(AjustesActivity.this,R.string.errorModificacion);

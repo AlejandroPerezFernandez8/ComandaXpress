@@ -45,7 +45,7 @@
     <string name="btnAceptar">Aceptar</string>
     <string name="btnCancelar">Cancelar</string>
     <!-- String de errores varios-->
-    <string name="errorUsuarioNoExiste">O usuario non existe</string>
+    <string name="errorUsuarioNoExiste">Usuario ou contrasinal incorrectos</string>
     <string name="errorServidor">Non se atopa o servidor</string>
     <string name="errorInesperado">Erro inesperado</string>
     <string name="errorCambioIP">Erro ao cambiar o IP</string>

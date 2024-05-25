@@ -62,7 +62,8 @@
                 app:layout_constraintTop_toTopOf="parent"
                 android:textColorHint="@color/colorLightBlue"
                 android:textColor="@color/colorLightBlue"
-                />
+                android:imeOptions="actionNext"
+                android:inputType="text" />
 
             <EditText
                 android:id="@+id/Contraseña"
@@ -79,7 +80,10 @@
                 android:textColorHint="@color/colorLightBlue"
                 android:textColor="@color/colorLightBlue"
                 android:inputType="textPassword"
-                />
+                android:imeOptions="actionDone" />
+
+
+
 
             <!-- Botón de Iniciar Sesión -->
             <Button

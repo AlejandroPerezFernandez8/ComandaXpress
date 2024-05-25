@@ -84,9 +84,6 @@
             android:layout_marginTop="10dp"
             android:textStyle="bold"
             />
-
-        <!-- Panel de ajustes para modificar información del usuario -->
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/panel"
             android:layout_width="match_parent"
@@ -100,69 +97,141 @@
             app:layout_constraintTop_toBottomOf="@+id/nombreUsuarioAjustes"
             app:layout_constraintVertical_bias="0.06">
 
-            <!-- Campos -->
-            <EditText
-                android:id="@+id/NombreModificar"
+            <!-- Nombre -->
+            <TextView
+                android:id="@+id/labelNombre"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:hint="@string/etNombre"
-                android:textColor="@color/colorLightBlue"
-                android:textColorHint="@color/colorLightBlue"
+                android:text="@string/etNombre"
+                android:textSize="16sp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
-                android:id="@+id/ApellidosModificar"
+                android:id="@+id/NombreModificar"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:hint="@string/etApellidos"
                 android:textColor="@color/colorLightBlue"
-                android:textColorHint="@color/colorLightBlue"
+                android:textSize="16sp"
+                android:backgroundTint="@color/colorLightBlue"
+                android:imeOptions="actionNext"
+                android:inputType="textPersonName"
+                android:nextFocusForward="@id/ApellidosModificar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/labelNombre" />
+
+            <!-- Apellidos -->
+            <TextView
+                android:id="@+id/labelApellidos"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/etApellidos"
+                android:textSize="16sp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/NombreModificar" />
 
             <EditText
-                android:id="@+id/EmailModificar"
+                android:id="@+id/ApellidosModificar"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:hint="@string/etEmail"
-                android:inputType="textEmailAddress"
                 android:textColor="@color/colorLightBlue"
-                android:textColorHint="@color/colorLightBlue"
+                android:textSize="16sp"
+                android:backgroundTint="@color/colorLightBlue"
+                android:imeOptions="actionNext"
+                android:inputType="textPersonName"
+                android:nextFocusForward="@id/EmailModificar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/labelApellidos" />
+
+            <!-- Email -->
+            <TextView
+                android:id="@+id/labelEmail"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/etEmail"
+                android:textSize="16sp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/ApellidosModificar" />
 
             <EditText
-                android:id="@+id/NombreUsuarioModificar"
+                android:id="@+id/EmailModificar"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:hint="@string/etNombreUsuario"
+                android:inputType="textEmailAddress"
                 android:textColor="@color/colorLightBlue"
-                android:textColorHint="@color/colorLightBlue"
+                android:textSize="16sp"
+                android:backgroundTint="@color/colorLightBlue"
+                android:imeOptions="actionNext"
+                android:nextFocusForward="@id/NombreUsuarioModificar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/labelEmail" />
+
+            <!-- Nombre de Usuario -->
+            <TextView
+                android:id="@+id/labelNombreUsuario"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/etNombreUsuario"
+                android:textSize="16sp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/EmailModificar" />
 
             <EditText
-                android:id="@+id/ContraseñaModificar"
+                android:id="@+id/NombreUsuarioModificar"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:hint="@string/etContraseña"
-                android:inputType="textPassword"
                 android:textColor="@color/colorLightBlue"
-                android:textColorHint="@color/colorLightBlue"
+                android:textSize="16sp"
+                android:backgroundTint="@color/colorLightBlue"
+                android:imeOptions="actionNext"
+                android:inputType="textPersonName"
+                android:nextFocusForward="@id/ContraseñaModificar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/labelNombreUsuario" />
+
+            <!-- Contraseña -->
+            <TextView
+                android:id="@+id/labelContraseña"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/etContraseña"
+                android:textSize="16sp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/NombreUsuarioModificar" />
 
+            <EditText
+                android:id="@+id/ContraseñaModificar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:textColor="@color/colorLightBlue"
+                android:textSize="16sp"
+                android:backgroundTint="@color/colorLightBlue"
+                android:imeOptions="actionDone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/labelContraseña" />
+
+            <!-- Foto y botón para sacar foto -->
             <LinearLayout
                 android:id="@+id/layoutFotoModificar"
                 android:layout_width="0dp"
@@ -193,6 +262,7 @@
 
             </LinearLayout>
 
+            <!-- Botón de Registrarse -->
             <Button
                 android:id="@+id/btnRegistrarse"
                 android:layout_width="0dp"
@@ -200,12 +270,17 @@
                 android:layout_marginTop="25dp"
                 android:backgroundTint="@color/colorLightBlue"
                 android:text="@string/btnModificarUsuario"
+                android:textColor="@color/colorOffWhite"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/layoutFotoModificar"
-                android:textColor="@color/colorOffWhite"
-                />
+                app:layout_constraintTop_toBottomOf="@+id/layoutFotoModificar" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/panelIdioma"

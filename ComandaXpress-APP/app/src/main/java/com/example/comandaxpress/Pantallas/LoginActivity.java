@@ -116,6 +116,7 @@ public class LoginActivity extends AppCompatActivity implements LoginCallBack {
     public void onError(String message) {
         dialogoDeCarga.dismissDialog();
         //SE NOTIFICA AL USUARIO DE QUE EL USUARIO NO EXISTE
+        Log.e("Login error",message);
         if (message.contains("AuthFailureError")){
             MensajeUtils.mostrarError(this,R.string.errorUsuarioNoExiste);
         }else if (message.contains("host")){
@@ -145,6 +146,7 @@ public class LoginActivity extends AppCompatActivity implements LoginCallBack {
                     SQLiteUtils.modificarIP(LoginActivity.this, ip);
                 }
                 ApiMapSingleton.getInstance().setIP(ip);
+                MensajeUtils.mostrarMensaje(LoginActivity.this,R.string.CambioIP + ": " + ApiMapSingleton.getInstance().getIP());
             }
         });
         builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {

@@ -32,6 +32,7 @@ import com.example.comandaxpress.Adapters.TicketProductoAdapter;
 import com.example.comandaxpress.ClasesHelper.ProductoCantidad;
 import com.example.comandaxpress.Pantallas.Fragment.DialogoCategoriasFragment;
 import com.example.comandaxpress.R;
+import com.example.comandaxpress.Util.BotonUtils;
 import com.example.comandaxpress.Util.CryptoUtils;
 import com.example.comandaxpress.Util.MensajeUtils;
 import com.google.gson.Gson;
@@ -79,6 +80,7 @@ public class MesaTicketActivity extends AppCompatActivity implements GetAllCateg
         btnAñadirProducto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                BotonUtils.deshabilitarTemporalmente(btnAñadirProducto);
                 CategoriaService.getAllCategorias(MesaTicketActivity.this, MesaTicketActivity.this);
             }
         });
@@ -105,6 +107,7 @@ public class MesaTicketActivity extends AppCompatActivity implements GetAllCateg
         btncobrarMesa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                BotonUtils.deshabilitarTemporalmente(btncobrarMesa);
                 AlertDialog.Builder builder = new AlertDialog.Builder(MesaTicketActivity.this);
                 LayoutInflater inflater = MesaTicketActivity.this.getLayoutInflater();
                 View dialogView = inflater.inflate(R.layout.cobrar_mesa_modal, null);

@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -120,10 +121,12 @@ public class RegistroActivity extends AppCompatActivity implements RegistroCallb
     }
     @Override
     public void onRegistroFailed(String error) {
-        MensajeUtils.mostrarError(RegistroActivity.this,R.string.errorRegistroUsuario);
-        if(error.contains("Usuario duplicado")) {
-            nombreUsuario.setTextColor(Color.RED);
+        Log.e("RegistroError",error);
+        if(error.contains("El usuario ya existe")) {
+            nombreUsuario.setError(RegistroActivity.this.getString(R.string.errorUsuarioDuplicado));
             MensajeUtils.mostrarError(RegistroActivity.this,R.string.errorUsuarioDuplicado);
+        }else{
+            MensajeUtils.mostrarError(RegistroActivity.this,R.string.errorRegistroUsuario);
         }
     }
     public boolean comprobarVacio(List<EditText> campos) {

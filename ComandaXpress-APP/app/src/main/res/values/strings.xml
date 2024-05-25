@@ -48,7 +48,7 @@
     <string name="btnAceptar">Aceptar</string>
     <string name="btnCancelar">Cancelar</string>
     <!-- MENSAJES DE ERROR VARIADOS-->
-    <string name="errorUsuarioNoExiste">El usuario no existe</string>
+    <string name="errorUsuarioNoExiste">Usuario o contraseña incorrectos</string>
     <string name="errorServidor">No se encuentra el servidor</string>
     <string name="errorInesperado">Error inesperado</string>
     <string name="errorCambioIP">Error al cambiar la IP</string>

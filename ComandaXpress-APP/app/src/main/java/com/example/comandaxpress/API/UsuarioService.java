@@ -36,7 +36,7 @@ public class UsuarioService {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.e("Login Error", "Error en la solicitud: " + error.toString());
+                Log.e("Login Error", "Error en la solicitud: " +ApiMapSingleton.getInstance().getUrlUsuarioLogin()+ error.toString()) ;
                 callBack.onError(error.toString());
             }
         }) {
