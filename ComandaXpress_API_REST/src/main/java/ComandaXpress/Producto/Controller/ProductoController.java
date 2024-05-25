@@ -3,9 +3,7 @@ package ComandaXpress.Producto.Controller;
 import ComandaXpress.Api_Map;
 import ComandaXpress.Categoria.Model.Categoria;
 import ComandaXpress.Categoria.Repository.CategoriaRepository;
-import ComandaXpress.DTO.MesaDTO;
 import ComandaXpress.DTO.ProductoDTO;
-import ComandaXpress.Mesa.Model.Mesa;
 import ComandaXpress.Producto.Model.Producto;
 import ComandaXpress.Producto.Repository.ProductoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;

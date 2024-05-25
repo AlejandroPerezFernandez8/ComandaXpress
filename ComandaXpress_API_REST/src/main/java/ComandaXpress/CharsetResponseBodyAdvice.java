@@ -1,7 +1,4 @@
 package ComandaXpress;
-
-package com.example.comandaxpress.config;
-
 import org.springframework.core.MethodParameter;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpInputMessage;
