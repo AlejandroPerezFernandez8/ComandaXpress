@@ -1,5 +1,5 @@
 DROP DATABASE IF EXISTS comandaxpress;
-CREATE DATABASE comandaxpress;
+CREATE DATABASE comandaxpress CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE comandaxpress;
 
 -- Creación de la tabla Usuarios
