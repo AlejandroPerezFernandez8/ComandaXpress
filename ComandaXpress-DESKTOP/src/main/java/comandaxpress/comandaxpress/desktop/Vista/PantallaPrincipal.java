@@ -37,6 +37,11 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         btnGestionTickets.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnGestionTickets.setForeground(new java.awt.Color(118, 171, 167));
         btnGestionTickets.setText("Gestionar Tickets");
+        btnGestionTickets.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGestionTicketsActionPerformed(evt);
+            }
+        });
 
         btnGestionProductos.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnGestionProductos.setForeground(new java.awt.Color(118, 171, 167));
@@ -45,6 +50,11 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         btnGestionarMesas.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnGestionarMesas.setForeground(new java.awt.Color(118, 171, 167));
         btnGestionarMesas.setText("Gestionar Mesas");
+        btnGestionarMesas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGestionarMesasActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -86,6 +96,14 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     private void btnGestionUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGestionUsuariosMouseClicked
         ControladorPrincipal.iniciarPantallaUsuarios();
     }//GEN-LAST:event_btnGestionUsuariosMouseClicked
+
+    private void btnGestionarMesasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGestionarMesasActionPerformed
+       ControladorPrincipal.iniciarPantallaMesas();
+    }//GEN-LAST:event_btnGestionarMesasActionPerformed
+
+    private void btnGestionTicketsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGestionTicketsActionPerformed
+        ControladorPrincipal.iniciarPantallaTickets();
+    }//GEN-LAST:event_btnGestionTicketsActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

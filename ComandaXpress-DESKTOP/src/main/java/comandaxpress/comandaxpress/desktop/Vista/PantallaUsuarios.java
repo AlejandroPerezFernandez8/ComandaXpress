@@ -7,6 +7,7 @@ import lombok.Data;
 public class PantallaUsuarios extends javax.swing.JFrame {
     public PantallaUsuarios() {
         initComponents();
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -33,6 +34,7 @@ public class PantallaUsuarios extends javax.swing.JFrame {
         txtNombre = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("ComandaXpress Desktop Application");
 
         tablaUsuarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

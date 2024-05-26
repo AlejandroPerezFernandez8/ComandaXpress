@@ -13,12 +13,14 @@ public class ControladorPrincipal {
     public static void iniciarPantallaUsuarios() {
           ControladorUsuarios.iniciar();
     }
-    
-    
-    public static void cargarDatosUsuario(){
-        
+
+    public static void iniciarPantallaMesas() {
+        ControladorMesas.iniciar();
     }
     
+    public static void iniciarPantallaTickets() {
+        ControladorTickets.iniciar();
+    }
     
     
 }

@@ -67,10 +67,8 @@ public class ControladorUsuarios {
         } finally {
             actualizarDatos();
         }
-    }
-   
-     
-public static void InsertarUsuario() {
+    }  
+   public static void InsertarUsuario() {
     Transaction transaction = null;
     try (Session session = HibernateUtil.getSessionFactory().openSession()) {
         String id = ventana.getTxtIDusuario().getText().trim();
@@ -107,8 +105,7 @@ public static void InsertarUsuario() {
         actualizarDatos();
     }
 }
-     
-     public static void ModificarUsuario() {
+   public static void ModificarUsuario() {
         Transaction transaction = null;
         try(Session session = HibernateUtil.getSessionFactory().openSession();) {
             transaction = session.beginTransaction();
@@ -142,12 +139,7 @@ public static void InsertarUsuario() {
         } finally {
           actualizarDatos();
         }
-    } 
-     
-     
-     
-     
-   
+    }  
    private static void actualizarDatos(){
         modelo.removeAllElements();
         modelo.addAll(getListaUsuarios());

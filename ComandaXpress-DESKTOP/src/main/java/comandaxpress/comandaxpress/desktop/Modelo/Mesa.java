@@ -9,6 +9,7 @@ import javax.persistence.*;
 public class Mesa {
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
+        @Column(name = "mesa_id")
         private Long mesaId;
 
         @Column(nullable = false, unique = true)
@@ -17,9 +18,14 @@ public class Mesa {
         @Column(nullable = false)
         private Integer capacidad;
 
-        @Column(nullable = false)
-        private Boolean activa;
+        @Column
+        private Boolean activa = false;
 
-        @OneToMany(mappedBy = "mesa", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+        @OneToMany(mappedBy = "mesa", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
         private List<Ticket> tickets;
+
+    @Override
+    public String toString() {
+        return numero.toString();
+    }     
 }
