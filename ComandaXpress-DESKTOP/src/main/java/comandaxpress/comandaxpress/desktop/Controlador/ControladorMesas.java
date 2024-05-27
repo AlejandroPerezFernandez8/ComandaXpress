@@ -148,7 +148,7 @@ public class ControladorMesas {
         }
     }
 
-    private static void actualizarDatos() {
+    public static void actualizarDatos() {
         modeloCombo.removeAllElements();
         modeloCombo.addAll(getListaMesas());
         ventana.getComboMesas().setModel(modeloCombo);
@@ -170,4 +170,87 @@ public class ControladorMesas {
             ventana.getTxtNumeroMesa().setText(mesa.getNumero() + "");
         }
     }
+
+   public static void activarMesaYCrearTicket() {
+    Transaction transaction = null;
+    try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        transaction = session.beginTransaction();
+
+        String idMesaStr = ventana.getTxtIDMesa().getText().trim();
+        if (idMesaStr.isEmpty()) {
+            JOptionPane.showMessageDialog(ventana, "Debe proporcionar el ID de la mesa.");
+            return;
+        }
+
+        Long idMesa = Long.parseLong(idMesaStr);
+        Mesa mesa = session.get(Mesa.class, idMesa);
+        if (mesa == null) {
+            JOptionPane.showMessageDialog(ventana, "Mesa no encontrada.");
+            return;
+        }
+
+        if (mesa.getActiva()) {
+            int confirmInactivar = JOptionPane.showConfirmDialog(
+                    ventana,
+                    "La mesa ya está activa. ¿Desea desactivarla?",
+                    "Confirmar desactivación",
+                    JOptionPane.YES_NO_OPTION
+            );
+
+            if (confirmInactivar == JOptionPane.YES_OPTION) {
+                mesa.setActiva(false);
+                session.update(mesa);
+                transaction.commit();
+                JOptionPane.showMessageDialog(ventana, "Mesa desactivada.");
+            } else {
+                JOptionPane.showMessageDialog(ventana, "Desactivación cancelada.");
+            }
+        } else {
+            int confirmActivar = JOptionPane.showConfirmDialog(
+                    ventana,
+                    "¿Está seguro de que desea activar esta mesa y crear un nuevo ticket para ella?",
+                    "Confirmar activación",
+                    JOptionPane.YES_NO_OPTION
+            );
+
+            if (confirmActivar == JOptionPane.YES_OPTION) {
+                
+                mesa.setActiva(true);
+                session.update(mesa);
+                transaction.commit();
+                session.close(); 
+
+                
+                boolean ticketCreado = ControladorTickets.insertarTicket(mesa);
+                if (ticketCreado) {
+                    JOptionPane.showMessageDialog(ventana, "Mesa activada y ticket creado correctamente.");
+                } else {
+                   
+                    try (Session revertSession = HibernateUtil.getSessionFactory().openSession()) {
+                        Transaction revertTransaction = revertSession.beginTransaction();
+                        mesa.setActiva(false);
+                        revertSession.update(mesa);
+                        revertTransaction.commit();
+                        JOptionPane.showMessageDialog(ventana, "Error al crear el ticket, mesa revertida a inactiva.");
+                    } catch (Exception revertException) {
+                        JOptionPane.showMessageDialog(ventana, "Error al revertir la activación de la mesa: " + revertException.getMessage());
+                    }
+                }
+            } else {
+                JOptionPane.showMessageDialog(ventana, "Activación cancelada.");
+            }
+        }
+    } catch (Exception e) {
+        if (transaction != null) {
+            transaction.rollback();
+        }
+        JOptionPane.showMessageDialog(ventana, "Error al activar la mesa: " + e.getMessage());
+    } finally {
+        actualizarDatos();
+    }
+}
+
+
+
+
 }
