@@ -16,6 +16,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         btnGestionTickets = new javax.swing.JButton();
         btnGestionProductos = new javax.swing.JButton();
         btnGestionarMesas = new javax.swing.JButton();
+        btnGestionarTicketDetalles = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("ComandaXpress Desktop Application");
@@ -56,6 +57,15 @@ public class PantallaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        btnGestionarTicketDetalles.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnGestionarTicketDetalles.setForeground(new java.awt.Color(118, 171, 167));
+        btnGestionarTicketDetalles.setText("Gestionar Detalles de los Tickets");
+        btnGestionarTicketDetalles.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGestionarTicketDetallesActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -67,8 +77,9 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnGestionTickets, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnGestionUsuarios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnGestionProductos, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
-                            .addComponent(btnGestionarMesas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(btnGestionProductos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnGestionarMesas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnGestionarTicketDetalles, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(53, 53, 53)
                         .addComponent(Titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 482, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -86,8 +97,10 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(btnGestionTickets)
                 .addGap(18, 18, 18)
+                .addComponent(btnGestionarTicketDetalles)
+                .addGap(13, 13, 13)
                 .addComponent(btnGestionProductos)
-                .addContainerGap(134, Short.MAX_VALUE))
+                .addContainerGap(98, Short.MAX_VALUE))
         );
 
         pack();
@@ -105,6 +118,10 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         ControladorPrincipal.iniciarPantallaTickets();
     }//GEN-LAST:event_btnGestionTicketsActionPerformed
 
+    private void btnGestionarTicketDetallesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGestionarTicketDetallesActionPerformed
+        ControladorPrincipal.inciarPantallaTicketDetalle();
+    }//GEN-LAST:event_btnGestionarTicketDetallesActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Titulo;
@@ -112,5 +129,6 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnGestionTickets;
     private javax.swing.JButton btnGestionUsuarios;
     private javax.swing.JButton btnGestionarMesas;
+    private javax.swing.JButton btnGestionarTicketDetalles;
     // End of variables declaration//GEN-END:variables
 }

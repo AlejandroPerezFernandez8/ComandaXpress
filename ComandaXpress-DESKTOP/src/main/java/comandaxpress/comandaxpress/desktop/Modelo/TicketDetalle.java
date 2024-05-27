@@ -23,7 +23,7 @@ public class TicketDetalle {
         @JoinColumn(name = "ticket_id", insertable = false, updatable = false)
         private Ticket ticket;
 
-        @ManyToOne(fetch = FetchType.LAZY)
+        @ManyToOne(fetch = FetchType.EAGER)
         @JoinColumn(name = "producto_id", insertable = false, updatable = false)
         private Producto producto;
 
