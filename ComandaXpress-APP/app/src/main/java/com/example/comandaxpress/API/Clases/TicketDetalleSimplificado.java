@@ -1,8 +1,9 @@
 package com.example.comandaxpress.API.Clases;
 
+import androidx.annotation.NonNull;
+
 public class TicketDetalleSimplificado {
     private long idTicket;
-
     private long idProducto;
     private int cantidad;
 
@@ -18,4 +19,13 @@ public class TicketDetalleSimplificado {
     public void setIdProducto(long idProducto) {this.idProducto = idProducto;}
     public int getCantidad() {return cantidad;}
     public void setCantidad(int cantidad) {this.cantidad = cantidad;}
+
+    @Override
+    public String toString() {
+        return "TicketDetalleSimplificado{" +
+                "idTicket=" + idTicket +
+                ", idProducto=" + idProducto +
+                ", cantidad=" + cantidad +
+                '}';
+    }
 }

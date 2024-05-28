@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -22,7 +23,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.comandaxpress.API.CategoriaService;
 import com.example.comandaxpress.API.Clases.Categoria;
 import com.example.comandaxpress.API.Clases.Mesa;
+import com.example.comandaxpress.API.Clases.Ticket;
+import com.example.comandaxpress.API.Clases.TicketDetalle;
+import com.example.comandaxpress.API.Clases.TicketDetalleSimplificado;
 import com.example.comandaxpress.API.Clases.Usuario;
+import com.example.comandaxpress.API.Interfaces.DeleteTicketDetalleCallback;
 import com.example.comandaxpress.API.Interfaces.GetAllCategoriasCallback;
 import com.example.comandaxpress.API.Interfaces.GetProductoCantidadCallback;
 import com.example.comandaxpress.API.Interfaces.ModificacionMesaCallback;
@@ -65,6 +70,33 @@ public class MesaTicketActivity extends AppCompatActivity implements GetAllCateg
         adapter = new TicketProductoAdapter(MesaTicketActivity.this, pcList);
         lista.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+
+        lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ProductoCantidad pc = adapter.getItem(position);
+                TicketDetalleSimplificado detalles = new TicketDetalleSimplificado(
+                        mesa.getTickets().get(mesa.getTickets().size()-1),
+                        pc.getProducto().getProducto_id(),
+                        pc.getCantidad()
+                );
+
+                TicketService.eliminarTicketDetalle(MesaTicketActivity.this, detalles, new DeleteTicketDetalleCallback() {
+                    @Override
+                    public void onDeleteSuccess(String message) {
+                        actualizarDetallesTicket();
+                        MensajeUtils.mostrarMensaje(MesaTicketActivity.this,R.string.EliminacionProducto);
+                    }
+
+                    @Override
+                    public void onDeleteError(String error) {
+                        MensajeUtils.mostrarError(MesaTicketActivity.this,R.string.errorEliminacionProdcutos);
+                        Log.d("Error",error);
+                    }
+                });
+
+            }
+        });
 
         try {
             mesa = new Gson().fromJson(sharedPreferences.getString("Mesa", ""), Mesa.class);
@@ -224,11 +256,13 @@ public class MesaTicketActivity extends AppCompatActivity implements GetAllCateg
     @Override
     public void onGetProductosError(String error) {
         Log.d("GetProductosError",error);
-        MensajeUtils.mostrarError(MesaTicketActivity.this,R.string.errorTicketDetalle);
+        if(!error.equals("No hay productos")) {
+            MensajeUtils.mostrarError(MesaTicketActivity.this, R.string.errorTicketDetalle);
+        }
     }
 
     private void actualizarTotal(){
-        BigDecimal total = BigDecimal.ZERO;
+        BigDecimal total = BigDecimal.valueOf(0);
         if(!adapter.getProductoCantidadList().isEmpty()){
             for (ProductoCantidad pc : adapter.getProductoCantidadList()) {
                 BigDecimal precio = pc.getProducto().getPrecio();
@@ -238,5 +272,55 @@ public class MesaTicketActivity extends AppCompatActivity implements GetAllCateg
             tvTotal.setText("Total : "+total.toString() + "€");
         }
     }
+
+    private void reiniciarTotal(){
+        tvTotal.setText("Total : "+0 + "€");
+    }
+
+    private void actualizarDetallesTicket() {
+        Log.d("ActualizarDetalles", "Actualizando detalles del ticket...");
+
+        TicketService.getDetallesDeTicket(MesaTicketActivity.this, mesa.getTickets().get(mesa.getTickets().size() - 1).longValue(), new GetProductoCantidadCallback() {
+            @Override
+            public void onGetProductosSuccess(List<ProductoCantidad> productoCantidadList) {
+                Log.d("ActualizarDetalles", "Detalles recibidos: " + productoCantidadList.size());
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        // Limpia la lista del adaptador y agrega los nuevos elementos
+                        pcList.clear();
+                        if (productoCantidadList != null && !productoCantidadList.isEmpty()) {
+                            Log.d("ActualizarDetalles", "Lista de productos no vacía: " + productoCantidadList.toString());
+                            pcList.addAll(productoCantidadList);
+                        } else {
+                            Log.d("ActualizarDetalles", "Lista de productos vacía");
+                        }
+
+                        // Notificar al adaptador de los cambios
+                        adapter.notifyDataSetChanged();
+                        actualizarTotal();
+                    }
+                });
+            }
+
+            @Override
+            public void onGetProductosError(String error) {
+                Log.d("ActualizarDetalles", "Error al obtener detalles: " + error);
+                if (error.equals("No hay productos")) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            // Limpieza en caso de error
+                            pcList.clear();
+                            adapter.notifyDataSetChanged();
+                            reiniciarTotal();
+                        }
+                    });
+                }
+            }
+        });
+    }
+
 
 }

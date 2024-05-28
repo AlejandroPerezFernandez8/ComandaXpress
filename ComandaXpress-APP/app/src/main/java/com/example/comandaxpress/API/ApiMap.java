@@ -25,6 +25,8 @@ public class ApiMap {
     //-----------------------------------DETALLES DE LOS TICKETS----------------------------------------------------------
     public static String getUrlTicketDetalle(long idTicket) {return getBaseUrl() + "ticketDetalle/"+idTicket;}
     public static String getUrlTicketDetalleGuardar() {return getBaseUrl() + "ticketDetalle/guardar";}
+    public static String getUrlTicketDetalleEliminar() {return getBaseUrl() + "ticketDetalle/eliminar";}
+
     //--------------------------------CONFIGURACION DE IP--------------------------------------------------
     public static void setIP(String ip) {
         IP = ip;

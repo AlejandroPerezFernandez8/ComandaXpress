@@ -4,16 +4,20 @@ import android.content.Context;
 import android.util.Log;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkResponse;
+import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.comandaxpress.API.Clases.Ticket;
 import com.example.comandaxpress.API.Clases.TicketDetalleSimplificado;
+import com.example.comandaxpress.API.Interfaces.DeleteTicketDetalleCallback;
 import com.example.comandaxpress.API.Interfaces.GetProductoCantidadCallback;
 import com.example.comandaxpress.API.Interfaces.InsertProductosCallback;
 import com.example.comandaxpress.API.Interfaces.InsertTickectCallback;
@@ -25,6 +29,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
@@ -88,6 +93,8 @@ public class TicketService {
                                 Type listType = new TypeToken<List<ProductoCantidad>>(){}.getType();
                                 List<ProductoCantidad> productoCantidadList = gson.fromJson(productosArray.toString(), listType);
                                 callback.onGetProductosSuccess(productoCantidadList);
+                            }else{
+                                callback.onGetProductosError("No hay productos");
                             }
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -144,5 +151,65 @@ public class TicketService {
         queue.add(jsonObjectRequest);
     }
 
+    public static void eliminarTicketDetalle(Context context, TicketDetalleSimplificado ticketDetalle, final DeleteTicketDetalleCallback callback) {
+        String url = ApiMapSingleton.getInstance().getUrlTicketDetalleEliminar();
+
+        Gson gson = new Gson();
+        String jsonString = gson.toJson(ticketDetalle);
+        JSONObject jsonObject = null;
+        try {
+            jsonObject = new JSONObject(jsonString);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Log.d("EliminarTicketDetalle", "URL: " + url);
+        Log.d("EliminarTicketDetalle", "JSON: " + jsonString);
+
+        StringRequest stringRequest = new StringRequest(
+                Request.Method.POST,  // Usar POST temporalmente
+                url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.d("EliminarTicketDetalle", "Response: " + response);
+                        callback.onDeleteSuccess("Detalle eliminado con éxito!");
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        String errorMessage = "Error al eliminar detalle: ";
+                        if (error.networkResponse != null && error.networkResponse.data != null) {
+                            errorMessage += new String(error.networkResponse.data, StandardCharsets.UTF_8);
+                        } else {
+                            errorMessage += error.toString();
+                        }
+                        Log.d("EliminarTicketDetalle", errorMessage);
+                        callback.onDeleteError(errorMessage);
+                    }
+                }
+        ) {
+            @Override
+            public String getBodyContentType() {
+                return "application/json; charset=utf-8";
+            }
+
+            @Override
+            public byte[] getBody() {
+                return jsonString == null ? null : jsonString.getBytes(StandardCharsets.UTF_8);
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> headers = new HashMap<>();
+                headers.put("Content-Type", "application/json; charset=utf-8");
+                return headers;
+            }
+        };
+
+        RequestQueue queue = Volley.newRequestQueue(context);
+        queue.add(stringRequest);
+    }
 
 }
