@@ -17,6 +17,8 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         btnGestionProductos = new javax.swing.JButton();
         btnGestionarMesas = new javax.swing.JButton();
         btnGestionarTicketDetalles = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("ComandaXpress Desktop Application");
@@ -27,8 +29,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         Titulo.setText("COMANDAXPRESS");
 
         btnGestionUsuarios.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnGestionUsuarios.setForeground(new java.awt.Color(118, 171, 167));
-        btnGestionUsuarios.setText("Gestionar Usuarios");
+        btnGestionUsuarios.setText("Usuarios");
         btnGestionUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnGestionUsuariosMouseClicked(evt);
@@ -36,8 +37,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         });
 
         btnGestionTickets.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnGestionTickets.setForeground(new java.awt.Color(118, 171, 167));
-        btnGestionTickets.setText("Gestionar Tickets");
+        btnGestionTickets.setText("Tickets");
         btnGestionTickets.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGestionTicketsActionPerformed(evt);
@@ -45,8 +45,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         });
 
         btnGestionProductos.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnGestionProductos.setForeground(new java.awt.Color(118, 171, 167));
-        btnGestionProductos.setText("Gestionar Productos");
+        btnGestionProductos.setText("Productos");
         btnGestionProductos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGestionProductosActionPerformed(evt);
@@ -54,8 +53,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         });
 
         btnGestionarMesas.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnGestionarMesas.setForeground(new java.awt.Color(118, 171, 167));
-        btnGestionarMesas.setText("Gestionar Mesas");
+        btnGestionarMesas.setText("Mesas");
         btnGestionarMesas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGestionarMesasActionPerformed(evt);
@@ -63,49 +61,69 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         });
 
         btnGestionarTicketDetalles.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnGestionarTicketDetalles.setForeground(new java.awt.Color(118, 171, 167));
-        btnGestionarTicketDetalles.setText("Gestionar Detalles de los Tickets");
+        btnGestionarTicketDetalles.setText("TicketDetalles");
         btnGestionarTicketDetalles.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGestionarTicketDetallesActionPerformed(evt);
             }
         });
 
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton1.setText("Categorias");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setText("Gestión de la tablas de la BD:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(196, 196, 196)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnGestionTickets, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnGestionUsuarios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnGestionProductos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnGestionarMesas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnGestionarTicketDetalles, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(53, 53, 53)
-                        .addComponent(Titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 482, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(54, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(Titulo, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnGestionUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnGestionarTicketDetalles, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(btnGestionarMesas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnGestionProductos, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE))
+                                .addGap(50, 50, 50)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(btnGestionTickets, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE))))
+                        .addGap(45, 45, 45))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(45, 45, 45)
+                .addGap(22, 22, 22)
                 .addComponent(Titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
-                .addComponent(btnGestionUsuarios)
-                .addGap(18, 18, 18)
-                .addComponent(btnGestionarMesas)
-                .addGap(18, 18, 18)
-                .addComponent(btnGestionTickets)
-                .addGap(18, 18, 18)
-                .addComponent(btnGestionarTicketDetalles)
-                .addGap(13, 13, 13)
-                .addComponent(btnGestionProductos)
-                .addContainerGap(98, Short.MAX_VALUE))
+                .addGap(30, 30, 30)
+                .addComponent(jLabel1)
+                .addGap(45, 45, 45)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnGestionUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnGestionarMesas, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnGestionTickets, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnGestionarTicketDetalles, javax.swing.GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnGestionProductos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(77, Short.MAX_VALUE))
         );
 
         pack();
@@ -131,6 +149,11 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         ControladorPrincipal.iniciarPantallaProductos();
     }//GEN-LAST:event_btnGestionProductosActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        ControladorPrincipal.iniciarPantallaCategorias();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Titulo;
@@ -139,5 +162,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnGestionUsuarios;
     private javax.swing.JButton btnGestionarMesas;
     private javax.swing.JButton btnGestionarTicketDetalles;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }
