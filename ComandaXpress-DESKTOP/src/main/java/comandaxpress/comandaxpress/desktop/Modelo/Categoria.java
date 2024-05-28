@@ -16,7 +16,10 @@ public class Categoria {
     private String nombre;
     @Column
     private String descripcion;
-    @OneToMany(mappedBy = "categoria", cascade = CascadeType.PERSIST , fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "categoria", cascade = CascadeType.REMOVE , fetch = FetchType.EAGER)
     private List<Producto> productos;
+
+    @Override
+    public String toString() {return nombre;}
 }
 

@@ -45,7 +45,7 @@ public class PantallaTicketDetalle extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tablaTicketDetalle);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder("GESTION DE TICKETS"), "GESTION DE TICKETS"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder("GESTION DE TICKETS"), "GESTION DE TICKETS DETALLE"));
 
         jLabel3.setText("Producto");
 

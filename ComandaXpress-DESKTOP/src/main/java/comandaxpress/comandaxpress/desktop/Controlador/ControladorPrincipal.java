@@ -25,6 +25,10 @@ public class ControladorPrincipal {
     public static void inciarPantallaTicketDetalle() {
         ControladorTicketDetalle.iniciar();
     }
+
+    public static void iniciarPantallaProductos() {
+        ControladorProductos.iniciar();
+    }
     
     
 }

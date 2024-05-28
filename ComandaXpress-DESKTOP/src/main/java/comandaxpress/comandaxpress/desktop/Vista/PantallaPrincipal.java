@@ -47,6 +47,11 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         btnGestionProductos.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnGestionProductos.setForeground(new java.awt.Color(118, 171, 167));
         btnGestionProductos.setText("Gestionar Productos");
+        btnGestionProductos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGestionProductosActionPerformed(evt);
+            }
+        });
 
         btnGestionarMesas.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnGestionarMesas.setForeground(new java.awt.Color(118, 171, 167));
@@ -121,6 +126,10 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     private void btnGestionarTicketDetallesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGestionarTicketDetallesActionPerformed
         ControladorPrincipal.inciarPantallaTicketDetalle();
     }//GEN-LAST:event_btnGestionarTicketDetallesActionPerformed
+
+    private void btnGestionProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGestionProductosActionPerformed
+        ControladorPrincipal.iniciarPantallaProductos();
+    }//GEN-LAST:event_btnGestionProductosActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
