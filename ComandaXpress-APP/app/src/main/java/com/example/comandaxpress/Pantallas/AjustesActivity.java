@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.Editable;
@@ -26,6 +28,7 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -44,6 +47,7 @@ import com.example.comandaxpress.Util.SQLiteUtils;
 import com.google.android.material.internal.EdgeToEdgeUtils;
 import com.google.gson.Gson;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 /**
@@ -123,6 +127,7 @@ public class AjustesActivity extends AppCompatActivity implements ModificacionCa
                 } else {
                     // Si no, solicitar el permiso de la cámara
                     ActivityCompat.requestPermissions(AjustesActivity.this, new String[]{Manifest.permission.CAMERA}, MY_CAMERA_PERMISSION_CODE);
+
                 }
             }
         });
@@ -295,9 +300,7 @@ public class AjustesActivity extends AppCompatActivity implements ModificacionCa
      * */
     private void openCamera() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-            takePictureLauncher.launch(takePictureIntent);
-        }
+        takePictureLauncher.launch(takePictureIntent);
     }
 
     /**
@@ -388,5 +391,46 @@ public class AjustesActivity extends AppCompatActivity implements ModificacionCa
         // Iniciar la primera mitad de la animación
         imagenBandera.startAnimation(flipStart);
     }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == MY_CAMERA_PERMISSION_CODE) {
+            if (!(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                MensajeUtils.mostrarError(AjustesActivity.this,R.string.errorPemisoFoto);
+            }
+        }
+    }
+
+
+    /**
+     * No perder la foto cuando se gira la pantalla
+     * */
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        try {
+            if (fotoPerfilModificar.getDrawable() != null) {
+                Bitmap bitmap = ((BitmapDrawable) fotoPerfilModificar.getDrawable()).getBitmap();
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                byte[] byteArray = stream.toByteArray();
+                outState.putByteArray("fotoPerfil", byteArray);
+            }
+        }catch (Exception ex){}
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        try {
+            byte[] byteArray = savedInstanceState.getByteArray("fotoPerfil");
+            if (byteArray != null) {
+                Bitmap bitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+                fotoPerfilModificar.setImageBitmap(bitmap);
+            }
+        }catch (Exception ex){}
+    }
+
 
 }

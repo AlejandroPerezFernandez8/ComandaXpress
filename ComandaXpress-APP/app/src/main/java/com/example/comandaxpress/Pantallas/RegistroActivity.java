@@ -4,7 +4,9 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.Editable;
@@ -33,6 +35,7 @@ import com.example.comandaxpress.R;
 import com.example.comandaxpress.Util.MensajeUtils;
 import com.example.comandaxpress.Util.ImageUtils;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,6 +43,7 @@ public class RegistroActivity extends AppCompatActivity implements RegistroCallb
     private static final int MY_CAMERA_PERMISSION_CODE = 100;
     public static final int REQUEST_TAKE_PHOTO = 101;
     EditText nombreUsuario;
+    ImageView fotoPerfil;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +54,7 @@ public class RegistroActivity extends AppCompatActivity implements RegistroCallb
         EditText email= findViewById(R.id.Email);
         nombreUsuario = findViewById(R.id.NombreUsuario);
         EditText contraseña = findViewById(R.id.Contraseña);
-        ImageView fotoPerfil = findViewById(R.id.fotoPerfil);
+        fotoPerfil = findViewById(R.id.fotoPerfil);
         Button btnFoto = findViewById(R.id.btnSacarFoto);
         Button btnRegistro = findViewById(R.id.btnRegistrarse);
         List<EditText> editTexts = new ArrayList<>();
@@ -170,4 +174,36 @@ public class RegistroActivity extends AppCompatActivity implements RegistroCallb
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         someActivityResultLauncher.launch(intent);
     }
+
+
+    /**
+     * No perder la foto cuando se gira la pantalla
+     * */
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        try {
+            if (fotoPerfil.getDrawable() != null) {
+                Bitmap bitmap = ((BitmapDrawable) fotoPerfil.getDrawable()).getBitmap();
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                byte[] byteArray = stream.toByteArray();
+                outState.putByteArray("fotoPerfil", byteArray);
+            }
+        }catch (Exception ex){}
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        try {
+            byte[] byteArray = savedInstanceState.getByteArray("fotoPerfil");
+            if (byteArray != null) {
+                Bitmap bitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+                fotoPerfil.setImageBitmap(bitmap);
+            }
+        }catch (Exception ex){}
+    }
+
+
 }

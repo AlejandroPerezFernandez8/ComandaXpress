@@ -65,7 +65,7 @@
     <string name="errorCorreo">O correo non e válido</string>
     <string name="errorCamposVacios">Debes encher todos os campos</string>
     <string name="errorEliminacionProdcutos">Non se puido eliminar o produto</string>
-
+    <string name="errorPemisoFoto">Non se pode sacar unha foto (Permiso denegado)</string>
     <!-- MENSAJE INFORMATIVOS-->
     <string name="CambioIP">IP cambiada</string>
     <string name="ModificacionUsuario">Usuario modificado correctamente</string>
