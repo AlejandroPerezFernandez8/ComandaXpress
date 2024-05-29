@@ -220,7 +220,7 @@ public class AjustesActivity extends AppCompatActivity implements ModificacionCa
                             SQLiteUtils.insertarIP(AjustesActivity.this, ip);
                         }
                         ApiMapSingleton.getInstance().setIP(SQLiteUtils.getIP(AjustesActivity.this));
-                        MensajeUtils.mostrarMensaje(AjustesActivity.this,R.string.CambioIP + ": " + ApiMapSingleton.getInstance().getIP());
+                        MensajeUtils.mostrarMensaje(AjustesActivity.this,AjustesActivity.this.getString(R.string.CambioIP) + ": " + ApiMapSingleton.getInstance().getIP());
                     } catch (Exception ex) {
                         MensajeUtils.mostrarError(AjustesActivity.this,R.string.errorCambioIP);
                         Log.d("Error IP", ex.getMessage());

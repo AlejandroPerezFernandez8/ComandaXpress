@@ -33,7 +33,7 @@ import com.example.comandaxpress.Util.SQLiteUtils;
  * */
 public class LoginActivity extends AppCompatActivity implements LoginCallBack {
     SharedPreferences sharedPreferences;
-    DialogoDeCarga dialogoDeCarga = new DialogoDeCarga(this);
+    DialogoDeCarga dialogoDeCarga = new DialogoDeCarga(LoginActivity.this);
     EditText nombreUsuario;
     /**
      * Comprobacion del idioma,Comprobación de la existencia de una IP, Instanciación de componentes
@@ -51,11 +51,40 @@ public class LoginActivity extends AppCompatActivity implements LoginCallBack {
         }else {
             ApiMapSingleton.getInstance().setIP(SQLiteUtils.getIP(this));
         }
+
         if("noExiste" != sharedPreferences.getString("Usuario","noExiste")){
-            //SE PASA A LA PANTALLA DE MESAS
-            Intent intentMesas = new Intent(getApplicationContext(),MesasActivity.class);
-            someActivityResultLauncher.launch(intentMesas);
-            finish();
+            //SE COMPRUEBA QUELE USER TAMBIEN EXISTA EN BD Y SE PASA A LA PANTALLA DE MESAS
+            dialogoDeCarga.startLoadingDialog();
+            try {
+                Usuario user = CryptoUtils.transformarJsonToUsuaro(
+                        CryptoUtils.desencriptar(
+                                sharedPreferences.getString("Usuario",null),"abc123.")
+                );
+                UsuarioService.loginUsuario(LoginActivity.this, user.getUsuario(), user.getContraseña(), new LoginCallBack() {
+                    @Override
+                    public void onSuccess(Usuario usuario) {
+                        try {
+                            sharedPreferences.edit().putString("Usuario",
+                                    CryptoUtils.encriptar(CryptoUtils.transformarUsuarioToJson(usuario),"abc123.")
+                            ).apply();
+                        }catch (Exception ex){}
+                        Intent intentMesas = new Intent(getApplicationContext(),MesasActivity.class);
+                        someActivityResultLauncher.launch(intentMesas);
+                        finish();
+                        dialogoDeCarga.dismissDialog();
+                    }
+                    @Override
+                    public void onError(String message) {
+                        MensajeUtils.mostrarErrorLargo(LoginActivity.this,"El usuario guardado ya no existe en la Base de Datos \n Vuelva a iniciar sesion para continuar");
+                        Log.d("ErrorLogin","Error al recuperar los datos de la sesion");
+                        dialogoDeCarga.dismissDialog();
+                    }
+                });
+
+            } catch (Exception e) {
+                Log.d("ErrorLogin","Error al recuperar el usuario guardado del login");
+                dialogoDeCarga.dismissDialog();
+            }
         }
         //Referencias a variables de actividad
         nombreUsuario = findViewById(R.id.NombreUsuario);
@@ -174,7 +203,7 @@ public class LoginActivity extends AppCompatActivity implements LoginCallBack {
                     SQLiteUtils.modificarIP(LoginActivity.this, ip);
                 }
                 ApiMapSingleton.getInstance().setIP(ip);
-                MensajeUtils.mostrarMensaje(LoginActivity.this,R.string.CambioIP + ": " + ApiMapSingleton.getInstance().getIP());
+                MensajeUtils.mostrarMensaje(LoginActivity.this,LoginActivity.this.getString(R.string.CambioIP)+ ": " + ApiMapSingleton.getInstance().getIP());
             }
         });
         builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {

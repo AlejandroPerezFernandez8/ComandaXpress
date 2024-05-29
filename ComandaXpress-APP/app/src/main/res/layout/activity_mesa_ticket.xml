@@ -133,7 +133,6 @@
             android:text="@string/btnCobrarMesa"
             android:backgroundTint="@color/colorLightBlue"
             app:layout_constraintTop_toBottomOf="@id/tvTotal"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginStart="40dp"
