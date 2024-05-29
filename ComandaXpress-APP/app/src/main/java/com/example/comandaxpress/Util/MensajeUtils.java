@@ -16,6 +16,10 @@ import com.example.comandaxpress.R;
 
 public class MensajeUtils {
 
+    /**
+     * Clase para sacar mensajes personalidos tanto de error como informativos
+     * */
+
     public static void mostrarError(Activity activity, String message) {
         LayoutInflater inflater = activity.getLayoutInflater();
         View layout = inflater.inflate(R.layout.toast_personalizado, null);

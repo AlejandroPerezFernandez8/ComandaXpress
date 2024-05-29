@@ -46,7 +46,9 @@ import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Pantalla de ajustes
+ * */
 public class AjustesActivity extends AppCompatActivity implements ModificacionCallback {
     SharedPreferences sharedPreferences;
     private long usuario_id;
@@ -59,6 +61,9 @@ public class AjustesActivity extends AppCompatActivity implements ModificacionCa
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        /**
+         * Creacion de variables e instancias de componentes
+         * */
         // Cargar el idioma persistido
         LocaleUtil.loadLocale(this);
         super.onCreate(savedInstanceState);
@@ -70,7 +75,6 @@ public class AjustesActivity extends AppCompatActivity implements ModificacionCa
         EditText etCambiarIP = findViewById(R.id.etCambioIP);
         Button btnCambiarIP = findViewById(R.id.btnCambiarIP);
         ImageView logout = findViewById(R.id.imagen_logout);
-
         EditText nombreModificar = findViewById(R.id.NombreModificar);
         EditText apellidosModificar = findViewById(R.id.ApellidosModificar);
         EditText emailModificar = findViewById(R.id.EmailModificar);
@@ -80,14 +84,15 @@ public class AjustesActivity extends AppCompatActivity implements ModificacionCa
         Button btnSacarFotoModificar = findViewById(R.id.btnSacarFotoModificar);
         Button btnRegistrarse = findViewById(R.id.btnRegistrarse);
         List<EditText> campos = new ArrayList<>();
-
         // Configurar el idioma y la bandera inicial
         imagenBandera = findViewById(R.id.btnCambiarIdioma);
         isCastellano = LocaleUtil.getCurrentLocale(this).equals("es");
         imagenBandera.setImageResource(isCastellano ? R.drawable.bandera_esp : R.drawable.bandera_gl);
-
         imagenBandera.setOnClickListener(v -> animacionFlip());
 
+        /**
+         * Obtención del usuario encriptado para mostrar sus datos
+         * */
         String usuarioJson = null;
         try {
             Gson gson = new Gson();
@@ -106,7 +111,9 @@ public class AjustesActivity extends AppCompatActivity implements ModificacionCa
             e.printStackTrace();
         }
 
-
+        /**
+         * Metodo para sacar pedir permisos y abrir el intent de sacar la foto
+         * */
         btnSacarFotoModificar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -132,6 +139,9 @@ public class AjustesActivity extends AppCompatActivity implements ModificacionCa
             }
         });
 
+        /**
+         * Logica de modificación del usuario
+         * */
         btnRegistrarse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -177,7 +187,7 @@ public class AjustesActivity extends AppCompatActivity implements ModificacionCa
                     UsuarioService.modificarUsuario(AjustesActivity.this, usuario_id, usuario, AjustesActivity.this);
                 }
         });
-
+        //SE GUARDA EL NUEVO USR
         sharedPreferences = getApplicationContext().getSharedPreferences("preferencias", MODE_PRIVATE);
         Usuario usuario;
         try {
@@ -194,6 +204,9 @@ public class AjustesActivity extends AppCompatActivity implements ModificacionCa
             e.printStackTrace();
         }
 
+        /**
+         * Logica para cambiar la ip del servidor
+         * */
         btnCambiarIP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -216,6 +229,9 @@ public class AjustesActivity extends AppCompatActivity implements ModificacionCa
             }
         });
 
+        /**
+         * Logica para hacer un logout
+         * */
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -256,6 +272,9 @@ public class AjustesActivity extends AppCompatActivity implements ModificacionCa
                 public void onActivityResult(ActivityResult result) {}
             });
 
+    /**
+     * Launcher para la recogida de la foto de perfil
+     * */
     ActivityResultLauncher<Intent> takePictureLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
@@ -271,6 +290,9 @@ public class AjustesActivity extends AppCompatActivity implements ModificacionCa
                 }
             });
 
+    /**
+     * Lanzamieto del intent de la camara
+     * */
     private void openCamera() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
@@ -278,6 +300,9 @@ public class AjustesActivity extends AppCompatActivity implements ModificacionCa
         }
     }
 
+    /**
+     * CallBacks de modificacion del usuario
+     * */
     @Override
     public void onRegistroSuccess(String response) {
         try {
@@ -304,6 +329,9 @@ public class AjustesActivity extends AppCompatActivity implements ModificacionCa
         }
     }
 
+    /**
+     * Metodo para comprobar que los edittext no estén vacios
+     * */
     public boolean comprobarVacio(List<EditText> campos) {
         for (EditText campo : campos) {
             if (campo.getText().toString().isEmpty()) {
@@ -314,6 +342,9 @@ public class AjustesActivity extends AppCompatActivity implements ModificacionCa
         return false;
     }
 
+    /**
+     * Metodo para animar el boton de cambiar el idioma
+     * */
     private void animacionFlip() {
         Animation flipStart = AnimationUtils.loadAnimation(this, R.anim.flip_start);
         Animation flipEnd = AnimationUtils.loadAnimation(this, R.anim.flip_end);

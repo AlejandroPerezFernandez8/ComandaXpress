@@ -25,7 +25,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+/**
+ * CLASE PARA LA GESTION DE LAS PETICIONES SOBRE LA TABLA MESAS
+ * -getAllMesas : Devuelve una lista de todas las mesas
+ * -updateMesa : Funcion para hacer una modificacion sobre una mesa
+ * */
 public class MesaService {
     public static void getAllMesas(Context context, GetAllMesasCallback callback) {
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, ApiMapSingleton.getInstance().getUrlMesa(), null,

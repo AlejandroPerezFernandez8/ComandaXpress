@@ -35,7 +35,14 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+/**
+ * Clase para la gestion de las peticiones sobre la tabla ticket y ticket detalle
+ *
+ * -insertTicket : Realiza la peticion para insertar un nuevo ticket
+ * -getDetallesTicket : Realiza la peticion para obtener todos los objetos TicketDetalle de un ticket concreto
+ * -insertTicketDetalle : Realiza la peticion para hacer el insert de un objeto TicketDetalle
+ * -eliminarTicketDetalle :  Realiza la peticion para hacer la eliminacion de un objeto ticketDetalle
+ * */
 public class TicketService {
     public static void insertTicket(Context context, Ticket ticket, InsertTickectCallback callback) {
         String url = ApiMapSingleton.getInstance().getUrlTicket();

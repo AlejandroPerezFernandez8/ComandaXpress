@@ -5,7 +5,9 @@ import java.util.TimerTask;
 import android.widget.Button;
 
 public class BotonUtils {
-
+    /**
+     * Clase para la desactivacion temporal de botones, para evitar multiples pulsaciones
+     * */
     public static void deshabilitarTemporalmente(final Button button) {
         button.setEnabled(false);
         Timer timer = new Timer();

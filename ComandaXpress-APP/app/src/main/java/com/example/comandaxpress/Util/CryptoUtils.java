@@ -14,6 +14,11 @@ import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.SecretKeySpec;
 
 public class CryptoUtils {
+
+    /**
+     * Clase para la encriptacion y desencriptación de strings con AES
+     * las claves son generadas a partir de una clave corta con el metodo KeyAESderivada
+     * */
     private static Gson gson = new Gson();
     public static String transformarUsuarioToJson(Usuario usuario){
         return gson.toJson(usuario);

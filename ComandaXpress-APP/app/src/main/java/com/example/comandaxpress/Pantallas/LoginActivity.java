@@ -28,11 +28,16 @@ import com.example.comandaxpress.Util.CryptoUtils;
 import com.example.comandaxpress.Util.MensajeUtils;
 import com.example.comandaxpress.Util.LocaleUtil;
 import com.example.comandaxpress.Util.SQLiteUtils;
-
+/**
+ * Primero pantalla de la APP
+ * */
 public class LoginActivity extends AppCompatActivity implements LoginCallBack {
     SharedPreferences sharedPreferences;
     DialogoDeCarga dialogoDeCarga = new DialogoDeCarga(this);
     EditText nombreUsuario;
+    /**
+     * Comprobacion del idioma,Comprobación de la existencia de una IP, Instanciación de componentes
+     * */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         LocaleUtil.loadLocale(LoginActivity.this);
@@ -59,6 +64,10 @@ public class LoginActivity extends AppCompatActivity implements LoginCallBack {
         Button btnLogin = findViewById(R.id.btnLogin);
         Button btnCambiarIP = findViewById(R.id.btnCambiarIPLogin);
 
+
+        /**
+         * Logica para cambiar la ip del servidor
+         * */
         btnCambiarIP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,6 +75,10 @@ public class LoginActivity extends AppCompatActivity implements LoginCallBack {
                 ApiMapSingleton.getInstance().setIP(SQLiteUtils.getIP(LoginActivity.this));
             }
         });
+
+        /**
+         * Llamada a la api para el logueo
+         * */
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,6 +86,10 @@ public class LoginActivity extends AppCompatActivity implements LoginCallBack {
                 UsuarioService.loginUsuario(getApplicationContext(),nombreUsuario.getText().toString().trim(),contraseña.getText().toString().trim(),LoginActivity.this);
             }
         });
+
+        /**
+         * Pantalla de registro
+         * */
         btnRegistro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,6 +98,9 @@ public class LoginActivity extends AppCompatActivity implements LoginCallBack {
             }});
     }
 
+    /**
+     * Post registro autocompeltar el nombre de usuario
+     * */
     ActivityResultLauncher someActivityResultLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
@@ -94,6 +114,9 @@ public class LoginActivity extends AppCompatActivity implements LoginCallBack {
                 }
     });
 
+    /**
+     * Callback de logueo completado y funcionalidad de guardar sesion
+     * */
     @Override
     public void onSuccess(Usuario usuario) {
         try {
@@ -112,6 +135,9 @@ public class LoginActivity extends AppCompatActivity implements LoginCallBack {
         finish();
     }
 
+    /**
+     * Error en el logueo
+     * */
     @Override
     public void onError(String message) {
         dialogoDeCarga.dismissDialog();
@@ -127,7 +153,9 @@ public class LoginActivity extends AppCompatActivity implements LoginCallBack {
         }
     }
 
-
+    /**
+     * Solicitar la IP al usuario
+     * */
     private void solicitarIP() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Configurar IP");

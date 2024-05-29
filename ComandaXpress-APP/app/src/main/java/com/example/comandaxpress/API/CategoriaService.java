@@ -19,6 +19,9 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * CLASE PARA LA GESTION DE LAS PETICIONES SOBRE LA TABLA CATEGORIAS
+ * */
 public class CategoriaService {
     public static void getAllCategorias(Context context, GetAllCategoriasCallback callback) {
         String urlCategorias = ApiMapSingleton.getInstance().getUrlCategoria();

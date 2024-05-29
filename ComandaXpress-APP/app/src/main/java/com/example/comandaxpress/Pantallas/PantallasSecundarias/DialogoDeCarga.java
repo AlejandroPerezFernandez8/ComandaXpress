@@ -6,6 +6,9 @@ import android.view.LayoutInflater;
 
 import com.example.comandaxpress.R;
 
+/**
+ * Pantalla para incluir un dialogo de carga
+ * */
 public class DialogoDeCarga {
     private Activity activity;
     private AlertDialog dialog;

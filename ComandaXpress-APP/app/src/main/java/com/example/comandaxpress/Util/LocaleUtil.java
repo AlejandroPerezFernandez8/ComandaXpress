@@ -9,6 +9,10 @@ import android.os.Build;
 import java.util.Locale;
 
 public class LocaleUtil {
+
+    /**
+     * Clases para la gestión de idiomas de la aplicacion
+     * */
     private static final String PREFS_NAME = "locale_prefs";
     private static final String KEY_LANGUAGE = "language";
 

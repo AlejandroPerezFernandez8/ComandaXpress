@@ -17,6 +17,10 @@ import com.example.comandaxpress.R;
 
 import java.util.ArrayList;
 
+/**
+ * Pantalla usada para mostrar el modal de seleccion de categoria en la pantalla de ticket
+ * */
+
 public class DialogoCategoriasFragment extends DialogFragment {
     private static final String ARG_CATEGORIAS = "categorias";
     private CategoriaSeleccionadaListener mListener;

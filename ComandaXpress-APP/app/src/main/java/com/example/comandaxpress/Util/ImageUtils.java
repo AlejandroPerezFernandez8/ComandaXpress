@@ -11,6 +11,9 @@ import android.widget.ImageView;
 import java.io.ByteArrayOutputStream;
 
 public class ImageUtils {
+    /**
+     * Clase para la codificacion y decodificacion de imagenes
+     * */
     public static String encodeImageViewToBase64(ImageView imageView) {
         Drawable drawable = imageView.getDrawable();
         Bitmap bitmap;

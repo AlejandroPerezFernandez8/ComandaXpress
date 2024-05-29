@@ -13,6 +13,9 @@ import com.example.comandaxpress.SQLite.FeedReaderDbHelper;
 import java.util.ArrayList;
 import java.util.List;
 public class SQLiteUtils {
+    /**
+     * Clase para la gestion de la BD SQLITE
+     * */
     private static FeedReaderDbHelper dbHelper;
 
     public static void insertarIP(Context context, String ip){

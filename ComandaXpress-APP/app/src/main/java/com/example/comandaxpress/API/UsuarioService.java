@@ -21,6 +21,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class UsuarioService {
+    /**
+     * Clase para la gestion de las peticiones sobre la tabla usuario
+     *
+     * -loginUsuario: Realiza una peticion con cuerpo[usuario,contraseña] que devuelve el objeto usuario completo coincidente
+     * -registro usuario: Realia un peticion para el registro de un nuevo usuario
+     * -modificarUsuario: Realiza una peticion para la modificacion de un usuario existente
+     * */
 
     public static void loginUsuario(Context context, String nombreUsuario, String contraseña, LoginCallBack callBack) {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, ApiMapSingleton.getInstance().getUrlUsuarioLogin(),

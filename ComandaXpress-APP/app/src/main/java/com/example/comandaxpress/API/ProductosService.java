@@ -18,7 +18,10 @@ import com.google.gson.reflect.TypeToken;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+/**
+ * Clase para la gestion de las peticiones sobre la tabla productos
+ * -getProductosPorCategoria : Devuelve la lista de productos asociados a un id de categoria
+ * */
 public class ProductosService {
     public static void getProductosPorCategoria(Context context, Long categoriaId, GetProductosCallback callback) {
         String url = ApiMapSingleton.getInstance().getUrlProductosCategoria(categoriaId);
