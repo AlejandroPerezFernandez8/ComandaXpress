@@ -15,10 +15,12 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.comandaxpress.API.Clases.FiltroTicket;
 import com.example.comandaxpress.API.Clases.Ticket;
 import com.example.comandaxpress.API.Clases.TicketDetalleSimplificado;
 import com.example.comandaxpress.API.Interfaces.DeleteTicketDetalleCallback;
 import com.example.comandaxpress.API.Interfaces.GetProductoCantidadCallback;
+import com.example.comandaxpress.API.Interfaces.GetTicketsCallback;
 import com.example.comandaxpress.API.Interfaces.InsertProductosCallback;
 import com.example.comandaxpress.API.Interfaces.InsertTickectCallback;
 import com.example.comandaxpress.ClasesHelper.ProductoCantidad;
@@ -217,6 +219,40 @@ public class TicketService {
 
         RequestQueue queue = Volley.newRequestQueue(context);
         queue.add(stringRequest);
+    }
+
+
+    public static void filtrarTickets(Context context, FiltroTicket filtros, final GetTicketsCallback callback) {
+        String url = ApiMapSingleton.getInstance().getUrlTicketFiltros(filtros);
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
+                Request.Method.GET,
+                url,
+                null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        try {
+                            Gson gson = new Gson();
+                            Type listType = new TypeToken<List<Ticket>>(){}.getType();
+                            List<Ticket> ticketList = gson.fromJson(response.toString(), listType);
+                            callback.onGetTicketsSuccess(ticketList);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            callback.onGetTicketsError(e.toString());
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        callback.onGetTicketsError(error.toString());
+                    }
+                }
+        );
+
+        RequestQueue queue = Volley.newRequestQueue(context);
+        queue.add(jsonArrayRequest);
     }
 
 }

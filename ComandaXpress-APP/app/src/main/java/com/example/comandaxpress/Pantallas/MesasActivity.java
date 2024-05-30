@@ -53,7 +53,7 @@ public class MesasActivity extends AppCompatActivity implements GetAllMesasCallb
         ImageView fotoPerfil = findViewById(R.id.fotoPerfilMesas);
         recarga = findViewById(R.id.recarga);
         lista = findViewById(R.id.listaMesas);
-
+        ImageView historial = findViewById(R.id.historial);
         try {
             Usuario usuario;
             String encriptedUser = sharedPreferences.getString("Usuario","");
@@ -68,6 +68,14 @@ public class MesasActivity extends AppCompatActivity implements GetAllMesasCallb
             public void onClick(View v) {
                 Intent intentAjustes = new Intent(getApplicationContext(),AjustesActivity.class);
                 someActivityResultLauncher.launch(intentAjustes);
+            }
+        });
+
+        historial.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent historial = new Intent(getApplicationContext(),HistorialActivity.class);
+                someActivityResultLauncher.launch(historial);
             }
         });
 

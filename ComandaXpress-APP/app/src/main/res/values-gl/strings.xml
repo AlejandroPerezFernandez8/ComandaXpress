@@ -66,11 +66,21 @@
     <string name="errorCamposVacios">Debes encher todos os campos</string>
     <string name="errorEliminacionProdcutos">Non se puido eliminar o produto</string>
     <string name="errorPemisoFoto">Non se pode sacar unha foto (Permiso denegado)</string>
+    <string name="errorFecha">A data non é válida</string>
+    <string name="errorHistorialTicket">Produciuse un erro ao recuperar o historial</string>
     <!-- MENSAJE INFORMATIVOS-->
     <string name="CambioIP">IP cambiada</string>
     <string name="ModificacionUsuario">Usuario modificado correctamente</string>
     <string name="UsuarioRegistrado">Usuario rexistrado correctamente</string>
     <string name="CobroMesa">Mesa cobrada correctamente</string>
     <string name="EliminacionProducto">Produto eliminado</string>
+
+    <!--Historial-->
+    <string name="historial_de_tickets">Historial de Tickets</string>
+    <string name="numero_de_mesa">Número de Mesa</string>
+    <string name="fecha">Data (YYYY-MM-DD)</string>
+    <string name="buscar">Buscar</string>
+    <string name="resultados_de_la_busqueda">Resultados da busca</string>
+
 
 </resources>

@@ -1,5 +1,7 @@
 package com.example.comandaxpress.API;
 
+import com.example.comandaxpress.API.Clases.FiltroTicket;
+
 public class ApiMap {
     private static String IP = "";
     private static final String PORT = ":8080/";
@@ -22,6 +24,18 @@ public class ApiMap {
     public static String getUrlCategoria() {return getBaseUrl() + "categoria";}
     //-----------------------------------TICKETS----------------------------------------------------------
     public static String getUrlTicket() {return getBaseUrl() + "ticket";}
+
+    public static String getUrlTicketFiltros(FiltroTicket filtro) {
+        if(filtro.getIdMesa()!= null && filtro.getFecha()!= null){
+            return getBaseUrl() + "ticket/filtros?idMesa="+ filtro.getIdMesa()+"&fecha="+filtro.getFecha();
+        }else if(filtro.getIdMesa() != null){
+            return getBaseUrl() + "ticket/filtros?idMesa="+ filtro.getIdMesa();
+        } else if (filtro.getFecha()!= null) {
+            return getBaseUrl() + "ticket/filtros?fecha="+filtro.getFecha();
+        }else {
+            return getBaseUrl() + "ticket/filtros";
+        }
+    }
     //-----------------------------------DETALLES DE LOS TICKETS----------------------------------------------------------
     public static String getUrlTicketDetalle(long idTicket) {return getBaseUrl() + "ticketDetalle/"+idTicket;}
     public static String getUrlTicketDetalleGuardar() {return getBaseUrl() + "ticketDetalle/guardar";}

@@ -15,6 +15,12 @@ public class Ticket {
         this.fechaHora = fechaHora;
         this.ticketDetallesID = ticketDetallesID;
     }
+    public Ticket(Long ticketId, Long mesaId, Date fechaHora) {
+        this.ticketId = ticketId;
+        this.mesaId = mesaId;
+        this.fechaHora = fechaHora;
+    }
+
     public Ticket(Long mesaId) {
         this.mesaId = mesaId;
     }

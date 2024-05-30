@@ -94,6 +94,8 @@ public class AjustesActivity extends AppCompatActivity implements ModificacionCa
         imagenBandera.setImageResource(isCastellano ? R.drawable.bandera_esp : R.drawable.bandera_gl);
         imagenBandera.setOnClickListener(v -> animacionFlip());
 
+
+
         /**
          * Obtención del usuario encriptado para mostrar sus datos
          * */
