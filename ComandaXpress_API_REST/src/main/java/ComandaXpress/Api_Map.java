@@ -16,10 +16,12 @@ public class Api_Map {
     /**-------------------------TICKETS--------------------------------*/
     public static final String TICKET_BASE_URL = "/ticket";
     public static final String TICKET_ID_URL = "/{ticketId}";
+    public static final String TICKET_FILTROS_URL = "/filtros";
     /**-------------------------TICKETDETALLE--------------------------------*/
     public static final String TICKET_DETALLE_BASE_URL = "/ticketDetalle";
     public static final String TICKET_DETALLE_ID_URL = "/{idTicket}";
     public static final String TICKET_DETALLE_GUARDAR = "/guardar";
+    public static final String TICKET_DETALLE_ELIMINAR = "/eliminar";
     /**-------------------------USUARIOS--------------------------------*/
     public static final String USUARIO_BASE_URL = "/usuarios";
     public static final String USUARIO_LOGIN_URL = "/login";

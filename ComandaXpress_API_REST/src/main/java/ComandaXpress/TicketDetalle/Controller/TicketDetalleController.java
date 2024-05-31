@@ -39,24 +39,19 @@ public class TicketDetalleController {
 
     @PostMapping(Api_Map.TICKET_DETALLE_GUARDAR)
     public ResponseEntity<String> guardarTicketDetalle(@RequestBody TicketDetalleSimplificadoDTO ticketDetalleDTO) {
-        // Buscar el ticket por su ID
         Ticket ticket = ticketRepository.findById(ticketDetalleDTO.getIdTicket())
                 .orElseThrow(() -> new RuntimeException("Ticket no encontrado con id: " + ticketDetalleDTO.getIdTicket()));
 
-        // Buscar el producto por su ID
         Producto producto = productoRepository.findById(ticketDetalleDTO.getIdProducto())
                 .orElseThrow(() -> new RuntimeException("Producto no encontrado con id: " + ticketDetalleDTO.getIdProducto()));
 
-        // Verificar si el detalle del ticket ya existe
         Optional<TicketDetalle> detalleExistenteOpt = ticketDetalleRepository.findById(new TicketDetalleID(ticketDetalleDTO.getIdTicket(), ticketDetalleDTO.getIdProducto()));
 
         TicketDetalle ticketDetalle;
         if (detalleExistenteOpt.isPresent()) {
-            // Actualizar la cantidad del detalle existente
             ticketDetalle = detalleExistenteOpt.get();
             ticketDetalle.setCantidad(ticketDetalle.getCantidad() + ticketDetalleDTO.getCantidad());
         } else {
-            // Crear un nuevo TicketDetalle
             ticketDetalle = new TicketDetalle();
             ticketDetalle.setTicket(ticket);
             ticketDetalle.setTicketId(ticket.getTicketId());
@@ -65,9 +60,23 @@ public class TicketDetalleController {
             ticketDetalle.setCantidad(ticketDetalleDTO.getCantidad());
         }
 
-        // Guardar el detalle en el repositorio
         ticketDetalleRepository.save(ticketDetalle);
 
         return ResponseEntity.ok("Detalle Guardado!!!");
     }
+
+
+    @PostMapping(Api_Map.TICKET_DETALLE_ELIMINAR)
+    public ResponseEntity<String> eliminarTicketDetalle(@RequestBody TicketDetalleSimplificadoDTO ticketDetalleDTO) {
+        System.out.println("detalles a eliminar: " + ticketDetalleDTO.getIdTicket() + " " + ticketDetalleDTO.getIdProducto() + " " + ticketDetalleDTO.getCantidad());
+        Optional<TicketDetalle> detalleExistenteOpt = ticketDetalleRepository.findById(new TicketDetalleID(ticketDetalleDTO.getIdTicket(), ticketDetalleDTO.getIdProducto()));
+
+        if (!detalleExistenteOpt.isPresent()) {
+            return ResponseEntity.status(404).body("El detalle del ticket no existe.");
+        }
+
+        ticketDetalleRepository.delete(detalleExistenteOpt.get());
+        return ResponseEntity.ok("Detalle del ticket eliminado correctamente.");
+    }
+
 }
