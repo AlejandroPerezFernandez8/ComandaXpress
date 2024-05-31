@@ -85,6 +85,6 @@ public class MensajeUtils {
 
     public static void mostrarMensaje(Activity activity, int messageResId) {
         String message = activity.getString(messageResId);
-        mostrarMensaje(activity, message); // Cambiado para llamar al método correcto
+        mostrarMensaje(activity, message);
     }
 }

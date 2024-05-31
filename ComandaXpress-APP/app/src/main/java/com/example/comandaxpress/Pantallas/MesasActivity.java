@@ -31,6 +31,7 @@ import com.example.comandaxpress.API.TicketService;
 import com.example.comandaxpress.Adapters.MesaAdapter;
 import com.example.comandaxpress.R;
 import com.example.comandaxpress.Util.CryptoUtils;
+import com.example.comandaxpress.Util.LocaleUtil;
 import com.example.comandaxpress.Util.MensajeUtils;
 import com.google.gson.Gson;
 
@@ -45,6 +46,7 @@ public class MesasActivity extends AppCompatActivity implements GetAllMesasCallb
     ListView lista;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        LocaleUtil.loadLocale(MesasActivity.this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mesas);
         EdgeToEdge.enable(this);

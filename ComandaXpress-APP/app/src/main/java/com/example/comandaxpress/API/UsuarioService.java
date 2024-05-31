@@ -78,7 +78,7 @@ public class UsuarioService {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        String errorMessage = "Error desconocido";  // Mensaje por defecto
+                        String errorMessage = "Error desconocido";
                         if (error.networkResponse != null && error.networkResponse.data != null) {
                             errorMessage = new String(error.networkResponse.data, StandardCharsets.UTF_8);
                         }

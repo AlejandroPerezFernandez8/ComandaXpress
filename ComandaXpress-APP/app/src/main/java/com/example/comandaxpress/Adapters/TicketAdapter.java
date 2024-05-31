@@ -39,11 +39,11 @@ public class TicketAdapter extends ArrayAdapter<Ticket> {
 
         Ticket ticket = getItem(position);
 
-        icon.setImageResource(R.drawable.ticket);  // Asegúrate de tener este recurso
+        icon.setImageResource(R.drawable.ticket);
         ticketInfo.setText("Ticket nº " + ticket.getTicketId());
 
         // Formatear la fecha
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         ticketDate.setText(sdf.format(ticket.getFechaHora()));
 
         return convertView;

@@ -54,7 +54,7 @@ public class DialogoCategoriasFragment extends DialogFragment {
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     Categoria categoriaSeleccionada = (Categoria) parent.getItemAtPosition(position);
                     if (mListener != null) {
-                        mListener.onCategoriaSeleccionada(categoriaSeleccionada); // Pasar la categoría seleccionada al listener
+                        mListener.onCategoriaSeleccionada(categoriaSeleccionada);
                     }
                     dismiss();
                 }

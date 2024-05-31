@@ -127,7 +127,6 @@ public class TicketService {
     public static void insertarTicketDetalle(Context context, TicketDetalleSimplificado ticketDetalle, final InsertProductosCallback callback) {
         String url = ApiMapSingleton.getInstance().getUrlTicketDetalleGuardar();
 
-        // Convertir TicketDetalleSimplificadoDTO a JSONObject
         Gson gson = new Gson();
         String jsonString = gson.toJson(ticketDetalle);
         JSONObject jsonObject = null;
@@ -175,7 +174,7 @@ public class TicketService {
         Log.d("EliminarTicketDetalle", "JSON: " + jsonString);
 
         StringRequest stringRequest = new StringRequest(
-                Request.Method.POST,  // Usar POST temporalmente
+                Request.Method.POST,
                 url,
                 new Response.Listener<String>() {
                     @Override

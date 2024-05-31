@@ -2,8 +2,8 @@ package com.example.comandaxpress.Pantallas;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -11,31 +11,23 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.example.comandaxpress.API.Clases.FiltroTicket;
 import com.example.comandaxpress.API.Clases.Ticket;
-import com.example.comandaxpress.API.Clases.TicketDetalle;
 import com.example.comandaxpress.API.Interfaces.GetProductoCantidadCallback;
 import com.example.comandaxpress.API.Interfaces.GetTicketsCallback;
 import com.example.comandaxpress.API.TicketService;
-import com.example.comandaxpress.Adapters.ProductoAdapter;
 import com.example.comandaxpress.Adapters.TicketAdapter;
 import com.example.comandaxpress.Adapters.TicketProductoAdapter;
 import com.example.comandaxpress.ClasesHelper.ProductoCantidad;
 import com.example.comandaxpress.Pantallas.PantallasSecundarias.DialogoDeCarga;
 import com.example.comandaxpress.R;
+import com.example.comandaxpress.Util.LocaleUtil;
 import com.example.comandaxpress.Util.MensajeUtils;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -44,19 +36,21 @@ public class HistorialActivity extends AppCompatActivity {
     TicketAdapter adapter;
     List<Ticket> listaTickets = new ArrayList<>();
     DialogoDeCarga dialogoDeCarga = new DialogoDeCarga(HistorialActivity.this);
-    Gson gson;
+    Gson gson = new Gson();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_historial);
-        Button btnBusqueda =  findViewById(R.id.buttonBuscar);
+
+        Button btnBusqueda = findViewById(R.id.buttonBuscar);
         EditText etNumeroMesa = findViewById(R.id.editTextNumeroMesa);
         EditText etFecha = findViewById(R.id.editTextFecha);
         ListView lista = findViewById(R.id.listaTickets);
-        DialogoDeCarga dialogoDeCarga = new DialogoDeCarga(HistorialActivity.this);
-        adapter = new TicketAdapter(this,listaTickets);
+
+        adapter = new TicketAdapter(this, listaTickets);
         lista.setAdapter(adapter);
+
         btnBusqueda.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,38 +60,24 @@ public class HistorialActivity extends AppCompatActivity {
                 numero = numero.isEmpty() ? null : numero;
                 fecha = fecha.isEmpty() ? null : fecha;
 
-
-                if (fecha!= null){
+                if (fecha != null) {
                     fecha = validarYConvertirFecha(fecha);
-                    if(fecha == null){
-                        MensajeUtils.mostrarError(HistorialActivity.this,R.string.errorFecha);
+                    if (fecha == null) {
+                        MensajeUtils.mostrarError(HistorialActivity.this, R.string.errorFecha);
                         return;
                     }
                 }
-                TicketService.filtrarTickets(HistorialActivity.this, new FiltroTicket(numero, fecha), new GetTicketsCallback() {
-                    @Override
-                    public void onGetTicketsSuccess(List<Ticket> tickets) {
-                        adapter.clear();
-                        adapter.addAll(tickets);
-                        adapter.notifyDataSetChanged();
-                    }
-                    @Override
-                    public void onGetTicketsError(String error) {
-                        MensajeUtils.mostrarError(HistorialActivity.this,R.string.errorHistorialTicket);
-                    }
-                });
+                realizarBusqueda(numero, fecha);
             }
         });
 
-
-    lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            obtenerDetallesTicket(adapter.getItem(position));
-        }
-    });
+        lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                obtenerDetallesTicket(adapter.getItem(position));
+            }
+        });
     }
-
 
     private void obtenerDetallesTicket(Ticket ticket) {
         dialogoDeCarga.startLoadingDialog();
@@ -110,38 +90,28 @@ public class HistorialActivity extends AppCompatActivity {
             @Override
             public void onGetProductosError(String error) {
                 dialogoDeCarga.dismissDialog();
-                MensajeUtils.mostrarError(HistorialActivity.this,"Error al recuperar los detalles del ticket");
+                MensajeUtils.mostrarError(HistorialActivity.this, "Error al recuperar los detalles del ticket");
             }
         });
     }
 
     private void mostrarDialogoDetalles(List<ProductoCantidad> detalles) {
-        // Infla el layout del diálogo
         LayoutInflater inflater = LayoutInflater.from(this);
         View dialogView = inflater.inflate(R.layout.dialog_ticket_detalles, null);
 
-        // Configura el ListView del diálogo
         ListView listViewDetalles = dialogView.findViewById(R.id.list_view_detalles);
         TicketProductoAdapter detalleAdapter = new TicketProductoAdapter(this, detalles);
         listViewDetalles.setAdapter(detalleAdapter);
 
-
-        // Muestra el diálogo
         AlertDialog dialogo = new AlertDialog.Builder(this)
                 .setTitle("Detalles del Ticket")
                 .setView(dialogView)
                 .setCancelable(false)
                 .setPositiveButton("Cerrar", (dialog, which) -> dialog.dismiss())
                 .show();
-        dialogo.setOnDismissListener(new DialogInterface.OnDismissListener() {
-            @Override
-            public void onDismiss(DialogInterface dialog) {
-                dialogoDeCarga.dismissDialog();
-            }
-        });
+        dialogo.setOnDismissListener(dialog -> dialogoDeCarga.dismissDialog());
     }
 
-    // Método para validar y convertir la fecha
     public static String validarYConvertirFecha(String date) {
         String regexGuion = "^\\d{4}-\\d{2}-\\d{2}$";
         String regexBarra = "^\\d{4}/\\d{2}/\\d{2}$";
@@ -154,10 +124,7 @@ public class HistorialActivity extends AppCompatActivity {
         if (patternBarra.matches()) {
             return date;
         } else if (matcherSlash.matches()) {
-            String convertedDate = date.replace('/', '-');
-            if (patternGuion.matcher(convertedDate).matches()) {
-                return convertedDate;
-            }
+            return date.replace('/', '-');
         }
         return null;
     }
@@ -165,24 +132,79 @@ public class HistorialActivity extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        if(listaTickets != null){
-            String jsonTickets = gson.toJson(listaTickets);
-            outState.putString("lista", jsonTickets);
-        }
+
+        EditText etNumeroMesa = findViewById(R.id.editTextNumeroMesa);
+        EditText etFecha = findViewById(R.id.editTextFecha);
+
+        outState.putString("numero_mesa", etNumeroMesa.getText().toString());
+        outState.putString("fecha", etFecha.getText().toString());
     }
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        String jsonTickets = savedInstanceState.getString("lista");
-        if (jsonTickets != null) {
-            Type type = new TypeToken<ArrayList<Ticket>>(){}.getType();
-            listaTickets = gson.fromJson(jsonTickets, type);
-            adapter.addAll(listaTickets);
-            adapter.notifyDataSetChanged();
+
+        EditText etNumeroMesa = findViewById(R.id.editTextNumeroMesa);
+        EditText etFecha = findViewById(R.id.editTextFecha);
+
+        String savedNumeroMesa = savedInstanceState.getString("numero_mesa");
+        String savedFecha = savedInstanceState.getString("fecha");
+
+        if (savedNumeroMesa != null) {
+            etNumeroMesa.setText(savedNumeroMesa);
         }
+        if (savedFecha != null) {
+            etFecha.setText(savedFecha);
+        }
+
+        realizarBusqueda(savedNumeroMesa, savedFecha);
+    }
+
+    private void realizarBusqueda(String numeroMesa, String fecha) {
+        if (fecha != null && !fecha.isEmpty()) {
+            fecha = validarYConvertirFecha(fecha);
+            if (fecha == null) {
+                MensajeUtils.mostrarError(HistorialActivity.this, R.string.errorFecha);
+                return;
+            }
+        }else {
+            fecha = null;
+        }
+        Log.d("Realizada", "principio - Fecha: " + fecha + ", Numero Mesa: " + numeroMesa);
+
+        long startTime = System.currentTimeMillis();
+
+        TicketService.filtrarTickets(HistorialActivity.this, new FiltroTicket(numeroMesa, fecha), new GetTicketsCallback() {
+            @Override
+            public void onGetTicketsSuccess(List<Ticket> tickets) {
+                long endTime = System.currentTimeMillis();
+                long duration = endTime - startTime;
+
+                Log.d("Tiempo de respuesta", "Duración: " + duration + " ms");
+
+                adapter.clear();
+                adapter.addAll(tickets);
+                adapter.notifyDataSetChanged();
+                Log.d("Realizada", "final - tamaño de tickets: " + tickets.size());
+            }
+
+            @Override
+            public void onGetTicketsError(String error) {
+                MensajeUtils.mostrarError(HistorialActivity.this, R.string.errorHistorialTicket);
+            }
+        });
     }
 
 
+    @Override
+    protected void onDestroy() {
+        LocaleUtil.loadLocale(HistorialActivity.this);
+        super.onDestroy();
+    }
 
+    @Override
+    protected void onStop() {
+        LocaleUtil.loadLocale(HistorialActivity.this);
+        super.onStop();
+    }
 }
