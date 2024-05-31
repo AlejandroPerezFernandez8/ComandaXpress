@@ -27,9 +27,9 @@ public class ApiMap {
 
     public static String getUrlTicketFiltros(FiltroTicket filtro) {
         if(filtro.getIdMesa()!= null && filtro.getFecha()!= null){
-            return getBaseUrl() + "ticket/filtros?idMesa="+ filtro.getIdMesa()+"&fecha="+filtro.getFecha();
+            return getBaseUrl() + "ticket/filtros?numeroMesa="+ filtro.getIdMesa()+"&fecha="+filtro.getFecha();
         }else if(filtro.getIdMesa() != null){
-            return getBaseUrl() + "ticket/filtros?idMesa="+ filtro.getIdMesa();
+            return getBaseUrl() + "ticket/filtros?numeroMesa="+ filtro.getIdMesa();
         } else if (filtro.getFecha()!= null) {
             return getBaseUrl() + "ticket/filtros?fecha="+filtro.getFecha();
         }else {

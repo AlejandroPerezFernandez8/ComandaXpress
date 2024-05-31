@@ -121,8 +121,8 @@
 
         <LinearLayout
             android:id="@+id/LinearLista"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="310dp"
             android:orientation="vertical"
             app:layout_constraintTop_toBottomOf="@id/textViewResultados"
             app:layout_constraintStart_toStartOf="parent"

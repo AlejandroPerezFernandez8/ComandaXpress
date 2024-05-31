@@ -86,7 +86,6 @@ public class TicketService {
 
     public static void getDetallesDeTicket(Context context, Long ticketId, final GetProductoCantidadCallback callback) {
         String url = ApiMapSingleton.getInstance().getUrlTicketDetalle(ticketId);
-
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
                 Request.Method.GET,
                 url,
@@ -224,7 +223,7 @@ public class TicketService {
 
     public static void filtrarTickets(Context context, FiltroTicket filtros, final GetTicketsCallback callback) {
         String url = ApiMapSingleton.getInstance().getUrlTicketFiltros(filtros);
-
+        Log.d("GetDetalles",url);
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
                 Request.Method.GET,
                 url,

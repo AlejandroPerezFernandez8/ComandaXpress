@@ -96,14 +96,6 @@ public class HistorialActivity extends AppCompatActivity {
             obtenerDetallesTicket(adapter.getItem(position));
         }
     });
-
-
-
-
-
-
-
-
     }
 
 
