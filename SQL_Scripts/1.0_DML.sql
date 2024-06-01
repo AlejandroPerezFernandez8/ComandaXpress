@@ -1,12 +1,11 @@
+use comandaxpress;
 INSERT INTO Usuarios (nombre, apellido, email, usuario, contraseña, foto)
 VALUES ('Admin', 'User', 'admin@example.com', 'admin', 'admin', NULL);
 
--- Insertar datos en la tabla Mesas
 INSERT INTO mesa (numero, capacidad) VALUES
 (1, 4), (2, 4), (3, 4), (4, 4), (5, 4), (6, 4), (7, 4), (8, 4), (9, 4), (10, 4),
 (11, 4), (12, 4), (13, 4), (14, 4);
 
--- Insertar datos en la tabla Categorías
 INSERT INTO Categorias (nombre, descripcion) VALUES
 ('Entrantes', 'Platos ligeros para comenzar la comida'),
 ('Refrescos', 'Bebidas sin alcohol para acompañar la comida'),
@@ -19,7 +18,6 @@ INSERT INTO Categorias (nombre, descripcion) VALUES
 ('Sopas', 'Sopas calientes y frías para todos los gustos'),
 ('Pasta', 'Platos de pasta con diferentes salsas');
 
--- Insertar datos en la tabla Productos
 INSERT INTO Productos (categoria_id, nombre, precio) VALUES
 -- Entrantes
 (1, 'Bruschetta', 5.00), (1, 'Calamares a la romana', 7.50), (1, 'Patatas bravas', 4.50), (1, 'Alitas de pollo', 6.00),
@@ -59,17 +57,18 @@ INSERT INTO Productos (categoria_id, nombre, precio) VALUES
 (9, 'Sopa de miso', 3.50), (9, 'Caldo de pollo', 4.00),
 -- Pasta
 (10, 'Espaguetis a la boloñesa', 8.00), (10, 'Macarrones con queso', 7.00), (10, 'Lasaña de carne', 9.00), (10, 'Raviolis de espinacas', 8.50),
-(10, 'Tallarines al pesto', 8.00), (10, 'Penne all arrabbiata' , 7.50), (10, 'Fettuccine Alfredo', 8.50), (10, 'Canelones de carne', 9.00),
+(10, 'Tallarines al pesto', 8.00), (10, 'Penne all arrabbiata', 7.50), (10, 'Fettuccine Alfredo', 8.50), (10, 'Canelones de carne', 9.00),
 (10, 'Gnocchi a la romana', 7.50), (10, 'Tagliatelle con trufa', 10.00);
 
--- Insertar datos en la tabla Tickets y Ticket_Detalle
--- Generar algunos tickets para las mesas
-INSERT INTO Tickets (mesa_id) VALUES
-(1), (1), (1), (2), (2), (3), (3), (4), (4), (5),
-(5), (6), (6), (7), (7), (8), (8), (9), (9), (10),
-(10), (11), (11), (12), (12), (13), (13), (14), (14);
+INSERT INTO Tickets (mesa_id, fecha_hora) VALUES
+(1, '2024-05-01 12:30:00'), (1, '2024-05-02 13:45:00'), (1, '2024-05-03 14:15:00'), (2, '2024-05-01 11:50:00'), (2, '2024-05-02 13:20:00'), 
+(3, '2024-05-03 14:05:00'), (3, '2024-05-04 12:10:00'), (4, '2024-05-05 13:25:00'), (4, '2024-05-06 12:35:00'), (5, '2024-05-07 14:50:00'), 
+(5, '2024-05-08 11:45:00'), (6, '2024-05-09 13:40:00'), (6, '2024-05-10 12:25:00'), (7, '2024-05-11 14:30:00'), (7, '2024-05-12 11:55:00'), 
+(8, '2024-05-13 13:15:00'), (8, '2024-05-14 12:50:00'), (9, '2024-05-15 14:20:00'), (9, '2024-05-16 13:05:00'), (10, '2024-05-17 12:40:00'), 
+(10, '2024-05-18 13:30:00'), (11, '2024-05-19 14:10:00'), (11, '2024-05-20 11:35:00'), (12, '2024-05-21 13:50:00'), (12, '2024-05-22 12:15:00'), 
+(13, '2024-05-23 14:00:00'), (13, '2024-05-24 11:20:00'), (14, '2024-05-25 13:40:00'), (14, '2024-05-26 12:05:00');
 
--- Generar detalles de tickets aleatorios
+
 INSERT INTO Ticket_Detalle (ticket_id, producto_id, cantidad) VALUES
 (1, 1, 2), (1, 11, 1), (1, 21, 2), (1, 31, 1), (1, 41, 3), (1, 51, 2),
 (2, 2, 1), (2, 12, 2), (2, 22, 3), (2, 32, 2), (2, 42, 1), (2, 52, 2),

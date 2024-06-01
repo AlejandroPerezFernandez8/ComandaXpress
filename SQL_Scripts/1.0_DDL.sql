@@ -34,7 +34,7 @@ CREATE TABLE mesa(
     mesa_id INT AUTO_INCREMENT PRIMARY KEY,
     numero INT NOT NULL UNIQUE,
     capacidad INT NOT NULL,
-    activa BOOLEAN NOT NULL DEFAULT TRUE
+    activa BOOLEAN DEFAULT FALSE
 );
 
 -- Creación de la tabla Tickets
