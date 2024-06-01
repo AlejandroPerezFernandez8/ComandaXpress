@@ -4,9 +4,14 @@ import TableModels.UsuarioTableModel;
 import comandaxpress.comandaxpress.desktop.HibernateUtils.HibernateUtil;
 import comandaxpress.comandaxpress.desktop.Modelo.Usuario;
 import comandaxpress.comandaxpress.desktop.Vista.PantallaUsuarios;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.Base64;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -18,6 +23,8 @@ public class ControladorUsuarios {
     private static final PantallaUsuarios ventana = new PantallaUsuarios();
     private static DefaultComboBoxModel modelo = new DefaultComboBoxModel<>();
     private static UsuarioTableModel modeloTabla;
+    private static String foto = null;
+    
     static void iniciar() {
         ventana.setLocationRelativeTo(null);
         ventana.setVisible(true);
@@ -66,6 +73,7 @@ public class ControladorUsuarios {
             System.out.println(e.getMessage());
         } finally {
             actualizarDatos();
+            foto = null;
         }
     }  
    public static void InsertarUsuario() {
@@ -87,6 +95,9 @@ public class ControladorUsuarios {
         if (!id.isEmpty()) {
             usuario.setUsuario_id(Long.parseLong(id));
         }
+        if(foto != null){
+            usuario.setFoto(foto);
+        }
         
         session.save(usuario);
         transaction.commit();
@@ -103,6 +114,7 @@ public class ControladorUsuarios {
         }
     } finally {
         actualizarDatos();
+        foto = null;
     }
 }
    public static void ModificarUsuario() {
@@ -127,7 +139,9 @@ public class ControladorUsuarios {
             usuario.setEmail(email);
             usuario.setUsuario(nombreUsuario);
             usuario.setContraseña(contraseña);
-            
+            if(foto != null){
+                usuario.setFoto(foto);
+            }
             session.update(usuario);
             transaction.commit();
             JOptionPane.showMessageDialog(null, "Usuario modificado correctamente.");
@@ -138,6 +152,7 @@ public class ControladorUsuarios {
             }
         } finally {
           actualizarDatos();
+          foto = null;
         }
     }  
    private static void actualizarDatos(){
@@ -164,4 +179,28 @@ public class ControladorUsuarios {
             ventana.getTxtContraseña().setText(usuario.getContraseña());
         }
     }   
+
+    public static void añadirFoto() {
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("Imagenes PNG y JPG", "png", "jpg"));
+        int result = fileChooser.showOpenDialog(ventana);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File archivoImagen = fileChooser.getSelectedFile();
+            foto = encodeImageFileToBase64(archivoImagen);
+            ventana.getLblMensaje().setText("Imagen: " +archivoImagen.getName());
+        }
+    }
+    
+     public static String encodeImageFileToBase64(File imageFile) {
+        try (FileInputStream fileInputStream = new FileInputStream(imageFile)) {
+            byte[] bytes = new byte[(int) imageFile.length()];
+            fileInputStream.read(bytes);
+            return Base64.getEncoder().encodeToString(bytes);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
+    
 }
