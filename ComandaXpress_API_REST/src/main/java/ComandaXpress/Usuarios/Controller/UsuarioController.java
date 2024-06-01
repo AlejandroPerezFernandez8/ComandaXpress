@@ -60,6 +60,11 @@ public class UsuarioController {
             usuarioRepository.save(usuarioModificado);
             return "Usuario Modificado!!!";
         }catch (Exception ex){
+            System.out.println(ex.getMessage());
+            if(ex.getMessage().contains("Duplicate entry")){
+                System.out.println("-----------");
+                return "Usuario duplicado";
+            }
             if(ex.getMessage().contains("duplicate")){
                 return "Usuario duplicado";
             }else {return "Ha ocurrido un error";}

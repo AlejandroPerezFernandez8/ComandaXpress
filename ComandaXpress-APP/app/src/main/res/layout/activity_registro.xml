@@ -58,7 +58,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:textColor="@color/colorLightBlue"
-                />
+                android:imeOptions="actionNext"
+                android:inputType="textPersonName"/>
 
             <EditText
                 android:id="@+id/Apellidos"
@@ -71,7 +72,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/Nombre"
                 android:textColor="@color/colorLightBlue"
-                />
+                android:imeOptions="actionNext"
+                android:inputType="textPersonName"/>
 
             <EditText
                 android:id="@+id/Email"
@@ -85,7 +87,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/Apellidos"
                 android:textColor="@color/colorLightBlue"
                 android:inputType="textEmailAddress"
-                />
+                android:imeOptions="actionNext"/>
 
             <EditText
                 android:id="@+id/NombreUsuario"
@@ -98,7 +100,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/Email"
                 android:textColor="@color/colorLightBlue"
-                />
+                android:imeOptions="actionNext"
+                android:inputType="textPersonName"/>
 
             <EditText
                 android:id="@+id/Contraseña"
@@ -112,7 +115,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/NombreUsuario"
                 android:textColor="@color/colorLightBlue"
                 android:inputType="textPassword"
-                />
+                android:imeOptions="actionDone"/>
 
             <LinearLayout
                 android:id="@+id/layoutFoto"

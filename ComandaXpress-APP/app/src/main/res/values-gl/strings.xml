@@ -68,6 +68,8 @@
     <string name="errorPemisoFoto">Non se pode sacar unha foto (Permiso denegado)</string>
     <string name="errorFecha">A data non é válida</string>
     <string name="errorHistorialTicket">Produciuse un erro ao recuperar o historial</string>
+    <string name="errorDetallesVacios">O ticket non contén productos</string>
+    <string name="errorClickDetalles">"Error ao recuperar os detalles do ticket"</string>
     <!-- MENSAJE INFORMATIVOS-->
     <string name="CambioIP">IP cambiada</string>
     <string name="ModificacionUsuario">Usuario modificado correctamente</string>
@@ -80,7 +82,7 @@
     <string name="numero_de_mesa">Número de Mesa</string>
     <string name="fecha">Data (YYYY-MM-DD)</string>
     <string name="buscar">Buscar</string>
-    <string name="resultados_de_la_busqueda">Resultados da busca</string>
+    <string name="resultados_de_la_busqueda">Resultados da busca:</string>
 
 
 </resources>

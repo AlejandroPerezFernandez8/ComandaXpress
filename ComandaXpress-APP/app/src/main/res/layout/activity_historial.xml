@@ -117,7 +117,7 @@
             app:layout_constraintTop_toBottomOf="@id/linearLayoutFiltros"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="16dp"/>
+            android:layout_marginTop="20dp"/>
 
         <LinearLayout
             android:id="@+id/LinearLista"
@@ -128,7 +128,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/buttonBuscar"
-            android:layout_margin="10dp"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="0dp"
             android:background="@drawable/panel_fondo_transparente_redondeado"
             android:padding="10dp">
 

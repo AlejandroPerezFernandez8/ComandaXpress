@@ -62,6 +62,7 @@ public class AjustesActivity extends AppCompatActivity implements ModificacionCa
     ImageView fotoPerfilModificar;
     ImageView imagenBandera;
     boolean isCastellano;
+    EditText nombreUsuarioModificar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,7 +83,7 @@ public class AjustesActivity extends AppCompatActivity implements ModificacionCa
         EditText nombreModificar = findViewById(R.id.NombreModificar);
         EditText apellidosModificar = findViewById(R.id.ApellidosModificar);
         EditText emailModificar = findViewById(R.id.EmailModificar);
-        EditText nombreUsuarioModificar = findViewById(R.id.NombreUsuarioModificar);
+        nombreUsuarioModificar = findViewById(R.id.NombreUsuarioModificar);
         EditText contraseñaModificar = findViewById(R.id.ContraseñaModificar);
         fotoPerfilModificar = findViewById(R.id.fotoPerfilModificar);
         Button btnSacarFotoModificar = findViewById(R.id.btnSacarFotoModificar);
@@ -311,6 +312,11 @@ public class AjustesActivity extends AppCompatActivity implements ModificacionCa
     @Override
     public void onRegistroSuccess(String response) {
         try {
+            if(response.contains("Usuario duplicado")){
+                MensajeUtils.mostrarError(AjustesActivity.this,R.string.errorUsuarioDuplicado);
+                nombreUsuarioModificar.setError(AjustesActivity.this.getString(R.string.errorUsuarioDuplicado));
+                return;
+            }
             // GUARDAR EL USUARIO ENCRIPTADO EN LAS PREFERENCIAS
             sharedPreferences.edit().putString("Usuario", CryptoUtils.encriptar(new Gson().toJson(usuario), "abc123.")).apply();
             MensajeUtils.mostrarMensaje(AjustesActivity.this,R.string.ModificacionUsuario);
@@ -326,8 +332,9 @@ public class AjustesActivity extends AppCompatActivity implements ModificacionCa
 
     @Override
     public void onRegistroFailed(String error) {
-        if (error.contains("Duplicated Entry")) {
+        if (error.contains("Usuario duplicado")) {
             MensajeUtils.mostrarError(AjustesActivity.this,R.string.errorUsuarioDuplicado);
+            nombreUsuarioModificar.setError(AjustesActivity.this.getString(R.string.errorUsuarioDuplicado));
         } else {
             MensajeUtils.mostrarError(AjustesActivity.this,R.string.errorModificacion);
             Log.d("Modificacion Error", error);

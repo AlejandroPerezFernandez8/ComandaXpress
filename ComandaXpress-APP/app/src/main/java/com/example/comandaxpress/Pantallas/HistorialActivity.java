@@ -84,13 +84,21 @@ public class HistorialActivity extends AppCompatActivity {
         TicketService.getDetallesDeTicket(this, ticket.getTicketId(), new GetProductoCantidadCallback() {
             @Override
             public void onGetProductosSuccess(List<ProductoCantidad> productoCantidadList) {
-                mostrarDialogoDetalles(productoCantidadList);
+                if(productoCantidadList.size()>0){
+                    mostrarDialogoDetalles(productoCantidadList);
+                }else{
+                    MensajeUtils.mostrarError(HistorialActivity.this,R.string.errorDetallesVacios);
+                }
             }
 
             @Override
             public void onGetProductosError(String error) {
                 dialogoDeCarga.dismissDialog();
-                MensajeUtils.mostrarError(HistorialActivity.this, "Error al recuperar los detalles del ticket");
+                if(error.contains("No hay productos")){
+                    MensajeUtils.mostrarError(HistorialActivity.this, R.string.errorDetallesVacios);
+                }else {
+                    MensajeUtils.mostrarError(HistorialActivity.this, "Error al recuperar los detalles del ticket");
+                }
             }
         });
     }

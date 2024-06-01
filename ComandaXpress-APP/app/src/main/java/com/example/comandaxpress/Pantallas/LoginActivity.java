@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.text.InputType;
 import android.util.Log;
 import android.view.View;
@@ -16,6 +17,7 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.comandaxpress.API.ApiMapSingleton;
@@ -24,6 +26,7 @@ import com.example.comandaxpress.API.Interfaces.LoginCallBack;
 import com.example.comandaxpress.API.UsuarioService;
 import com.example.comandaxpress.Pantallas.PantallasSecundarias.DialogoDeCarga;
 import com.example.comandaxpress.R;
+import com.example.comandaxpress.Util.BotonUtils;
 import com.example.comandaxpress.Util.CryptoUtils;
 import com.example.comandaxpress.Util.MensajeUtils;
 import com.example.comandaxpress.Util.LocaleUtil;
@@ -35,6 +38,7 @@ public class LoginActivity extends AppCompatActivity implements LoginCallBack {
     SharedPreferences sharedPreferences;
     DialogoDeCarga dialogoDeCarga = new DialogoDeCarga(LoginActivity.this);
     EditText nombreUsuario;
+    EditText contraseña;
     /**
      * Comprobacion del idioma,Comprobación de la existencia de una IP, Instanciación de componentes
      * */
@@ -75,8 +79,12 @@ public class LoginActivity extends AppCompatActivity implements LoginCallBack {
                     }
                     @Override
                     public void onError(String message) {
-                        MensajeUtils.mostrarErrorLargo(LoginActivity.this,"El usuario guardado ya no existe en la Base de Datos \n Vuelva a iniciar sesion para continuar");
-                        Log.d("ErrorLogin","Error al recuperar los datos de la sesion");
+                        if(message.contains("TimeoutError")){
+                            MensajeUtils.mostrarError(LoginActivity.this,R.string.errorServidor);
+                        }else {
+                            MensajeUtils.mostrarErrorLargo(LoginActivity.this, "El usuario guardado ya no existe en la Base de Datos \n Vuelva a iniciar sesion para continuar");
+                            Log.d("ErrorLogin", "Error al recuperar los datos de la sesion");
+                        }
                         dialogoDeCarga.dismissDialog();
                     }
                 });
@@ -88,7 +96,7 @@ public class LoginActivity extends AppCompatActivity implements LoginCallBack {
         }
         //Referencias a variables de actividad
         nombreUsuario = findViewById(R.id.NombreUsuario);
-        EditText contraseña = findViewById(R.id.Contraseña);
+        contraseña = findViewById(R.id.Contraseña);
         Button btnRegistro = findViewById(R.id.btnRegistrarse);
         Button btnLogin = findViewById(R.id.btnLogin);
         Button btnCambiarIP = findViewById(R.id.btnCambiarIPLogin);
@@ -100,6 +108,7 @@ public class LoginActivity extends AppCompatActivity implements LoginCallBack {
         btnCambiarIP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                BotonUtils.deshabilitarTemporalmente(btnCambiarIP);
                 solicitarIP();
                 ApiMapSingleton.getInstance().setIP(SQLiteUtils.getIP(LoginActivity.this));
             }
@@ -111,6 +120,7 @@ public class LoginActivity extends AppCompatActivity implements LoginCallBack {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                BotonUtils.deshabilitarTemporalmente(btnLogin);
                 dialogoDeCarga.startLoadingDialog();
                 UsuarioService.loginUsuario(getApplicationContext(),nombreUsuario.getText().toString().trim(),contraseña.getText().toString().trim(),LoginActivity.this);
             }
@@ -122,6 +132,7 @@ public class LoginActivity extends AppCompatActivity implements LoginCallBack {
         btnRegistro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                BotonUtils.deshabilitarTemporalmente(btnRegistro);
                 Intent intentRegistro = new Intent(getApplicationContext(),RegistroActivity.class);
                 someActivityResultLauncher.launch(intentRegistro);
             }});
@@ -174,7 +185,7 @@ public class LoginActivity extends AppCompatActivity implements LoginCallBack {
         Log.e("Login error",message);
         if (message.contains("AuthFailureError")){
             MensajeUtils.mostrarError(this,R.string.errorUsuarioNoExiste);
-        }else if (message.contains("host")){
+        }else if (message.contains("host")||message.contains("TimeoutError")){
             MensajeUtils.mostrarError(this,R.string.errorServidor);
         }else{
             Log.d("Login activity", message+"a");
@@ -214,5 +225,20 @@ public class LoginActivity extends AppCompatActivity implements LoginCallBack {
         });
 
         builder.show();
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("usuario", nombreUsuario.getText().toString());
+        outState.putString("contraseña", contraseña.getText().toString());
+    }
+
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        nombreUsuario.setText(savedInstanceState.getString("usuario"));
+        contraseña.setText(savedInstanceState.getString("contraseña"));
     }
 }
