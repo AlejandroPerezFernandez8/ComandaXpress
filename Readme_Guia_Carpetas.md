@@ -2,7 +2,7 @@
 
 ## Estructura del Proyecto
 
-El proyecto está organizado en varios directorios clave, cada uno con un propósito específico. A continuación, te presento un desglose detallado:
+El proyecto está organizado en varios directorios clave, cada uno con un propósito específico. A continuación, se muestra un desglose detallado:
 
 ### 1. Assets
 
