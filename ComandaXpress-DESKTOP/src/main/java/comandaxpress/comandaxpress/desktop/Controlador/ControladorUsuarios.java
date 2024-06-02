@@ -146,9 +146,13 @@ public class ControladorUsuarios {
             transaction.commit();
             JOptionPane.showMessageDialog(null, "Usuario modificado correctamente.");
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al modificar el usuario: " + e.getMessage());
-             if (transaction != null) {
-                transaction.rollback();
+            if(e.getMessage().contains("ConstraintViolationException")){
+                JOptionPane.showMessageDialog(null, "El nombre de usuario ya existe");
+            }else{
+                JOptionPane.showMessageDialog(null, "Error al modificar el usuario: " + e.getMessage());
+                 if (transaction != null) {
+                    transaction.rollback();
+                }
             }
         } finally {
           actualizarDatos();

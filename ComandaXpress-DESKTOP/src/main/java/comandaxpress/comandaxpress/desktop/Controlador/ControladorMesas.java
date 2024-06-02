@@ -81,7 +81,12 @@ public class ControladorMesas {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-
+            
+            if(ventana.getTxtIDMesa().getText().trim().isEmpty()){
+                JOptionPane.showMessageDialog(ventana,"Debes escribir un ID de mesa o seleccionar una en el combo");
+                return;
+            }
+            
             Long mesaId = Long.parseLong(ventana.getTxtIDMesa().getText().trim());
             Integer numero = Integer.parseInt(ventana.getTxtNumeroMesa().getText().trim());
             Integer capacidad = Integer.parseInt(ventana.getTxtNumeroComensales().getText().trim());
@@ -107,6 +112,7 @@ public class ControladorMesas {
             if (e.getMessage().contains("ConstraintViolationException")) {
                 JOptionPane.showMessageDialog(ventana, "Error: La mesa ya existe");
             } else {
+               
                 JOptionPane.showMessageDialog(ventana, "Error al modificar la mesa: " + e.getMessage());
             }
             if (transaction != null) {
@@ -118,6 +124,10 @@ public class ControladorMesas {
     }
 
     public static void eliminarMesa() {
+        if(ventana.getTxtIDMesa().getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(ventana, "Debes escribir un id de mesa o seleccionar una del combo");
+            return;
+        }
         Long mesaId = Long.parseLong(ventana.getTxtIDMesa().getText().trim());
         int confirm = JOptionPane.showConfirmDialog(
                 ventana,
@@ -132,6 +142,7 @@ public class ControladorMesas {
             try (Session session = HibernateUtil.getSessionFactory().openSession()) {
                 transaction = session.beginTransaction();
                 Mesa mesa = session.get(Mesa.class, mesaId);
+                if(mesa == null){JOptionPane.showMessageDialog(ventana, "La mesa no existe");return;}
                 session.delete(mesa);  // Elimina la mesa y sus tickets asociados debido al cascade
                 transaction.commit();
                 JOptionPane.showMessageDialog(ventana, "Mesa eliminada.");
