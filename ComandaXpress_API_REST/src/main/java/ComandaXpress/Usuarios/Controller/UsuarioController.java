@@ -62,7 +62,6 @@ public class UsuarioController {
         }catch (Exception ex){
             System.out.println(ex.getMessage());
             if(ex.getMessage().contains("Duplicate entry")){
-                System.out.println("-----------");
                 return "Usuario duplicado";
             }
             if(ex.getMessage().contains("duplicate")){
