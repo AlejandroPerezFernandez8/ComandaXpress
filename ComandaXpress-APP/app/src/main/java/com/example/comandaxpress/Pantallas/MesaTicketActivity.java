@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -70,6 +71,14 @@ public class MesaTicketActivity extends AppCompatActivity implements GetAllCateg
         adapter = new TicketProductoAdapter(MesaTicketActivity.this, pcList);
         lista.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+
+        lista.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                v.getParent().requestDisallowInterceptTouchEvent(false);
+                return false;
+            }
+        });
 
         lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

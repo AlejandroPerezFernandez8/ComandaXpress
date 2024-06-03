@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -100,24 +100,33 @@
             android:layout_marginEnd="40dp"
             android:textColor="@color/colorOffWhite" />
 
-        <ListView
-            android:id="@+id/listaProductosAgregados"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:id="@+id/LinearListaProductos"
+            android:layout_width="match_parent"
             android:layout_height="450dp"
+            android:orientation="vertical"
             app:layout_constraintTop_toBottomOf="@id/btnAñadirProducto"
             app:layout_constraintBottom_toTopOf="@id/tvTotal"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_margin="20dp"
             android:background="@drawable/panel_fondo_transparente_redondeado"
-            android:padding="15dp"
-            android:scrollbars="none" />
+            android:padding="15dp">
+
+            <ListView
+                android:id="@+id/listaProductosAgregados"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:divider="@android:color/transparent"
+                android:dividerHeight="10dp"
+                android:nestedScrollingEnabled="true"/>
+        </LinearLayout>
 
         <TextView
             android:id="@+id/tvTotal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/listaProductosAgregados"
+            app:layout_constraintTop_toBottomOf="@id/LinearListaProductos"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:textColor="@color/colorOffWhite"
@@ -140,4 +149,4 @@
             android:layout_marginBottom="16dp"
             android:textColor="@color/colorOffWhite" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+</androidx.core.widget.NestedScrollView>

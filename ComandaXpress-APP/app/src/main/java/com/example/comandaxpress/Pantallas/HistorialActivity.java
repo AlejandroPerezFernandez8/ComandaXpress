@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -70,13 +71,22 @@ public class HistorialActivity extends AppCompatActivity {
                 realizarBusqueda(numero, fecha);
             }
         });
-
+        lista.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                v.getParent().requestDisallowInterceptTouchEvent(false);
+                return false;
+            }
+        });
         lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 obtenerDetallesTicket(adapter.getItem(position));
             }
         });
+
+
+
     }
 
     private void obtenerDetallesTicket(Ticket ticket) {
