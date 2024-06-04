@@ -1,0 +1,853 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.21.3.final using JasperReports Library version 6.21.3-4a3078d20785ebe464f18037d738d12fc98c13cf  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Coffee" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ced95029-b569-4027-895c-af2843a4e088">
+	<property name="com.jaspersoft.studio.data.sql.tables">
+		<![CDATA[Y29tYW5kYXhwcmVzcy50aWNrZXRfZGV0YWxsZSBBUyAsMjQ0LDMxNyw1ZTc1NmVkNS0xZDBkLTQz
+ZTItOGZlNi05MzgzNjNkYjUzZGI7Y29tYW5kYXhwcmVzcy5wcm9kdWN0b3MgQVMgLDQyOSwyOTcs
+ODA0YTA5ODgtNWU2OC00ZTY3LTljNDItMTFmNGEyMWZlZjZlO2NvbWFuZGF4cHJlc3MudXN1YXJp
+b3MgQVMgLDMyNCw3MixjZmQ5ZjQ5Yi1mNDhiLTRhODUtODQxYS1mYzZlMDg1MTdkYTM7Y29tYW5k
+YXhwcmVzcy5jYXRlZ29yaWFzIEFTICwxNDUsMTE4LDJiYmRmZjdlLTQ5YTYtNDA5OC1hNGNjLWY4
+ZWM1NWJhMGJmMTtjb21hbmRheHByZXNzLm1lc2EgQVMgLDM4Miw0NSxjYmRiYzQ1OS00ODE3LTQ3
+Y2YtYWIwMC1mOGQwNmQ5N2Y2YWE7Y29tYW5kYXhwcmVzcy50aWNrZXRzIEFTICwxNzMsMzIxLGU1
+NmJiMzQwLTA3ZWMtNGZiMC04NWM0LWIwOTE2NjUyN2M3ZTs=]]>
+	</property>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="357"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="632"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Adaptador"/>
+	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w1" value="871"/>
+	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w2" value="115"/>
+	<style name="Title" fontName="Times New Roman" fontSize="50" isBold="true"/>
+	<style name="SubTitle" forecolor="#736343" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<style name="Row" mode="Transparent">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style backcolor="#E6DAC3"/>
+		</conditionalStyle>
+	</style>
+	<style name="Table 1_TH" mode="Opaque" backcolor="#FAEBD7">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 1_CH" mode="Opaque" backcolor="#FFE4BF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TH" mode="Opaque" backcolor="#FFE4C4">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_CH" mode="Opaque" backcolor="#FFE2BF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 2_TH" mode="Opaque" backcolor="#FFE4C4">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 2_CH" mode="Opaque" backcolor="#FFE2BF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 2_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 3_TH" mode="Opaque" backcolor="#FFE4C4">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 3_CH" mode="Opaque" backcolor="#FFE2BF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 3_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Dataset1" uuid="093be84b-6cc1-4488-9a8f-a96e17fabb0b">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Adaptador"/>
+		<queryString language="SQL">
+			<![CDATA[SELECT
+    p.nombre AS producto_nombre,
+    SUM(td.cantidad) AS total_vendidos
+FROM
+    comandaxpress.ticket_detalle td
+INNER JOIN
+    comandaxpress.productos p ON td.producto_id = p.producto_id
+GROUP BY
+    p.nombre
+ORDER BY
+    total_vendidos DESC
+LIMIT 10;]]>
+		</queryString>
+		<field name="producto_nombre" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="nombre"/>
+			<property name="com.jaspersoft.studio.field.label" value="producto_nombre"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="productos"/>
+		</field>
+		<field name="total_vendidos" class="java.math.BigDecimal">
+			<property name="com.jaspersoft.studio.field.name" value="total_vendidos"/>
+			<property name="com.jaspersoft.studio.field.label" value="total_vendidos"/>
+		</field>
+	</subDataset>
+	<subDataset name="Dataset2" uuid="232966e9-a8d2-46d6-8fa6-65f24f0381c1">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Adaptador"/>
+		<queryString language="SQL">
+			<![CDATA[SELECT
+    p.nombre AS producto_nombre,
+    SUM(td.cantidad) AS total_vendidos
+FROM
+    Ticket_Detalle td
+INNER JOIN
+    Productos p ON td.producto_id = p.producto_id
+GROUP BY
+    p.nombre
+ORDER BY
+    total_vendidos DESC
+LIMIT 10]]>
+		</queryString>
+		<field name="producto_nombre" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="nombre"/>
+			<property name="com.jaspersoft.studio.field.label" value="producto_nombre"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="productos"/>
+		</field>
+		<field name="total_vendidos" class="java.math.BigDecimal">
+			<property name="com.jaspersoft.studio.field.name" value="total_vendidos"/>
+			<property name="com.jaspersoft.studio.field.label" value="total_vendidos"/>
+		</field>
+		<group name="producto_nombre">
+			<groupExpression><![CDATA[$F{producto_nombre}]]></groupExpression>
+		</group>
+	</subDataset>
+	<subDataset name="ProductosMasVendidos" uuid="7902b9ee-24e9-418d-8a28-1bef72929539">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Adaptador"/>
+		<queryString language="SQL">
+			<![CDATA[SELECT
+    p.nombre AS producto_nombre,
+    SUM(td.cantidad) AS total_vendidos
+FROM
+    Ticket_Detalle td
+INNER JOIN
+    Productos p ON td.producto_id = p.producto_id
+GROUP BY
+    p.nombre
+ORDER BY
+    total_vendidos DESC
+LIMIT 10]]>
+		</queryString>
+		<field name="producto_nombre" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="nombre"/>
+			<property name="com.jaspersoft.studio.field.label" value="producto_nombre"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="productos"/>
+		</field>
+		<field name="total_vendidos" class="java.math.BigDecimal">
+			<property name="com.jaspersoft.studio.field.name" value="total_vendidos"/>
+			<property name="com.jaspersoft.studio.field.label" value="total_vendidos"/>
+		</field>
+	</subDataset>
+	<subDataset name="MediaDeVentasPorCategoria" uuid="b27f086a-90bd-4f29-84e2-7ddf06f8d7b9">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Adaptador"/>
+		<queryString language="SQL">
+			<![CDATA[SELECT
+    c.nombre AS categoria_nombre,
+    AVG(ingresos_totales) AS ingresos_medios
+FROM (
+    SELECT
+        p.categoria_id,
+        SUM(td.cantidad * p.precio) AS ingresos_totales
+    FROM
+        Ticket_Detalle td
+    INNER JOIN
+        Productos p ON td.producto_id = p.producto_id
+    GROUP BY
+        p.categoria_id, td.ticket_id
+) subquery
+INNER JOIN
+    Categorias c ON subquery.categoria_id = c.categoria_id
+GROUP BY
+    c.nombre
+ORDER BY
+    ingresos_medios DESC]]>
+		</queryString>
+		<field name="categoria_nombre" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="nombre"/>
+			<property name="com.jaspersoft.studio.field.label" value="categoria_nombre"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="categorias"/>
+		</field>
+		<field name="ingresos_medios" class="java.math.BigDecimal">
+			<property name="com.jaspersoft.studio.field.name" value="ingresos_medios"/>
+			<property name="com.jaspersoft.studio.field.label" value="ingresos_medios"/>
+		</field>
+	</subDataset>
+	<subDataset name="GraficoProductividadMesas" uuid="1aebf24f-c997-45b4-83e3-ea4f058f8e7d">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Adaptador"/>
+		<queryString language="SQL">
+			<![CDATA[SELECT
+    m.numero AS mesa_numero,
+    SUM(td.cantidad * p.precio) AS ingresos_totales,
+    ROUND((SUM(td.cantidad * p.precio) / (SELECT SUM(td.cantidad * p.precio)
+                                          FROM Ticket_Detalle td
+                                          INNER JOIN Productos p ON td.producto_id = p.producto_id)) * 100, 2) AS porcentaje_productividad
+FROM
+    Ticket_Detalle td
+INNER JOIN
+    Tickets t ON td.ticket_id = t.ticket_id
+INNER JOIN
+    mesa m ON t.mesa_id = m.mesa_id
+INNER JOIN
+    Productos p ON td.producto_id = p.producto_id
+GROUP BY
+    m.numero
+ORDER BY
+    porcentaje_productividad DESC]]>
+		</queryString>
+		<field name="mesa_numero" class="java.lang.Integer">
+			<property name="com.jaspersoft.studio.field.name" value="numero"/>
+			<property name="com.jaspersoft.studio.field.label" value="mesa_numero"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="mesa"/>
+		</field>
+		<field name="ingresos_totales" class="java.math.BigDecimal">
+			<property name="com.jaspersoft.studio.field.name" value="ingresos_totales"/>
+			<property name="com.jaspersoft.studio.field.label" value="ingresos_totales"/>
+		</field>
+		<field name="porcentaje_productividad" class="java.math.BigDecimal">
+			<property name="com.jaspersoft.studio.field.name" value="porcentaje_productividad"/>
+			<property name="com.jaspersoft.studio.field.label" value="porcentaje_productividad"/>
+		</field>
+	</subDataset>
+	<subDataset name="Empty Dataset1" uuid="43f4dc09-86b3-4d48-beb5-ca56e3a01cf3"/>
+	<subDataset name="MediaTicketPorMesa" uuid="501a9585-3d75-488e-8fe7-e22c162294d2">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Adaptador"/>
+		<queryString language="SQL">
+			<![CDATA[SELECT
+    m.numero AS numero_mesa,
+    AVG(ticket_total.total_precio) AS precio_medio_ticket
+FROM
+    mesa m
+JOIN
+    Tickets t ON m.mesa_id = t.mesa_id
+JOIN (
+    SELECT
+        td.ticket_id,
+        SUM(p.precio * td.cantidad) AS total_precio
+    FROM
+        Ticket_Detalle td
+    JOIN
+        Productos p ON td.producto_id = p.producto_id
+    GROUP BY
+        td.ticket_id
+) AS ticket_total ON t.ticket_id = ticket_total.ticket_id
+GROUP BY
+    m.numero]]>
+		</queryString>
+		<field name="numero_mesa" class="java.lang.Integer">
+			<property name="com.jaspersoft.studio.field.name" value="numero"/>
+			<property name="com.jaspersoft.studio.field.label" value="numero_mesa"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="mesa"/>
+		</field>
+		<field name="precio_medio_ticket" class="java.math.BigDecimal">
+			<property name="com.jaspersoft.studio.field.name" value="precio_medio_ticket"/>
+			<property name="com.jaspersoft.studio.field.label" value="precio_medio_ticket"/>
+		</field>
+	</subDataset>
+	<subDataset name="Empty Dataset2" uuid="68597972-f18a-4b63-8502-7df5594353a0"/>
+	<subDataset name="IngresoMensualPorTIckets" uuid="e62ac457-98e7-4166-bdad-9d7f227c28ac">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Adaptador"/>
+		<queryString language="SQL">
+			<![CDATA[SELECT 
+    DATE_FORMAT(t.fecha_hora, '%Y-%m') AS mes,
+    COUNT(t.ticket_id) AS numero_tickets,
+    SUM(td.total_precio) AS ingreso_total,
+    AVG(td.total_precio) AS precio_medio_ticket
+FROM 
+    Tickets t
+JOIN 
+    (
+        SELECT 
+            td.ticket_id,
+            SUM(p.precio * td.cantidad) AS total_precio
+        FROM 
+            Ticket_Detalle td
+        JOIN 
+            Productos p ON td.producto_id = p.producto_id
+        GROUP BY 
+            td.ticket_id
+    ) td ON t.ticket_id = td.ticket_id
+GROUP BY 
+    DATE_FORMAT(t.fecha_hora, '%Y-%m')
+ORDER BY 
+    mes]]>
+		</queryString>
+		<field name="mes" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="mes"/>
+			<property name="com.jaspersoft.studio.field.label" value="mes"/>
+		</field>
+		<field name="numero_tickets" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="numero_tickets"/>
+			<property name="com.jaspersoft.studio.field.label" value="numero_tickets"/>
+		</field>
+		<field name="ingreso_total" class="java.math.BigDecimal">
+			<property name="com.jaspersoft.studio.field.name" value="ingreso_total"/>
+			<property name="com.jaspersoft.studio.field.label" value="ingreso_total"/>
+		</field>
+		<field name="precio_medio_ticket" class="java.math.BigDecimal">
+			<property name="com.jaspersoft.studio.field.name" value="precio_medio_ticket"/>
+			<property name="com.jaspersoft.studio.field.label" value="precio_medio_ticket"/>
+		</field>
+	</subDataset>
+	<subDataset name="TicketsDS1" uuid="0006480a-6623-41c1-b765-6024486a378c">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Adaptador"/>
+		<queryString language="SQL">
+			<![CDATA[SELECT 
+    DATE_FORMAT(t.fecha_hora, '%Y-%m') AS mes,
+    COUNT(t.ticket_id) AS numero_tickets,
+    SUM(td.total_precio) AS ingreso_total,
+    AVG(td.total_precio) AS precio_medio_ticket
+FROM 
+    Tickets t
+JOIN 
+    (
+        SELECT 
+            td.ticket_id,
+            SUM(p.precio * td.cantidad) AS total_precio
+        FROM 
+            Ticket_Detalle td
+        JOIN 
+            Productos p ON td.producto_id = p.producto_id
+        GROUP BY 
+            td.ticket_id
+    ) td ON t.ticket_id = td.ticket_id
+GROUP BY 
+    DATE_FORMAT(t.fecha_hora, '%Y-%m')
+ORDER BY 
+    mes]]>
+		</queryString>
+		<field name="mes" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="mes"/>
+			<property name="com.jaspersoft.studio.field.label" value="mes"/>
+		</field>
+		<field name="numero_tickets" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="numero_tickets"/>
+			<property name="com.jaspersoft.studio.field.label" value="numero_tickets"/>
+		</field>
+		<field name="ingreso_total" class="java.math.BigDecimal">
+			<property name="com.jaspersoft.studio.field.name" value="ingreso_total"/>
+			<property name="com.jaspersoft.studio.field.label" value="ingreso_total"/>
+		</field>
+		<field name="precio_medio_ticket" class="java.math.BigDecimal">
+			<property name="com.jaspersoft.studio.field.name" value="precio_medio_ticket"/>
+			<property name="com.jaspersoft.studio.field.label" value="precio_medio_ticket"/>
+		</field>
+	</subDataset>
+	<subDataset name="Dataset3" uuid="4e195d89-76c6-4a1b-9141-31054296314a">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Adaptador"/>
+		<queryString language="SQL">
+			<![CDATA[SELECT
+    DATE_FORMAT(T.fecha_hora, '%Y-%m') AS Mes,
+    COUNT(DISTINCT T.ticket_id) AS Numero_Tickets,
+    SUM(TD.cantidad * P.precio) AS Ingreso_Total,
+    ROUND(SUM(TD.cantidad * P.precio) / COUNT(DISTINCT T.ticket_id), 2) AS Precio_Medio
+FROM
+    Tickets T
+JOIN
+    Ticket_Detalle TD ON T.ticket_id = TD.ticket_id
+JOIN
+    Productos P ON TD.producto_id = P.producto_id
+GROUP BY
+    DATE_FORMAT(T.fecha_hora, '%Y-%m')
+ORDER BY
+    Mes]]>
+		</queryString>
+		<field name="Mes" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="Mes"/>
+			<property name="com.jaspersoft.studio.field.label" value="Mes"/>
+		</field>
+		<field name="Numero_Tickets" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="Numero_Tickets"/>
+			<property name="com.jaspersoft.studio.field.label" value="Numero_Tickets"/>
+		</field>
+		<field name="Ingreso_Total" class="java.math.BigDecimal">
+			<property name="com.jaspersoft.studio.field.name" value="Ingreso_Total"/>
+			<property name="com.jaspersoft.studio.field.label" value="Ingreso_Total"/>
+		</field>
+		<field name="Precio_Medio" class="java.math.BigDecimal">
+			<property name="com.jaspersoft.studio.field.name" value="Precio_Medio"/>
+			<property name="com.jaspersoft.studio.field.label" value="Precio_Medio"/>
+		</field>
+	</subDataset>
+	<queryString language="SQL">
+		<![CDATA[SELECT *
+FROM comandaxpress.ticket_detalle
+	INNER JOIN comandaxpress.productos ON 
+	 comandaxpress.ticket_detalle.producto_id = comandaxpress.productos.producto_id 
+	INNER JOIN comandaxpress.categorias ON 
+	 comandaxpress.productos.categoria_id = comandaxpress.categorias.categoria_id 
+	INNER JOIN comandaxpress.tickets ON 
+	 comandaxpress.ticket_detalle.ticket_id = comandaxpress.tickets.ticket_id 
+	INNER JOIN comandaxpress.mesa ON 
+	 comandaxpress.tickets.mesa_id = comandaxpress.mesa.mesa_id ,
+	comandaxpress.usuarios]]>
+	</queryString>
+	<group name="SingleExecutionGroup">
+		<groupExpression><![CDATA[new Boolean(true)]]></groupExpression>
+		<groupHeader>
+			<band height="586">
+				<staticText>
+					<reportElement x="20" y="7" width="198" height="53" uuid="d3565440-2f30-4f91-9fe8-3abc4577994c"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<text><![CDATA[La tabla muestra los 10 productos con mas ventas totales hasta la fecha.]]></text>
+				</staticText>
+				<componentElement>
+					<reportElement x="10" y="190" width="200" height="57" uuid="163ad1d8-7315-4d6e-b341-35563c7aaa4c">
+						<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+						<property name="com.jaspersoft.studio.table.style.table_header" value="Table 2_TH"/>
+						<property name="com.jaspersoft.studio.table.style.column_header" value="Table 2_CH"/>
+						<property name="com.jaspersoft.studio.table.style.detail" value="Table 2_TD"/>
+					</reportElement>
+					<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+						<datasetRun subDataset="MediaTicketPorMesa" uuid="f8673224-45cb-445f-83c2-821879d99445">
+							<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+						</datasetRun>
+						<jr:column width="100" uuid="f29e16f6-56b6-4826-9dc0-b3bcd8a3b756">
+							<jr:columnHeader style="Table 2_CH" height="30">
+								<staticText>
+									<reportElement x="0" y="0" width="100" height="30" uuid="5b4898d0-a5c6-4402-b076-1b83b67cf007"/>
+									<textElement textAlignment="Center">
+										<font isBold="true"/>
+									</textElement>
+									<text><![CDATA[Numero de Mesa]]></text>
+								</staticText>
+							</jr:columnHeader>
+							<jr:detailCell style="Table 2_TD" height="30">
+								<textField>
+									<reportElement x="0" y="0" width="100" height="30" uuid="085f84e4-be2a-4aac-848b-1fddc9a41661"/>
+									<textElement textAlignment="Center"/>
+									<textFieldExpression><![CDATA[$F{numero_mesa}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="100" uuid="bf90c0d8-278f-429e-8841-cff89c18e1f3">
+							<jr:columnHeader style="Table 2_CH" height="30">
+								<staticText>
+									<reportElement x="0" y="0" width="100" height="30" uuid="b53cd76e-a6ef-454c-bdf8-e1e38103f20a"/>
+									<textElement textAlignment="Center">
+										<font isBold="true"/>
+									</textElement>
+									<text><![CDATA[Precio Medio Ticket (EUR)]]></text>
+								</staticText>
+							</jr:columnHeader>
+							<jr:detailCell style="Table 2_TD" height="30">
+								<textField>
+									<reportElement x="0" y="0" width="100" height="30" uuid="77a54559-58ae-4074-822b-e7cc12f6381b"/>
+									<textElement textAlignment="Center"/>
+									<textFieldExpression><![CDATA[new java.text.DecimalFormat("#.00").format($F{precio_medio_ticket})+"€"]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+					</jr:table>
+				</componentElement>
+				<staticText>
+					<reportElement x="330" y="7" width="192" height="53" uuid="ae180e1d-47d7-4f2a-9ad6-dc23c04ca513"/>
+					<textElement textAlignment="Justified">
+						<font size="14"/>
+					</textElement>
+					<text><![CDATA[La tabla muestra los ingresos medios que genera cada categoria de productos actualmente.]]></text>
+				</staticText>
+				<componentElement>
+					<reportElement x="330" y="60" width="200" height="59" uuid="696a0457-e201-4970-9ffd-c19dfbf781e1">
+						<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+						<property name="com.jaspersoft.studio.table.style.table_header" value="Table 1_TH"/>
+						<property name="com.jaspersoft.studio.table.style.column_header" value="Table 1_CH"/>
+						<property name="com.jaspersoft.studio.table.style.detail" value="Table 1_TD"/>
+					</reportElement>
+					<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+						<datasetRun subDataset="MediaDeVentasPorCategoria" uuid="ad906751-cca5-489d-b3b7-9691598be981">
+							<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+						</datasetRun>
+						<jr:column width="100" uuid="097d5f94-d248-4071-88f6-95ef3ba3d5b3">
+							<jr:columnHeader style="Table 1_CH" height="30">
+								<staticText>
+									<reportElement x="0" y="0" width="100" height="30" uuid="958b1054-dc00-40f8-8184-827e46716427"/>
+									<textElement textAlignment="Center">
+										<font isBold="true"/>
+									</textElement>
+									<text><![CDATA[Categoría]]></text>
+								</staticText>
+							</jr:columnHeader>
+							<jr:detailCell style="Table 1_TD" height="30">
+								<textField>
+									<reportElement x="0" y="0" width="100" height="30" uuid="fb47acea-d035-4188-8138-dc135cb1cae7"/>
+									<textElement textAlignment="Center"/>
+									<textFieldExpression><![CDATA[$F{categoria_nombre}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="100" uuid="ed014c51-575a-45e0-b600-f6ed89c44a8e">
+							<jr:columnHeader style="Table 1_CH" height="30">
+								<staticText>
+									<reportElement x="0" y="0" width="100" height="30" uuid="3607e75c-950a-419d-9276-075457de5cb9"/>
+									<textElement textAlignment="Center">
+										<font isBold="true"/>
+									</textElement>
+									<text><![CDATA[Ingreso Promedio]]></text>
+								</staticText>
+							</jr:columnHeader>
+							<jr:detailCell style="Table 1_TD" height="30">
+								<textField>
+									<reportElement x="0" y="0" width="100" height="30" uuid="e275f5fe-16a6-4edb-b211-253d22807d1f"/>
+									<textElement textAlignment="Center"/>
+									<textFieldExpression><![CDATA[$F{ingresos_medios}.setScale(2, java.math.RoundingMode.HALF_UP)+"€"]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+					</jr:table>
+				</componentElement>
+				<componentElement>
+					<reportElement x="20" y="60" width="199" height="59" uuid="3d38427e-7ec9-43aa-8dde-f8b7eb059c51">
+						<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+						<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
+						<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
+						<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
+					</reportElement>
+					<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+						<datasetRun subDataset="ProductosMasVendidos" uuid="4f9473e9-597b-4370-b00b-542156f4388d">
+							<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+						</datasetRun>
+						<jr:column width="100" uuid="d9594958-5091-4cad-9aaf-2dbc11b19db8">
+							<jr:columnHeader style="Table_CH" height="30">
+								<staticText>
+									<reportElement x="0" y="0" width="100" height="30" uuid="5c1b9e49-93e3-4a6f-a5f9-7cbcd0090f10"/>
+									<box>
+										<pen lineWidth="1.0"/>
+										<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+									<textElement textAlignment="Center">
+										<font isBold="true"/>
+									</textElement>
+									<text><![CDATA[Producto]]></text>
+								</staticText>
+							</jr:columnHeader>
+							<jr:detailCell style="Table_TD" height="30">
+								<textField>
+									<reportElement x="0" y="0" width="100" height="30" uuid="30798c6b-720f-442b-af57-c8ad56ee5950"/>
+									<textElement textAlignment="Center"/>
+									<textFieldExpression><![CDATA[$F{producto_nombre}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="100" uuid="5919e3a8-488b-4061-ac6d-11e1b7b548cd">
+							<jr:columnHeader style="Table_CH" height="30">
+								<staticText>
+									<reportElement x="0" y="0" width="100" height="30" uuid="e6f22503-4075-477b-973e-23a5cee321dd"/>
+									<box>
+										<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+									<textElement textAlignment="Center">
+										<font isBold="true"/>
+									</textElement>
+									<text><![CDATA[Cantidad Ventas]]></text>
+								</staticText>
+							</jr:columnHeader>
+							<jr:detailCell style="Table_TD" height="30">
+								<textField>
+									<reportElement x="0" y="0" width="100" height="30" uuid="a974527c-7136-4008-87ec-3dda933ec9dc"/>
+									<textElement textAlignment="Center"/>
+									<textFieldExpression><![CDATA[$F{total_vendidos}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+					</jr:table>
+				</componentElement>
+				<staticText>
+					<reportElement x="10" y="150" width="249" height="40" uuid="dc7a8b27-5535-489d-819f-b27d89c49dcb"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<text><![CDATA[La tabla muestra el gasto promedio por ticket en cada mesa del resturante]]></text>
+				</staticText>
+				<break>
+					<reportElement x="0" y="145" width="554" height="1" uuid="ac875d85-26fe-44c2-93fe-0b5440bfdec3"/>
+				</break>
+				<staticText>
+					<reportElement x="1" y="340" width="552" height="40" uuid="f26c310f-c119-4b55-a3a1-13835129fef5"/>
+					<textElement textAlignment="Justified">
+						<font size="14"/>
+					</textElement>
+					<text><![CDATA[El grafico muestra la relacion porcentual de las mesas y el total de ventas sobre el individual.]]></text>
+				</staticText>
+				<barChart>
+					<chart evaluationTime="Report">
+						<reportElement x="-1" y="380" width="554" height="205" uuid="25f230be-d268-474e-bdd1-fa2ab024be45"/>
+						<chartTitle/>
+						<chartSubtitle/>
+						<chartLegend/>
+					</chart>
+					<categoryDataset>
+						<dataset>
+							<datasetRun subDataset="GraficoProductividadMesas" uuid="ec2a482a-a5fb-48d5-84a2-1cd14b97a6e3">
+								<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+							</datasetRun>
+						</dataset>
+						<categorySeries>
+							<seriesExpression><![CDATA["Mesas"]]></seriesExpression>
+							<categoryExpression><![CDATA[$F{mesa_numero}]]></categoryExpression>
+							<valueExpression><![CDATA[$F{porcentaje_productividad}]]></valueExpression>
+						</categorySeries>
+					</categoryDataset>
+					<barPlot>
+						<plot/>
+						<itemLabel/>
+						<categoryAxisFormat>
+							<axisFormat labelColor="#000000" tickLabelColor="#000000" axisLineColor="#000000"/>
+						</categoryAxisFormat>
+						<valueAxisFormat>
+							<axisFormat labelColor="#000000" tickLabelColor="#000000" axisLineColor="#000000"/>
+						</valueAxisFormat>
+					</barPlot>
+				</barChart>
+				<break>
+					<reportElement x="0" y="302" width="553" height="1" uuid="df5f68af-7d47-4434-8342-b551dd68eb4e"/>
+				</break>
+				<staticText>
+					<reportElement x="284" y="150" width="260" height="60" uuid="7988eea9-67a8-480c-8a1c-349b5abea88b"/>
+					<textElement textAlignment="Justified">
+						<font size="14"/>
+					</textElement>
+					<text><![CDATA[La tabla muestra, para cada mes, el número de tickets vendidos, el ingreso total y el precio promedio de los tickets.]]></text>
+				</staticText>
+				<componentElement>
+					<reportElement x="283" y="210" width="262" height="49" uuid="5307e3f2-135b-498d-9551-09ea7f26b28d">
+						<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+						<property name="com.jaspersoft.studio.table.style.table_header" value="Table 3_TH"/>
+						<property name="com.jaspersoft.studio.table.style.column_header" value="Table 3_CH"/>
+						<property name="com.jaspersoft.studio.table.style.detail" value="Table 3_TD"/>
+					</reportElement>
+					<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+						<datasetRun subDataset="Dataset3" uuid="c913e504-1e25-48a5-92ba-36a7530ffab3">
+							<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+						</datasetRun>
+						<jr:column width="50" uuid="586b8562-5ef1-45e4-a26f-bb73b68eb464">
+							<jr:columnHeader style="Table 3_CH" height="30">
+								<staticText>
+									<reportElement x="0" y="0" width="50" height="30" uuid="347c8d3f-88a6-4f46-b46b-e4158b4e9a6d"/>
+									<textElement textAlignment="Center">
+										<font isBold="true"/>
+									</textElement>
+									<text><![CDATA[Mes]]></text>
+								</staticText>
+							</jr:columnHeader>
+							<jr:detailCell style="Table 3_TD" height="30">
+								<textField>
+									<reportElement x="0" y="0" width="50" height="30" uuid="2b282e25-8deb-43b3-b9ad-cc9cb4562181"/>
+									<textElement textAlignment="Center"/>
+									<textFieldExpression><![CDATA[$F{Mes}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="50" uuid="1d22bbef-48da-493f-a3b0-ac0c708540e8">
+							<jr:columnHeader style="Table 3_CH" height="30">
+								<staticText>
+									<reportElement x="0" y="0" width="50" height="30" uuid="0afc9968-1776-421f-ae0f-0309fdc993ad"/>
+									<textElement textAlignment="Center">
+										<font isBold="true"/>
+									</textElement>
+									<text><![CDATA[Numero de Ticket]]></text>
+								</staticText>
+							</jr:columnHeader>
+							<jr:detailCell style="Table 3_TD" height="30">
+								<textField>
+									<reportElement x="0" y="0" width="50" height="30" uuid="0cfcfd80-5c0a-4eb5-9b8a-f0c2bb4a3069"/>
+									<textElement textAlignment="Center"/>
+									<textFieldExpression><![CDATA[$F{Numero_Tickets}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="50" uuid="4b3aa934-f9c2-4f0d-bd62-63eb6495c631">
+							<jr:columnHeader style="Table 3_CH" height="30">
+								<staticText>
+									<reportElement x="0" y="0" width="50" height="30" uuid="a0095ecf-706a-4f1f-a236-86d50a7b643c"/>
+									<textElement textAlignment="Center">
+										<font isBold="true"/>
+									</textElement>
+									<text><![CDATA[Ingreso Total]]></text>
+								</staticText>
+							</jr:columnHeader>
+							<jr:detailCell style="Table 3_TD" height="30">
+								<textField>
+									<reportElement x="0" y="0" width="50" height="30" uuid="0ce3deb1-5607-4cb1-89a0-704a9814b1bd"/>
+									<textElement textAlignment="Center"/>
+									<textFieldExpression><![CDATA[$F{Ingreso_Total}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="50" uuid="4b6e0749-7a6a-4b25-ad2f-070aed7da23c">
+							<jr:columnHeader style="Table 3_CH" height="30">
+								<staticText>
+									<reportElement x="0" y="0" width="50" height="30" uuid="9c264aa4-e519-4ea3-8f4b-1fff8819295f"/>
+									<textElement textAlignment="Center">
+										<font isBold="true"/>
+									</textElement>
+									<text><![CDATA[Precio Medio por Ticket]]></text>
+								</staticText>
+							</jr:columnHeader>
+							<jr:detailCell style="Table 3_TD" height="30">
+								<textField>
+									<reportElement x="0" y="0" width="50" height="30" uuid="d3313525-7a50-4d8a-9759-90b778a7b077"/>
+									<textElement textAlignment="Center"/>
+									<textFieldExpression><![CDATA[$F{Precio_Medio}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+					</jr:table>
+				</componentElement>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="179" splitType="Stretch">
+			<staticText>
+				<reportElement style="Title" x="80" y="0" width="382" height="62" uuid="1a652692-054a-40f3-ade5-68d8da36626d"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[ComandaXpress]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="80" y="62" width="382" height="22" uuid="88d4231e-f014-4b0d-b871-1737ba63a1ae"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<text><![CDATA[Informe de rendimiento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="100" width="553" height="79" uuid="d9cf7221-1c78-410a-a15a-c55b5292566a"/>
+				<textElement textAlignment="Justified">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[El siguiente informe trata acerca del rendimiento de un local que esta usando ComandaXpress para la gestión de las mesas y tickets del local. A continucion se muestran datos de interes sobre el rendimiento.]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="7" splitType="Stretch"/>
+	</pageHeader>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="30" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="-21" y="1" width="597" height="24" forecolor="#D0B48E" backcolor="#F2EBDF" uuid="183682bc-d976-4756-83e0-6625a3f98ed1"/>
+				<textField evaluationTime="Report">
+					<reportElement style="Column header" x="533" y="0" width="40" height="20" forecolor="#736343" uuid="0193f9b3-1559-491a-8580-b6988863b6a1"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Column header" x="453" y="0" width="80" height="20" forecolor="#736343" uuid="d00b105e-494b-418b-8ac9-8b1b4824f4f0"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				</textField>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement style="Column header" x="22" y="1" width="197" height="20" forecolor="#736343" uuid="0616f3fe-0354-456f-8911-ec30ec51a5ae"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+</jasperReport>
