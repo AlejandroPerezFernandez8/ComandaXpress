@@ -39,3 +39,9 @@ El proyecto está organizado en varios directorios clave, cada uno con un propó
 **Ruta:** `./SQL_Scripts`
 
 **Descripción:** En esta carpeta se encuentran todos los scripts SQL necesarios para crear y poblar la base de datos del proyecto. Estos scripts son esenciales para configurar la estructura de la base de datos e insertar datos de prueba.
+
+### 7. Informes
+
+**Ruta:** `./Informes`
+
+**Descripción:** En esta carpeta se encuentran todos los informes creados para la aplicacion.
