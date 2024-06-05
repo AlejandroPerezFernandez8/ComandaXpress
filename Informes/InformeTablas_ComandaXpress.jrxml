@@ -533,52 +533,6 @@ FROM comandaxpress.ticket_detalle
 				</componentElement>
 			</band>
 		</groupHeader>
-		<groupFooter>
-			<band height="228">
-				<staticText>
-					<reportElement x="10" y="10" width="179" height="40" uuid="4841a54d-67f9-4082-aec6-bdbfa0e62297"/>
-					<textElement textAlignment="Left">
-						<font size="26" isBold="true" isUnderline="true"/>
-					</textElement>
-					<text><![CDATA[Resumen:]]></text>
-				</staticText>
-				<staticText>
-					<reportElement x="70" y="70" width="240" height="20" uuid="86e4d8de-4949-4827-ab76-84377daef980"/>
-					<textElement>
-						<font size="12"/>
-					</textElement>
-					<text><![CDATA[Usuarios totales registrados en la aplicación:]]></text>
-				</staticText>
-				<staticText>
-					<reportElement x="70" y="190" width="128" height="20" uuid="45e80118-7220-41fa-ab0d-ab404b817a70"/>
-					<textElement>
-						<font size="12"/>
-					</textElement>
-					<text><![CDATA[Numero total de mesas:]]></text>
-				</staticText>
-				<staticText>
-					<reportElement x="70" y="100" width="189" height="20" uuid="6baadb05-1ea3-401e-b432-f65b6f410539"/>
-					<textElement>
-						<font size="12"/>
-					</textElement>
-					<text><![CDATA[Productos totales del restaurante:]]></text>
-				</staticText>
-				<staticText>
-					<reportElement x="70" y="130" width="189" height="20" uuid="56932263-9d90-42a1-9ce0-25044b350012"/>
-					<textElement>
-						<font size="12"/>
-					</textElement>
-					<text><![CDATA[Categorias totales del restaurante:]]></text>
-				</staticText>
-				<staticText>
-					<reportElement x="70" y="160" width="179" height="20" uuid="dcc87dbf-f54d-4328-b4b2-4c0feb5be390"/>
-					<textElement>
-						<font size="12"/>
-					</textElement>
-					<text><![CDATA[Numero total de tickets creados:]]></text>
-				</staticText>
-			</band>
-		</groupFooter>
 	</group>
 	<group name="Group2">
 		<groupHeader>
