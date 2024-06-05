@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.comandaxpress.API.Clases.FiltroTicket;
@@ -43,7 +44,7 @@ public class HistorialActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_historial);
-
+        EdgeToEdge.enable(this);
         Button btnBusqueda = findViewById(R.id.buttonBuscar);
         EditText etNumeroMesa = findViewById(R.id.editTextNumeroMesa);
         EditText etFecha = findViewById(R.id.editTextFecha);
@@ -121,7 +122,7 @@ public class HistorialActivity extends AppCompatActivity {
         TicketProductoAdapter detalleAdapter = new TicketProductoAdapter(this, detalles);
         listViewDetalles.setAdapter(detalleAdapter);
 
-        AlertDialog dialogo = new AlertDialog.Builder(this)
+        AlertDialog dialogo = new AlertDialog.Builder(this,R.style.CustomAlertDialogBackground)
                 .setTitle("Detalles del Ticket")
                 .setView(dialogView)
                 .setCancelable(false)

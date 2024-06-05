@@ -8,4 +8,8 @@
     <style name="CustomSpinnerDropdown" parent="Widget.AppCompat.Spinner.DropDown.ActionBar">
         <item name="android:popupBackground">@drawable/spinner_item_background</item> <!-- Fondo personalizado -->
     </style>
+    <style name="CustomAlertDialogBackground" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:background">@color/colorMediumBlue</item>
+        <item name="android:textColor">@color/colorOffWhite</item>
+    </style>
 </resources>
