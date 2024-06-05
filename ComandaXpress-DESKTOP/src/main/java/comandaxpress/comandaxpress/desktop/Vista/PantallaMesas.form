@@ -91,14 +91,12 @@
                   <EmptySpace pref="111" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="jButton1" pref="157" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="btnCambiarEstado" pref="157" max="32767" attributes="0"/>
-                          <Component id="btnEliminar" pref="157" max="32767" attributes="0"/>
-                          <Component id="ComboMesas" pref="157" max="32767" attributes="0"/>
-                          <Component id="jLabel1" min="-2" pref="148" max="-2" attributes="0"/>
-                          <Component id="btnModificar" alignment="0" max="32767" attributes="0"/>
-                          <Component id="btnInsertar" alignment="0" max="32767" attributes="0"/>
-                      </Group>
+                      <Component id="btnCambiarEstado" pref="157" max="32767" attributes="0"/>
+                      <Component id="btnEliminar" pref="157" max="32767" attributes="0"/>
+                      <Component id="ComboMesas" pref="157" max="32767" attributes="0"/>
+                      <Component id="jLabel1" min="-2" pref="148" max="-2" attributes="0"/>
+                      <Component id="btnModificar" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnInsertar" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
               </Group>
@@ -205,7 +203,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
-            <Property name="text" type="java.lang.String" value="ID MESA (Opcional)"/>
+            <Property name="text" type="java.lang.String" value="ID MESA (solo para modificar y borrar)"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtNumeroMesa">

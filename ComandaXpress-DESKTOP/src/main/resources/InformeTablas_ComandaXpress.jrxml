@@ -292,7 +292,7 @@ FROM comandaxpress.ticket_detalle
 		<groupHeader>
 			<band height="241">
 				<componentElement>
-					<reportElement x="80" y="50" width="601" height="60" uuid="5e39fa6b-e1ca-4ef2-9271-e1fe92adc936">
+					<reportElement x="60" y="50" width="601" height="60" uuid="5e39fa6b-e1ca-4ef2-9271-e1fe92adc936">
 						<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
 						<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
 						<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
@@ -425,21 +425,21 @@ FROM comandaxpress.ticket_detalle
 					</jr:table>
 				</componentElement>
 				<staticText>
-					<reportElement x="80" y="20" width="149" height="30" uuid="5fa0bae3-314e-46eb-a263-535e811a0e7b"/>
+					<reportElement x="60" y="20" width="149" height="30" uuid="5fa0bae3-314e-46eb-a263-535e811a0e7b"/>
 					<textElement>
 						<font size="16" isBold="true" isUnderline="true"/>
 					</textElement>
 					<text><![CDATA[Tabla de usuarios:]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="80" y="130" width="149" height="30" uuid="76350990-212a-4f52-b3b0-20d849aca535"/>
+					<reportElement x="60" y="130" width="149" height="30" uuid="76350990-212a-4f52-b3b0-20d849aca535"/>
 					<textElement>
 						<font size="16" isBold="true" isUnderline="true"/>
 					</textElement>
 					<text><![CDATA[Tabla de mesas:]]></text>
 				</staticText>
 				<componentElement>
-					<reportElement x="80" y="160" width="290" height="60" uuid="6901f1fc-a887-4448-9871-989d97262ac4">
+					<reportElement x="60" y="160" width="360" height="60" uuid="6901f1fc-a887-4448-9871-989d97262ac4">
 						<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
 						<property name="com.jaspersoft.studio.table.style.table_header" value="Table 1_TH"/>
 						<property name="com.jaspersoft.studio.table.style.column_header" value="Table 1_CH"/>
@@ -469,19 +469,19 @@ FROM comandaxpress.ticket_detalle
 								</textField>
 							</jr:detailCell>
 						</jr:column>
-						<jr:column width="80" uuid="0c76aa6c-1bb5-43cd-8542-8aa556d94782">
+						<jr:column width="100" uuid="0c76aa6c-1bb5-43cd-8542-8aa556d94782">
 							<jr:columnHeader style="Table 1_CH" height="30">
 								<staticText>
-									<reportElement x="0" y="0" width="80" height="30" uuid="a2825037-899b-43ac-8b66-25ab4c16ca10"/>
+									<reportElement x="0" y="0" width="100" height="30" uuid="a2825037-899b-43ac-8b66-25ab4c16ca10"/>
 									<textElement textAlignment="Center">
 										<font size="14" isBold="true"/>
 									</textElement>
-									<text><![CDATA[Numero de Mesa]]></text>
+									<text><![CDATA[Mesa]]></text>
 								</staticText>
 							</jr:columnHeader>
 							<jr:detailCell style="Table 1_TD" height="30">
 								<textField>
-									<reportElement x="0" y="0" width="80" height="30" uuid="3c21acef-89e7-49bd-8064-e8eaa0c38ac8"/>
+									<reportElement x="0" y="0" width="100" height="30" uuid="3c21acef-89e7-49bd-8064-e8eaa0c38ac8"/>
 									<textElement textAlignment="Center" verticalAlignment="Middle">
 										<font size="12"/>
 									</textElement>
@@ -533,58 +533,12 @@ FROM comandaxpress.ticket_detalle
 				</componentElement>
 			</band>
 		</groupHeader>
-		<groupFooter>
-			<band height="228">
-				<staticText>
-					<reportElement x="10" y="10" width="179" height="40" uuid="4841a54d-67f9-4082-aec6-bdbfa0e62297"/>
-					<textElement textAlignment="Left">
-						<font size="26" isBold="true" isUnderline="true"/>
-					</textElement>
-					<text><![CDATA[Resumen:]]></text>
-				</staticText>
-				<staticText>
-					<reportElement x="70" y="70" width="240" height="20" uuid="86e4d8de-4949-4827-ab76-84377daef980"/>
-					<textElement>
-						<font size="12"/>
-					</textElement>
-					<text><![CDATA[Usuarios totales registrados en la aplicación:]]></text>
-				</staticText>
-				<staticText>
-					<reportElement x="70" y="190" width="128" height="20" uuid="45e80118-7220-41fa-ab0d-ab404b817a70"/>
-					<textElement>
-						<font size="12"/>
-					</textElement>
-					<text><![CDATA[Numero total de mesas:]]></text>
-				</staticText>
-				<staticText>
-					<reportElement x="70" y="100" width="189" height="20" uuid="6baadb05-1ea3-401e-b432-f65b6f410539"/>
-					<textElement>
-						<font size="12"/>
-					</textElement>
-					<text><![CDATA[Productos totales del restaurante:]]></text>
-				</staticText>
-				<staticText>
-					<reportElement x="70" y="130" width="189" height="20" uuid="56932263-9d90-42a1-9ce0-25044b350012"/>
-					<textElement>
-						<font size="12"/>
-					</textElement>
-					<text><![CDATA[Categorias totales del restaurante:]]></text>
-				</staticText>
-				<staticText>
-					<reportElement x="70" y="160" width="179" height="20" uuid="dcc87dbf-f54d-4328-b4b2-4c0feb5be390"/>
-					<textElement>
-						<font size="12"/>
-					</textElement>
-					<text><![CDATA[Numero total de tickets creados:]]></text>
-				</staticText>
-			</band>
-		</groupFooter>
 	</group>
 	<group name="Group2">
 		<groupHeader>
 			<band height="298">
 				<componentElement>
-					<reportElement x="80" y="50" width="290" height="61" uuid="8b56684b-f282-428f-b105-1810cc8feed7">
+					<reportElement x="60" y="50" width="310" height="61" uuid="8b56684b-f282-428f-b105-1810cc8feed7">
 						<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
 						<property name="com.jaspersoft.studio.table.style.table_header" value="Table 3_TH"/>
 						<property name="com.jaspersoft.studio.table.style.column_header" value="Table 3_CH"/>
@@ -621,7 +575,7 @@ FROM comandaxpress.ticket_detalle
 									<textElement textAlignment="Center">
 										<font size="14" isBold="true"/>
 									</textElement>
-									<text><![CDATA[Numero de Mesa]]></text>
+									<text><![CDATA[Mesa]]></text>
 								</staticText>
 							</jr:columnHeader>
 							<jr:detailCell style="Table 3_TD" height="30">
@@ -657,14 +611,14 @@ FROM comandaxpress.ticket_detalle
 					</jr:table>
 				</componentElement>
 				<staticText>
-					<reportElement x="80" y="12" width="149" height="30" uuid="c5e36103-8bf3-4bbd-a692-bdde8f617754"/>
+					<reportElement x="60" y="10" width="149" height="30" uuid="c5e36103-8bf3-4bbd-a692-bdde8f617754"/>
 					<textElement>
 						<font size="16" isBold="true" isUnderline="true"/>
 					</textElement>
 					<text><![CDATA[Tabla de Tickets:]]></text>
 				</staticText>
 				<componentElement>
-					<reportElement x="410" y="50" width="290" height="60" uuid="31d72184-3973-408b-8034-aa4271769a54">
+					<reportElement x="460" y="50" width="290" height="60" uuid="31d72184-3973-408b-8034-aa4271769a54">
 						<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
 						<property name="com.jaspersoft.studio.table.style.table_header" value="Table 2_TH"/>
 						<property name="com.jaspersoft.studio.table.style.column_header" value="Table 2_CH"/>
@@ -757,7 +711,7 @@ FROM comandaxpress.ticket_detalle
 					</jr:table>
 				</componentElement>
 				<staticText>
-					<reportElement x="410" y="9" width="169" height="30" uuid="c1dc1e6b-f54a-4ee2-b202-bac9a373013b"/>
+					<reportElement x="460" y="10" width="169" height="30" uuid="c1dc1e6b-f54a-4ee2-b202-bac9a373013b"/>
 					<textElement>
 						<font size="16" isBold="true" isUnderline="true"/>
 					</textElement>
